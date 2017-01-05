@@ -1,0 +1,29 @@
+.tqtmenu {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #666;
+	white-space: nowrap;
+}
+.tqtmenu img {
+	border: 0px;
+	vertical-align: middle;
+}
+.tqtmenu a {
+	color: #333;
+	text-decoration: none;
+}
+.tqtmenu a.node, .tqtmenu a.nodeSel {
+	white-space: nowrap;
+	padding: 1px 2px 1px 2px;
+}
+.tqtmenu a.node:hover, .tqtmenu a.nodeSel:hover {
+	color: #333;
+	text-decoration: underline;
+}
+.tqtmenu a.nodeSel {
+	background-color: #316AC5;
+	color:#fff;
+}
+.tqtmenu .clip {
+	overflow: hidden;
+}

@@ -1,0 +1,15 @@
+@charset "gb2312";
+.headmenu{margin-left:10px;margin-top:0px;overflow:hidden}
+.headmenu ul{line-height:21px;float:left;font-weight:bold;padding:0px 8px;margin:5px 3px;cursor:pointer;}
+.tab_menu_normal {
+	BORDER-LEFT: #4076bf 1px solid; BACKGROUND: url(../images/headmenu/header_menu_bg.png) repeat-x; HEIGHT: 21px; COLOR: #ffffff; BORDER-TOP: #4076bf 1px solid; BORDER-RIGHT: #4076bf 1px solid
+}
+.tab_menu_normal A {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+.tab_menu_over {
+	Z-INDEX: 100; BORDER-LEFT: #cfcfcf 1px solid; BACKGROUND: url(../images/headmenu/header_menu_over_bg.png) #ffffff repeat-x; HEIGHT: 21px; COLOR: #333333; BORDER-TOP: #cfcfcf 1px solid; CURSOR: pointer; BORDER-RIGHT: #cfcfcf 1px solid
+}
+.tab_menu_over A {
+	COLOR: #333333; TEXT-DECORATION: none
+}

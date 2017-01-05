@@ -1,0 +1,232 @@
+20150108添加字段，com_info_tb
+isview integer DEFAULT 1, -- 是否在地图上显示 0不显示，1显示
+
+20150109添加字段，user_info_tb
+collector_pics integer DEFAULT 0, -- 收费员上传的图片个数
+collector_auditor bigint, -- 审核人员
+
+20150112
+添加字段collector_scroe_tb
+online_scroe numeric(5,2) DEFAULT 0, -- 在线积分，每10分钟积0.2分
+
+20150113
+添加字段com_info_tb
+remarks character varying, -- 备注
+
+20150119
+新增收费员账户图片，客服根据图片设置收费员账户信息
+CREATE TABLE collector_account_pic_tb
+
+新增礼包类型表
+CREATE TABLE bonus_type_tb
+
+
+20150119
+添加数据授权表dataauth_tb
+CREATE TABLE dataauth_tb
+
+20150120
+新增车主消息表
+CREATE TABLE user_message_tb
+新增车场消息表
+CREATE TABLE parkuser_message_tb
+
+20150122
+添加com_message_tb表字段
+ title character varying
+ 
+2015/1/26
+添加 用户支付账号表，记录用户支付宝或微信等支付账户
+CREATE TABLE user_payaccount_tb
+
+2015-01-29
+表register_anlysis_tb添加字段
+carnumber_count integer, -- 有车牌的注册用户
+
+2015-01-29
+添加表order_attach_tb
+
+2015-01-30
+添加视图ticket_view
+
+2015-01-30
+表com_worksite_tb添加字段net_type
+
+2015-02-02
+添加表consume_anlysis_tb
+
+2015-02-28
+表com_info_tb添加字段
+invalid_order bigint DEFAULT 0, -- 未结算的垃圾订单数量
+
+2015-03-02
+表com_info_tb添加字段
+fixed_pass_time bigint, -- 车场校验通过的时间
+
+2015-03-02
+表price_tb添加字段
+car_type integer DEFAULT 0, -- 0：通用，1：小车，2：大车
+
+表order_tb添加字段
+car_type integer DEFAULT 0, -- 0：通用，1：小车，2：大车
+
+2015-03-03
+表com_info_tb添加字段
+car_type integer DEFAULT 0, -- 是否区分大小车，0:不区分，1：区分
+
+
+2015-03-05
+表recommend_tb添加字段
+comid bigint DEFAULT (-1), -- 用户通过注册月卡会员注册车主时所在的车场id
+
+2015-03-16
+表user_info_tb添加字段
+imei character(100) ---手机串号
+client_type integer DEFAULT 0 ,--0:android ,1:ios
+新建表：order_ticket_tb,order_ticket_detail_tb,zld_black_tb
+
+2015-03-20
+表com_info_tb添加字段
+passfree integer DEFAULT 0, -- 是否允许免费结算订单，0：允许，1：不允许
+activity integer DEFAULT 0, -- 车场活动：0 没有活动 1申请活动 2:申请通过
+activity_content character varying, -- 活动内容
+
+2015-03-19
+表user_info_tb添加字段
+version character(20) ---客户端版本号
+表area_ibeacon_tb 添加字段(经纬度)
+lng numeric(10,6), lat numeric(10,6)
+
+2015-03-23
+添加表car_stops_tb
+
+2015-03-23
+表user_info_tb添加字段
+wxp_openid character varying, -- 微信公众号openid
+wxp_openid字段添加索引
+
+添加表car_stops_tb--泊车点表
+
+2015-03-24--yao
+添加表carstop_order_tb----泊车订单表
+
+
+2015-03-25--yao
+添加表user_pic_tb----用户头像表
+
+2015-03-31--wang
+添加表wxp_user_tb---微信公众号用户表
+
+2015-04-2--yao
+添加表carstops_price_tb----泊车点价格表
+
+2015-04-14--yao
+添加表park_ticket_tb---专用停车券表
+
+2015-04-23--yao
+添加表qr_code_tb --二维码管理表
+com_nfc_tb 添加字段：qrcode character varying ---二维码
+
+
+2015-04-24--yao
+com_info_tb 添加字段  upload_uin bigint, -- 上传人---车主
+
+
+2015-04-25--yao
+recommend_tb 添加字段 money numeric(8,2) DEFAULT 0, -- 推荐奖励金额  
+order_ticket_tb 添加字段 type integer DEFAULT 0, -- 类型 0普通券，1微信打折券
+
+
+2015-04-26--yao
+order_ticket_detail_tb 添加字段  btype integer DEFAULT 0, -- 红包类型 0普通红包，1微信红包
+
+
+2015-05-26--wang
+添加表shop_tb
+
+user_info_tb 添加字段shop_id bigint, -- 商户的id
+ticket_tb 添加字段shop_id-- 商户id
+qr_code_tb 添加字段ticketid bigint, -- 停车券id
+ticket_tb 添加字段bmoney numeric(8,2), -- 预支付返款后的实际作用金额
+
+alipay_log 添加字段 wxp_orderid character varying, -- 微信公众号订单号
+ticket_tb 添加字段wxp_orderid character varying, -- 微信公众号订单号=======
+order_ticket_detail_tb 添加字段  btype integer DEFAULT 0, -- 红包类型 0普通红包，1微信红包
+
+mongodb ticket_pics 字段ticketid还未加索引 
+
+20150610 --yao
+order_ticket_detail_tb 添加字段 ticketid bigint, -- 停车券编号
+user_info_Tb 添加字段:  wx_name character varying,微信名  wx_imgurl character varying, 微信头像地址
+  
+2015-06-16--yao
+添加表：parkuser_reward_tb 车主打赏收费员表
+     parkuser_comment_tb 评论收费员表
+
+2015-06-18--dai
+
+语句（comment on column carstop_order_tb.state is '状态:0车主泊车请求 1泊车员已响应泊车 2正在泊车  3泊车完成 4车主取车请求 5 泊车员已响应取车 6泊车员正在取车 7等待支付 8支付成功 9订单取消'）  
+
+com_info_tb增加字段：minprice_unit 默认值0     0（该收多少收多少）,0.5（收5毛 ）,1（收一块）
+
+2015-06-26--dai
+添加表：parkuser_work_record_tb
+
+2015-07-01-wang
+添加表：parkuser_cash_tb
+
+20150708 -yao
+添加表：zld_protocol_tb
+car_info_tb表添加字段：
+  pic_url1 character varying, -- 图片地地址1
+  pic_url2 character varying, -- 图片地地址2
+  is_comuse integer DEFAULT 0, -- 是否是常用车牌，0不是，1是
+  remark character varying, -- 说明
+  is_auth integer, -- 是否已认证 0没有，1已认证
+  
+20150714--yao
+car_info_tb 添加字段：
+  pic_url1 character varying, -- 图片地地址1
+  pic_url2 character varying, -- 图片地地址2
+  is_comuse integer DEFAULT 0, -- 是否是常用车牌，0不是，1是
+  remark character varying, -- 说明
+  is_auth integer DEFAULT 0, -- 是否已认证 0未认证，1已认证 2认证中
+  ctime bigint, -- 新建时间
+
+ 20150717-dai
+ com_info_tb 
+ 	添加字段 isshowepay integer DEFAULT 1, -- 收费员客户端是否显示直付订单 0：不显示,1：显示  默认显示
+ 			ishidehdbutton integer DEFAULT 0, -- 结算按钮（HD版）0显示  1不显示   默认0
+ carower_produc  
+ 	添加字段 name character varying, -- 会员名字
+  			address character varying, -- 会员地址
+20150721--yao
+user_info_tb 添加字段：  			
+   credit_limit numeric(10,2) DEFAULT 0, -- 信用额度
+   is_auth integer DEFAULT 0, -- 是否认证通过，0否，1是
+   
+20150722--yao
+order_ticket_tb type字段添加枚举值：3:车主认证1246专享红包（顺序发放）
+
+2015-07-24--wang
+添加表reward_account_tb
+表user_info_tb 添加字段reward_score
+表qr_code_tb 添加字段score
+
+20150730--yao
+com_account_tb 字段加类型  （对公） type integer DEFAULT 0, -- 0:公司，1个人 2对公
+withdrawer_tb  字段加类型   (对公提现)  wtype integer DEFAULT 0, -- 1个人提现，0公司提现  2对公提现
+
+添加表 20150820 --yao
+user_friend_tb
+user_liuyan_tb
+flygame_score_tb
+flygame_pool_tb
+advert_tb
+
+20150827 --yao
+表ticket_tb添加字段 resources integer DEFAULT 0, -- 来源 0停车宝，1购买
+is_back_money integer DEFAULT 0, -- 车主购买的停车券，未使用过期退款，0未退款，1已退款
+
+20150911 --dai
+添加表price_assist_tb

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_textinfo"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:background="@drawable/gv_province_selector"
+        android:gravity="center"
+        android:textColor="@color/key_font_gray"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+</LinearLayout>

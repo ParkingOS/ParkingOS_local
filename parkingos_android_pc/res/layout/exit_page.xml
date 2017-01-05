@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="4" >
+
+        <ImageView
+            android:id="@+id/iv_exit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/home_car_icon"
+            android:contentDescription="@null"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/tv_exit"
+            style="@style/little_title"
+            android:text="@string/exit" />
+
+        <Button
+            android:id="@+id/tv_exit_open_pole"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="3dip"
+            android:background="@drawable/btn_selector"
+            android:text="@string/uplift_pole"
+            android:textColor="@color/idle_green"
+            android:textSize="28sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_marginTop="5dip"
+        android:layout_weight="1.5"
+        android:background="@color/bg_green"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/iv_plate_show"
+            android:layout_width="0dip"
+            android:layout_height="60dip"
+            android:layout_margin="8dip"
+            android:layout_weight="3"
+            android:background="@drawable/plate_sample"
+            android:contentDescription="@null"
+            android:scaleType="fitXY" />
+
+        <EditText
+            android:id="@+id/et_carnumber"
+            android:layout_width="0dip"
+            android:layout_height="60dip"
+            android:layout_weight="3"
+            android:background="@color/plate_bg"
+            android:gravity="center"
+            android:hint="@string/car_number"
+            android:singleLine="true"
+            android:textColor="@color/plate_text"
+            android:textSize="30sp" />
+         <Button
+            android:id="@+id/btn_search"
+            android:layout_width="0dip"
+            android:layout_height="60dip"
+            android:layout_margin="8dip"
+            android:layout_weight="2"
+            android:background="@drawable/search_selector" />
+		<Button
+            android:id="@+id/btn_nullPlate"
+            android:layout_width="0dip"
+            android:layout_height="60dip"
+            android:layout_margin="8dip"
+            android:textSize="26sp"
+            android:background="@drawable/btn_selector"
+            android:text="@string/searchnullplate"
+            android:textColor="@color/idle_green"
+            android:layout_weight="2" />
+       
+    </LinearLayout>
+
+</LinearLayout>

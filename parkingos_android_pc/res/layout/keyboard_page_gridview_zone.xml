@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_keyborad_zone"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DADDE1"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/ll_view_title"
+        android:layout_width="fill_parent"
+        android:layout_height="40.0dip"
+        android:background="@color/bg_green" >
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="省份"
+            android:textColor="@color/white"
+            android:textSize="18dip" 
+            android:background="@color/dark_grenn"/>
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_marginLeft="3dip"
+            android:layout_marginRight="3dip"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="字母/数字"
+            android:textColor="@color/dark_grenn"
+            android:textSize="18dip" 
+            android:background="@color/white"/>
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="军/警"
+            android:textColor="@color/dark_grenn"
+            android:textSize="18dip" 
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/cursor"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="matrix"
+        android:visibility="gone" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="50" >
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>

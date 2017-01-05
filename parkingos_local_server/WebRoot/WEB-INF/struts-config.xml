@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<data-sources />
+	<form-beans />
+	<global-exceptions />
+	<global-forwards />
+	<action-mappings>
+		<!-- 超市后台管理员后台  -->
+		<action path="/member"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/parkadmin/member.jsp"
+				redirect="false" />
+			<forward name="adminlist" path="/WEB-INF/pages/admin/member.jsp"
+				redirect="false" />
+		</action>
+		<action path="/order"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/parkadmin/order.jsp"
+				redirect="false" />
+			<forward name="carpics" path="/WEB-INF/pages/parkadmin/carpics.jsp"
+				redirect="false" />
+		</action>
+				<action path="/withdraw"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/parkadmin/withdraw.jsp"
+				redirect="false" />
+		</action>
+		<action path="/price"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/parkadmin/price.jsp"
+				redirect="false" />
+		</action>
+		<action path="/package"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/parkadmin/package.jsp"
+				redirect="false" />
+		</action>
+		<action path="/authsetting"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="auth" path="/WEB-INF/pages/admin/auth.jsp"
+				redirect="false" />
+			<forward name="authsetting" path="/WEB-INF/pages/admin/authsetting.jsp"
+				redirect="false" />
+			<forward name="rolesetting" path="/WEB-INF/pages/admin/rolesetting.jsp"
+				redirect="false" />
+			<forward name="department" path="/WEB-INF/pages/admin/departmentsetting.jsp"
+				redirect="false" />
+			<forward name="authmanage" path="/WEB-INF/pages/admin/authmanage.jsp"
+				redirect="false" />
+			<forward name="personmanage" path="/WEB-INF/pages/admin/person.jsp"
+				redirect="false" />
+			<forward name="todepartpage" path="/WEB-INF/pages/admin/departs.jsp"
+				redirect="false" />
+			<forward name="todmempage" path="/WEB-INF/pages/admin/departmembers.jsp"
+				redirect="false" />
+		</action>
+		<!-- 车场会员管理 -->
+		<action path="/vipuser" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/parkadmin/vipuser.jsp"
+				redirect="false" />
+		</action>
+		<action path="/collectorrequest"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+		<action path="/carservice"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+		<action path="/carowner"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="success" path="/WEB-INF/pages/bonus/bonus.jsp" redirect="false" />
+			<forward name="error" path="/WEB-INF/pages/bonus/error.jsp" redirect="false" />
+			<forward name="bonus" path="/WEB-INF/pages/bonus/bonusret.jsp" redirect="false" />
+			<forward name="bonusm" path="/WEB-INF/pages/bonus/bonusmoney.jsp" redirect="false" />
+			<!-- <forward name="orderbonuns" path="/WEB-INF/pages/bonus/orderbonus.jsp" redirect="false" /> -->
+			<forward name="caibouns" path="/WEB-INF/pages/bonus/caibonus.jsp" redirect="false" />
+			<forward name="bounsret" path="/WEB-INF/pages/bonus/caibonusret.jsp" redirect="false" />
+			<forward name="bounslist" path="/WEB-INF/pages/bonus/bonuslist.jsp" redirect="false" />
+		</action>
+		<action path="/parkinfo"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="success" path="/WEB-INF/pages/parkadmin/parkinfo.jsp"
+				redirect="false" />
+		</action>
+		<action path="/carplate" type="org.apache.struts.actions.ForwardAction"
+			parameter="/WEB-INF/pages/parkadmin/carplate.jsp">
+		</action>
+		<!-- 总管理员后台  -->
+		<action path="/parkpraise"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/admin/parkpraise.jsp"
+				redirect="false" />
+			<forward name="commentdetail" path="/WEB-INF/pages/admin/commentlist.jsp"
+				redirect="false" />
+			<forward name="praisedetail" path="/WEB-INF/pages/admin/praisedetail.jsp"
+				redirect="false" />
+			<forward name="commentlist" path="/WEB-INF/pages/admin/commentdetail.jsp"
+				redirect="false" />
+		</action>
+		<action path="/collector"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/admin/collector.jsp"
+				redirect="false" />
+			<forward name="vusers" path="/WEB-INF/pages/admin/collector_validates.jsp"
+				redirect="false" />
+			<forward name="vuser" path="/WEB-INF/pages/admin/collector_validate.jsp"
+				redirect="false" />
+			<forward name="cominfo" path="/WEB-INF/pages/admin/cominfo.jsp"
+				redirect="false" />
+			<forward name="remarks" path="/WEB-INF/pages/admin/remarks.jsp"
+				redirect="false" />
+			<forward name="useraccount" path="/WEB-INF/pages/admin/collector_account.jsp"
+				redirect="false" />
+			<forward name="adduseraccount" path="/WEB-INF/pages/admin/addcollector_acc.jsp"
+				redirect="false" />
+		</action>
+		<action path="/recomview"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/admin/recommend.jsp"
+				redirect="false" />
+		</action>
+		<action path="/ticket"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/admin/ticket.jsp"
+				redirect="false" />
+		</action>
+		<action path="/carower"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/admin/carower.jsp"
+				redirect="false" />
+			<forward name="carlist" path="/WEB-INF/pages/admin/carinfo.jsp"
+				redirect="false" />
+			<forward name="orderlist" path="/WEB-INF/pages/admin/carowerorderlist.jsp"
+				redirect="false" />
+			<forward name="authusers" path="/WEB-INF/pages/admin/carower_auth.jsp"
+				redirect="false" />
+			<forward name="preauthuser" path="/WEB-INF/pages/admin/carower_preauth.jsp"
+				redirect="false" />
+		</action>
+		<action path="/parking" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/admin/park/parklist.jsp" redirect="false" />
+			<forward name="ugclist" path="/WEB-INF/pages/admin/park/ugclist.jsp" redirect="false" />
+			<forward name="ugcverify" path="/WEB-INF/pages/admin/park/ugcverify.jsp" redirect="false" />
+			<forward name="verifydetail" path="/WEB-INF/pages/admin/park/verifydetail.jsp" redirect="false" />
+		</action>
+		<action path="/freepark"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/admin/freeparklist.jsp"
+				redirect="false" />
+		</action>
+		<action path="/carlogin"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+		<action path="/ibeaconhandle"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+		<action path="/account"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/admin/account.jsp"
+				redirect="false" />
+		</action>
+		<action path="/parkaccount"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/parkadmin/account.jsp"
+				redirect="false" />
+		</action>
+		<action path="/collectorsort"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/admin/sharesort.jsp"
+				redirect="false" />
+			<forward name="detail" path="/WEB-INF/pages/admin/sharesortdetail.jsp"
+				redirect="false" />
+		</action>
+		<action path="/searchpark"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+		<action path="/parksetting" type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/WEB-INF/pages/admin/parksetting.jsp" redirect="false" />
+			<forward name="parkclientset" path="/WEB-INF/pages/admin/parkclientset.jsp"
+				redirect="false" />	
+		</action>
+		<action path="/marketer" type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/WEB-INF/pages/manage/marketer.jsp"
+				redirect="false" />
+		</action>
+		<action path="/bizcircle" type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/WEB-INF/pages/admin/bizcircle.jsp"
+				redirect="false" />
+		</action>
+		<action path="/marketerpark" type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="list" path="/WEB-INF/pages/admin/marketerparklist.jsp"
+				redirect="false" />
+		</action>
+		<action path="/comaccount" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/admin/comaccountlist.jsp"
+				redirect="false" />
+		</action>
+		
+		<action path="/useraccount" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/admin/useraccountlist.jsp"
+				redirect="false" />
+		</action>
+		
+		<action path="/recommend" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/admin/recommendlist.jsp"
+				redirect="false" />
+		</action>
+		
+		<action path="/nfcmanage" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/admin/nfcmanage.jsp"
+				redirect="false" />
+		</action>
+		
+		<action path="/activity" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/admin/activitylist.jsp"
+				redirect="false" />
+			<forward name="detail" path="/WEB-INF/pages/admin/activity.jsp"
+				redirect="false" />
+		</action>
+		
+		<!-- 金额设定-->
+		<action path="/mset" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/admin/moneyset.jsp"
+				redirect="false" />
+		</action>
+		
+		
+		<action path="/nfchandle" type="org.springframework.web.struts.DelegatingActionProxy" >
+		</action>
+		<action path="/anlysis" type="org.apache.struts.actions.ForwardAction"
+			parameter="/WEB-INF/pages/anlysis/anlysis.jsp">
+		</action>
+		<action path="/sysset" type="org.apache.struts.actions.ForwardAction"
+			parameter="/WEB-INF/pages/menu/sysset.jsp">
+		</action>
+		<action path="/parkanlysis" type="org.apache.struts.actions.ForwardAction"
+			parameter="/WEB-INF/pages/anlysis/parkanlysis.jsp">
+		</action>
+		<action path="/nfcanlysis" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/anlysis/nfcanlysis.jsp" redirect="false" />
+			<forward name="detail" path="/WEB-INF/pages/anlysis/nfcdetail.jsp" redirect="false" />
+		</action>
+		<action path="/mobileanlysis" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/anlysis/mobileanlysis.jsp" redirect="false" />
+			<forward name="mpaydetail" path="/WEB-INF/pages/anlysis/mobiledetail.jsp" redirect="false" />
+			<forward name="dpaydetail" path="/WEB-INF/pages/anlysis/directpaydetail.jsp" redirect="false" />
+			<forward name="trend" path="/WEB-INF/pages/anlysis/mobilepaytrend.jsp" redirect="false" />
+			<forward name="totaltrend" path="/WEB-INF/pages/anlysis/mobiletotaltrend.jsp" redirect="false" />
+		</action>
+		<action path="/reganlysis" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="trend" path="/WEB-INF/pages/anlysis/registertrend.jsp" redirect="false" />
+		</action>
+		<action path="/consumeanlysis" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="trend" path="/WEB-INF/pages/anlysis/consumetrend.jsp" redirect="false" />
+		</action>
+		<action path="/visitanlysis" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="visit" path="/WEB-INF/pages/anlysis/visitanlysis.jsp" redirect="false" />
+			<forward name="detail" path="/WEB-INF/pages/anlysis/visitdetail.jsp" redirect="false" />
+		</action>
+		<action path="/efparkanlysis" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/anlysis/parkinfoanlysis.jsp" redirect="false" />
+		</action>
+		<action path="/hasparker" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="trend" path="/WEB-INF/pages/anlysis/hasparkeranlysis.jsp" redirect="false" />
+		</action>
+		<action path="/charge" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/anlysis/chargeanlysis.jsp" redirect="false" />
+		</action>
+		<action path="/allowance" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/anlysis/allowanceanlysis.jsp" redirect="false" />
+		</action>
+		<action path="/easypass" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/anlysis/easypass.jsp" redirect="false" />
+			<forward name="detail" path="/WEB-INF/pages/anlysis/easypassdetail.jsp" redirect="false" />
+		</action>
+		<action path="/marketerpics" type="org.springframework.web.struts.DelegatingActionProxy" >
+		</action>
+		<action path="/orderanly" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/anlysis/parkorderanlysis.jsp" redirect="false" />
+			<forward name="detail" path="/WEB-INF/pages/anlysis/parkorderdetail.jsp" redirect="false" />
+			<forward name="work" path="/WEB-INF/pages/anlysis/parkuserworkdetail.jsp" redirect="false" />
+		</action>
+		<action path="/productanlysis" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/anlysis/productanlysis.jsp" redirect="false" />
+		</action>
+		<action path="/parkedit" type="org.springframework.web.struts.DelegatingActionProxy" >
+		</action>
+		<action path="/worksiteinfo" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/zld/testhelp.jsp" redirect="false" />
+		</action>
+		<action path="/carpicsup" type="org.springframework.web.struts.DelegatingActionProxy" >
+		</action>
+		<action path="/worksite" type="org.springframework.web.struts.DelegatingActionProxy" scope="request" >
+			<forward name="list" path="/WEB-INF/pages/admin/worksite.jsp"
+				redirect="false" />
+		</action>
+		<action path="/provincesett" type="org.springframework.web.struts.DelegatingActionProxy" scope="request" >
+			<forward name="list" path="/WEB-INF/pages/admin/provincesetting.jsp"
+				redirect="false" />
+		</action>
+		<action path="/passedit" type="org.springframework.web.struts.DelegatingActionProxy" scope="request" >
+			<forward name="list" path="/WEB-INF/pages/admin/pass.jsp"
+				redirect="false" />
+		</action>
+		<action path="/camera" type="org.springframework.web.struts.DelegatingActionProxy" scope="request" >
+			<forward name="list" path="/WEB-INF/pages/admin/camera.jsp"
+				redirect="false" />
+		</action>
+		<action path="/led" type="org.springframework.web.struts.DelegatingActionProxy" scope="request" >
+			<forward name="list" path="/WEB-INF/pages/admin/led.jsp"
+				redirect="false" />
+		</action>
+		<action path="/parkworksite" type="org.springframework.web.struts.DelegatingActionProxy" scope="request" >
+			<forward name="list" path="/WEB-INF/pages/parkadmin/worksite.jsp"
+				redirect="false" />
+		</action>
+		<action path="/parkpassedit" type="org.springframework.web.struts.DelegatingActionProxy" scope="request" >
+			<forward name="list" path="/WEB-INF/pages/parkadmin/pass.jsp"
+				redirect="false" />
+		</action>
+		<action path="/parkcamera" type="org.springframework.web.struts.DelegatingActionProxy" scope="request" >
+			<forward name="list" path="/WEB-INF/pages/parkadmin/camera.jsp"
+				redirect="false" />
+		</action>
+		<action path="/parkled" type="org.springframework.web.struts.DelegatingActionProxy" scope="request" >
+			<forward name="list" path="/WEB-INF/pages/parkadmin/led.jsp"
+				redirect="false" />
+		</action>
+		<action path="/getpark" type="org.springframework.web.struts.DelegatingActionProxy" >
+		</action>
+		<action path="/parkwithdraw" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/admin/withdraw.jsp" redirect="false" />
+		</action>
+		<!--  微信预支付  -->
+		<action path="/wxpreorder" type="org.springframework.web.struts.DelegatingActionProxy" >
+		</action>
+		<!-- 照牌生成查询订单  create order by photo-->
+		<action path="/cobp" type="org.springframework.web.struts.DelegatingActionProxy" >
+		</action>
+		<!-- 手机管理  -->
+		<action path="/mobilemanage" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/admin/mobilemanage.jsp" redirect="false" />
+		</action>
+		<action path="/pricetest" type="org.apache.struts.actions.ForwardAction"
+			parameter="/WEB-INF/pages/zld/pricetest.jsp">
+		</action>
+		<!-- 黑名单管理 -->
+		<action path="/blackuser" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/admin/blackusers.jsp" redirect="false" />
+		</action>
+		<!-- 泊车员接口 -->
+		<action path="/attendant" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="carstops" path="/WEB-INF/pages/carstop/carstops.jsp" redirect="false" />
+			<forward name="stopdetail" path="/WEB-INF/pages/carstop/stopdetail.jsp" redirect="false" />
+			<forward name="stopresult" path="/WEB-INF/pages/carstop/stopresult.jsp" redirect="false" />
+			<forward name="currorder" path="/WEB-INF/pages/carstop/currorder.jsp" redirect="false" />
+			<forward name="payorder" path="/WEB-INF/pages/carstop/payorder.jsp" redirect="false" />
+			<forward name="payresult" path="/WEB-INF/pages/carstop/payresult.jsp" redirect="false" />
+			<forward name="topaypage" path="/WEB-INF/pages/carstop/weixinpay.jsp" redirect="false" />
+			<forward name="error" path="/WEB-INF/pages/wxpublic/error.jsp" redirect="false" />
+			<forward name="login" path="/WEB-INF/pages/wxpublic/adduser.jsp" redirect="false" />
+			<forward name="addcar" path="/WEB-INF/pages/wxpublic/addcarnumber.jsp" redirect="false" />
+			<forward name="orderlist" path="/WEB-INF/pages/carstop/orderlist.jsp" redirect="false" />
+			<forward name="protocol" path="/WEB-INF/pages/carstop/protol.jsp" redirect="false" />
+		</action>
+		<!-- 泊车点管理 -->
+		<action path="/carstops" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/carstop/carstopslist.jsp" redirect="false" />
+			<forward name="uploadret" path="/WEB-INF/pages/carstop/uploadret.jsp" redirect="false" />
+		</action>
+		<!-- 泊车员管理 -->
+		<action path="/parkattendant" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/carstop/attendantslist.jsp" redirect="false" />
+			<forward name="uploadret" path="/WEB-INF/pages/carstop/uploadret.jsp" redirect="false" />
+		</action>
+		<!-- 泊车点价格管理 -->
+		<action path="/carstopsprice" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/carstop/carstopspricelist.jsp" redirect="false" />
+		</action>
+		<!-- 泊车订单管理 -->
+		<action path="/ctorders" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/carstop/carstopsorderlist.jsp" redirect="false" />
+		</action>
+		<!-- Ibeacon管理 -->
+		<action path="/ibeacon" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/admin/ibeaconlist.jsp" redirect="false" />
+		</action>
+		<!-- 二维码管理 -->
+		<action path="/qrmanage" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/admin/qrlist.jsp" redirect="false" />
+		</action>
+		<!-- 车场专用停车券管理 -->
+		<action path="/parkticket" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/admin/parkticketlist.jsp" redirect="false" />
+		</action>
+		<action path="/parklalaanly" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="success" path="/WEB-INF/pages/anlysis/parklalaanly.jsp" redirect="false" />
+			<forward name="parkidle" path="/WEB-INF/pages/anlysis/parkidleanly.jsp" redirect="false" />	
+		</action>
+		<!-- 停车场注册-->
+		<action path="/regparker" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="collectorreg" path="/WEB-INF/pages/recommend/register.jsp"
+				redirect="false" />
+			<forward name="collect" path="/WEB-INF/pages/recommend/collector.jsp"
+				redirect="false" />
+			<forward name="error" path="/WEB-INF/pages/recommend/errorpage.jsp"
+				redirect="false" />
+			<forward name="download" path="/WEB-INF/pages/recommend/download.jsp"
+				redirect="false" />
+		</action> 
+		<!-- 取数据接口-->
+		<action path="/getdata" type="org.springframework.web.struts.DelegatingActionProxy" >
+		</action>
+		<!-- 礼包统计  -->
+		<action path="/bonusanly" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/anlysis/bounsanly.jsp" redirect="false" />
+			<forward name="detail" path="/WEB-INF/pages/anlysis/bonusdetail.jsp" redirect="false" />
+		</action>
+		<!-- 登录 -->
+		<action path="/login" type="org.apache.struts.actions.ForwardAction"
+			parameter="/WEB-INF/pages/zld/login.jsp">
+		</action>
+		<action path="/dologin"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="success" path="/WEB-INF/pages/menu/menu.jsp"
+				redirect="false" />
+			<forward name="parkmanage" path="/WEB-INF/pages/menu/parkmenu.jsp"
+				redirect="false" />
+			<forward name="marketer" path="/WEB-INF/pages/menu/marketermenu.jsp"
+				redirect="false" />
+			<forward name="recorder" path="/WEB-INF/pages/menu/recordermenu.jsp"
+				redirect="false" />
+			<forward name="fail" path="/WEB-INF/pages/zld/login.jsp"
+				redirect="false" />
+			<forward name="finance" path="/WEB-INF/pages/menu/financemenu.jsp"
+				redirect="false" />
+			<forward name="cardoperator" path="/WEB-INF/pages/menu/cardoperatormenu.jsp"
+				redirect="false" />
+			<forward name="config" path="/WEB-INF/pages/admin/config.jsp"
+				redirect="false" />
+		</action>
+		
+		<!-- 收费员登录客户端  -->
+		<action path="/collectorlogin"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+		
+		<!-- 市场专员客户端 -->
+		<!-- 登陆 -->
+		<action path="/marketerlogin"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+		<!-- 车场管理 -->
+		<action path="/parkmanage"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+		<!-- 下载图片 -->
+		<action path="/download"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+		<!-- 拜访记录 -->
+		<action path="/visit"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+		
+		<!-- 微信公众号 -->
+		<action path="/wxpublic" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="parklist" path="/WEB-INF/pages/wxpublic/parklist.jsp" redirect="false" />
+			<forward name="parkerlist" path="/WEB-INF/pages/wxpublic/parkerlist.jsp" redirect="false" />
+			<forward name="adduser" path="/WEB-INF/pages/wxpublic/adduser.jsp" redirect="false" />
+			<forward name="addcarnumber" path="/WEB-INF/pages/wxpublic/addcarnumber.jsp" redirect="false" />
+			<forward name="paysuccess" path="/WEB-INF/pages/wxpublic/presuccess.jsp" redirect="false" />
+			<forward name="error" path="/WEB-INF/pages/wxpublic/error.jsp" redirect="false" />
+		</action>
+		<action path="/wxpaccount" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="account" path="/WEB-INF/pages/wxpublic/account.jsp" redirect="false" />
+			<forward name="ticket" path="/WEB-INF/pages/wxpublic/ticket.jsp" redirect="false" />
+			<forward name="adduser" path="/WEB-INF/pages/wxpublic/adduser.jsp" redirect="false" />
+			<forward name="addcarnumber" path="/WEB-INF/pages/wxpublic/addcarnumber.jsp" redirect="false" />
+			<forward name="accountdetail" path="/WEB-INF/pages/wxpublic/accountdetail.jsp" redirect="false" />
+			<forward name="regbonus" path="/WEB-INF/pages/wxpublic/regbonus.jsp" redirect="false" />
+			<forward name="addcnum_regbonus" path="/WEB-INF/pages/wxpublic/addcnum_regbonus.jsp" redirect="false" />
+			<forward name="bonus" path="/WEB-INF/pages/wxpublic/bonus.jsp" redirect="false" />
+			<forward name="nobonus" path="/WEB-INF/pages/wxpublic/nobonus.jsp" redirect="false" />
+			<forward name="balance" path="/WEB-INF/pages/wxpublic/balance.jsp" redirect="false" />
+			<forward name="tocarnumber" path="/WEB-INF/pages/wxpublic/carnumber.jsp" redirect="false" />
+			<forward name="toupload" path="/WEB-INF/pages/wxpublic/uploadcnumpic.jsp" redirect="false" />
+			<forward name="tobuyticket" path="/WEB-INF/pages/wxpublic/buyticketimport.jsp" redirect="false" />
+			<forward name="buyticket" path="/WEB-INF/pages/wxpublic/buyticket.jsp" redirect="false" />
+			<forward name="orderlist" path="/WEB-INF/pages/wxpublic/orderlist.jsp" redirect="false" />
+			<forward name="horderdetail" path="/WEB-INF/pages/wxpublic/horderdetail.jsp" redirect="false" />
+			<forward name="error" path="/WEB-INF/pages/wxpublic/error.jsp" redirect="false" />
+		</action>
+		<action path="/wxpfast" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="prepay" path="/WEB-INF/pages/wxpublic/prepay.jsp" redirect="false" />
+			<forward name="toprepaypage" path="/WEB-INF/pages/wxpublic/prepayorder.jsp" redirect="false" />
+			<forward name="epayimport" path="/WEB-INF/pages/wxpublic/epayimport.jsp" redirect="false" />
+			<forward name="toepay" path="/WEB-INF/pages/wxpublic/epay.jsp" redirect="false" />
+			<forward name="payorder" path="/WEB-INF/pages/wxpublic/payorder.jsp" redirect="false" />
+			<forward name="error" path="/WEB-INF/pages/wxpublic/error.jsp" redirect="false" />
+			<forward name="presuccess" path="/WEB-INF/pages/wxpublic/presuccess.jsp" redirect="false" />
+			<forward name="addcarnum" path="/WEB-INF/pages/wxpublic/addcnum_temp.jsp" redirect="false" />
+			<forward name="toreward" path="/WEB-INF/pages/wxpublic/rewardimport.jsp" redirect="false" />
+			<forward name="reward" path="/WEB-INF/pages/wxpublic/reward.jsp" redirect="false" />
+			<forward name="getticket" path="/WEB-INF/pages/wxpublic/getticket.jsp" redirect="false" />
+			<forward name="chooseticket" path="/WEB-INF/pages/wxpublic/chooseticket.jsp" redirect="false" />
+			<forward name="createorder" path="/WEB-INF/pages/wxpublic/createorder.jsp" redirect="false" />
+		</action>
+		<!-- 车主2.0接口 -->
+		<action path="/carinter" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="orderdetail" path="/WEB-INF/pages/wxpublic/orderdetail.jsp" redirect="false" />
+			<!-- <forward name="bonus" path="/WEB-INF/pages/wxbouns/orderbonus.jsp" redirect="false" />
+			<forward name="caibouns" path="/WEB-INF/pages/wxbouns/caibonus.jsp" redirect="false" />
+			<forward name="bounsret" path="/WEB-INF/pages/wxbouns/caibonusret.jsp" redirect="false" /> -->
+			<forward name="caibouns" path="/WEB-INF/pages/bonus/caibonus.jsp" redirect="false" />
+			<forward name="verifyrule" path="/WEB-INF/pages/carowner/verifyrule.jsp" redirect="false" />
+			<forward name="upfine" path="/WEB-INF/pages/carowner/upfine.jsp" redirect="false" />
+		</action>
+		<!-- 停车游戏  -->
+		<action path="/cargame" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="pregame" path="/WEB-INF/pages/game/pregame.jsp" redirect="false" />
+			<forward name="game"    path="/WEB-INF/pages/game/cargame.jsp" redirect="false" />
+			<forward name="greet"    path="/WEB-INF/pages/game/greet.jsp" redirect="false" />
+			<forward name="success"    path="/WEB-INF/pages/game/success.jsp" redirect="false" />
+			<forward name="gamefail"    path="/WEB-INF/pages/game/gamefail.jsp" redirect="false" />
+			<forward name="fail"    path="/WEB-INF/pages/game/fail.jsp" redirect="false" />
+			<forward name="error"    path="/WEB-INF/pages/game/error.jsp" redirect="false" />
+			<forward name="addcar"    path="/WEB-INF/pages/game/addcar.jsp" redirect="false" />
+			<forward name="tickets"    path="/WEB-INF/pages/game/tickets.jsp" redirect="false" />
+			<forward name="gamesort"    path="/WEB-INF/pages/game/gamesort.jsp" redirect="false" />
+			<forward name="mysort"    path="/WEB-INF/pages/game/mysort.jsp" redirect="false" />
+			<forward name="addmobile"    path="/WEB-INF/pages/game/addmobile.jsp" redirect="false" />
+			<forward name="togame"    path="/WEB-INF/pages/game/togame.jsp" redirect="false" />
+		</action>
+		<action path="/parkinter" type="org.springframework.web.struts.DelegatingActionProxy" scope="request"></action>
+		<!-- 停车宝账户 -->
+		<action path="/tcbaccountaly" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/anlysis/tingchebaoaccountanlysis.jsp" redirect="false" />	
+		</action>
+		<action path="/parkaccountaly" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/anlysis/parkaccountanlysis.jsp" redirect="false" />	
+		</action>
+		<action path="/parkuseraccountaly" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/anlysis/parkuseraccountanlysis.jsp" redirect="false" />	
+		</action>
+		<action path="/useraccountaly" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/anlysis/useraccountanlysis.jsp" redirect="false" />	
+		</action>
+		<action path="/orderbonusanly" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/anlysis/orderbounsanlysis.jsp" redirect="false" />	
+		</action>
+		<!-- 购物中心 -->
+		<action path="/midpreanlysis" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/anlysis/midpreanlysis.jsp" redirect="false" />
+			<forward name="detail" path="/WEB-INF/pages/anlysis/midpredetail.jsp" redirect="false" />
+			<forward name="workdetail" path="/WEB-INF/pages/anlysis/midpreworkdetail.jsp" redirect="false" />
+		</action>
+		
+		<!-- 商户客户端 -->
+		<action path="/midprepay"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+		<action path="/picshandle"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+		<action path="/reward" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="list" path="/WEB-INF/pages/anlysis/rewardanlysis.jsp" redirect="false" />	
+		</action>
+		<action path="/flygame" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+			<forward name="pregame" path="/WEB-INF/pages/flygame/pregame.jsp" redirect="false" />	
+			<forward name="game" path="/WEB-INF/pages/flygame/game.jsp" redirect="false" />	
+			<forward name="wgame" path="/WEB-INF/pages/flygame/wgame.jsp" redirect="false" />	
+			<forward name="toshare" path="/WEB-INF/pages/flygame/share.jsp" redirect="false" />	
+			<forward name="error" path="/WEB-INF/pages/flygame/error.jsp" redirect="false" />	
+			<forward name="addmobile" path="/WEB-INF/pages/flygame/addmobile.jsp" redirect="false" />	
+		</action>
+		<!-- 客户端本地化接口 -->
+		<action path="/local"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+		<!-- 车型管理  -->
+		<action path="/cartype" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="list" path="/WEB-INF/pages/parkadmin/cartype.jsp"
+				redirect="false" />
+		</action>
+		<action path="/config" type="org.springframework.web.struts.DelegatingActionProxy" >
+			<forward name="configpage" path="/WEB-INF/pages/admin/configpage.jsp"
+				redirect="false" />
+			<forward name="config" path="/WEB-INF/pages/admin/config.jsp"
+			redirect="false" />
+			<forward name="list" path="/WEB-INF/pages/admin/configlist.jsp"
+				redirect="false" />
+				<forward name="passmanage" path="/WEB-INF/pages/admin/passmanage.jsp"
+				redirect="false" />
+		</action>
+		<action path="/initLocal" 
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+	</action-mappings>
+</struts-config>
+

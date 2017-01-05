@@ -1,0 +1,7 @@
+@charset "gb2312";
+/*all*/
+html, body{width:100%;height:100%;overflow:auto;margin:0px;padding:0px;font-size:14px;list-style:none; background:#fff;}
+body{*position:relative}
+table, tr, td, div, th{font-family:"Î¢ÈíÑÅºÚ",sans-serif,Arial,Verdana;font-size:14px;}
+
+td,th{border-right: solid 1px #8DB2E3;border-bottom: solid 1px #8DB2E3;}

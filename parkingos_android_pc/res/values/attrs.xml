@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <!--boolean, string, integer, dimension, float, reference, color, fraction, enum, flag-->
+<resources>
+     <declare-styleable name="CellDefinedAttr"> 
+      <attr name="lineNum" format="integer"/> 
+      <attr name="columnNum" format="integer"/>
+    </declare-styleable> 
+</resources>

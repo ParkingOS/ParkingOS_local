@@ -1,0 +1,108 @@
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, form, img, dl, dt, dd, table, th, td, blockquote, fieldset, div, strong, label, em {
+	margin:0;
+	padding:0;
+	border:0;
+}
+input, button {
+	margin:0;
+	font-size:12px;
+	vertical-align:middle;
+}
+a {
+	color:#333;
+	text-decoration:none;
+}
+a:hover {
+	color:#c00;
+	text-decoration:underline;
+}
+.btndiv {
+	width:100%;
+	float:left;
+	height:28px;
+	position:relative;
+}
+.btndiv strong {
+	float:left;
+	padding-left:10px;
+	padding-top:4px;
+}
+a.abtn {
+	display:block;
+	height:22px;
+	width:24px;
+	position:absolute;
+	overflow:hidden;
+	background:url(../images/btn.gif) no-repeat;
+	text-indent:-999em;
+	outline:none;
+}
+a.aleft {
+	right:40px;
+	background-position:0 -32px;
+}
+a.agrayleft {
+	cursor:default;
+	background-position:0 0;
+}
+a.aright {
+	right:10px;
+	background-position:-34px 0;
+}
+a.agrayright {
+	cursor:default;
+	background-position:-34px -32px;
+}
+.uldiv {
+	width:600px;
+	padding:25px;
+	margin:20px auto;
+	position:relative;
+	text-align:center;
+	border:3px solid #f60;
+	border-radius:5px;
+}
+.scrollcontainer {
+	width:600px;
+	height:600px;
+	overflow:hidden;
+	position:relative;
+	margin:0 auto;
+}
+
+.scrollcontainer1 {
+	width:600px;
+	height:400px;
+	overflow:hidden;
+	position:relative;
+	margin:0 auto;
+}
+
+.scrollcontainer ul {
+	width:20000px;
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+.scrollcontainer li {
+	float:left;
+}
+.scrollcontainer1 ul {
+	width:20000px;
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+.scrollcontainer1 li {
+	float:left;
+}
+
+.gzbtn {
+	background:url(../images/btngz.gif) no-repeat;
+	margin:0 auto;
+	width:100px;
+	height:30px;
+	display:block;
+	border:none;
+	text-indent:-999em;
+}

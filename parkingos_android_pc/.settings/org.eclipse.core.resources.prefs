@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//src/com/media/H264Decoder.java=UTF-8
+encoding//src/com/vzvison/monitor/player/CircleQueue.java=UTF-8
+encoding//src/com/vzvison/monitor/player/DataService.java=UTF-8
+encoding//src/com/vzvison/monitor/player/Frame.java=UTF-8
+encoding//src/com/vzvison/monitor/player/FrameQueue.java=UTF-8
+encoding//src/com/vzvison/monitor/player/MediaInfo.java=UTF-8
+encoding//src/com/vzvison/monitor/player/MediaPlayer.java=UTF-8
+encoding//src/com/zld/lib/util/BluetoothService.java=UTF-8
+encoding/<project>=GBK

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="timewarn">
+        <item>不提醒</item>
+        <item>15分钟</item>
+        <item>30分钟</item>
+    </string-array>
+ <string-array name="voicer_cloud_entries">
+       	<item>小燕</item>
+		<item>小宇</item>
+		<item>凯瑟琳</item>
+		<item>亨利</item>
+		<item>玛丽</item>
+		<item>小研</item>
+		<item>小琪</item>
+		<item>小峰</item>
+		<item>小梅</item>
+		<item>小莉</item>
+		<item>小蓉</item>
+		<item>小芸</item>
+		<item>小坤</item>
+		<item>小强 </item>
+		<item>小莹</item>
+		<item>小新</item>
+		<item>楠楠</item>
+		<item>老孙</item>
+    </string-array>
+    <string-array name="voicer_cloud_values">
+		<item>xiaoyan</item>
+		<item>xiaoyu</item>
+		<item>Catherine</item>
+		<item>henry</item>
+		<item>vimary</item>
+		<item>vixy</item>
+		<item>vixq</item>
+		<item>vixf</item>
+		<item>vixm</item>
+		<item>vixl</item>
+		<item>vixr</item>
+		<item>vixyun</item>
+		<item>vixk</item>
+		<item>vixqa</item>
+		<item>vixying</item>
+		<item>vixx</item>
+		<item>vinn</item>
+		<item>vils</item>
+    </string-array>
+    <string-array name="FrameSize">
+        <item>352x288</item>
+        <item>704x576 </item>
+        <item>1280x720</item>
+        <item>1920x1080</item>
+    </string-array>
+      <string-array name="FrameRate">
+        <item>1</item>
+         <item>2</item>
+         <item>3</item>
+         <item>4</item>
+         <item>5</item>
+         <item>6</item>
+         <item>7</item>
+         <item>8</item>
+         <item>9</item>
+         <item>10</item>
+         <item>11</item>
+         <item>12</item>
+         <item>13</item>
+         <item>14</item>
+         <item>15</item>
+         <item>16</item>
+         <item>17</item>
+         <item>18</item>
+         <item>19</item>
+         <item>20</item>
+         <item>21</item>
+         <item>22</item>
+         <item>23</item>
+         <item>24</item>
+         <item>25</item>
+    </string-array>
+     <string-array name="EncodeType">
+        <item>JEPG</item>
+        <item>H264 </item>
+    </string-array>
+    
+     <string-array name="serials">
+        <item>1</item>
+        <item>2</item>
+        <item>全部</item>
+    </string-array>
+    
+      <string-array name="enable">
+        <item>否</item>
+        <item>是</item>
+    </string-array>
+     <string-array name="plateColor">
+        <item>白</item>
+        <item>灰银</item>
+        <item>黄</item>
+        <item>粉</item>
+        <item>红</item>
+        <item>绿</item>
+        <item>蓝</item>
+         <item>棕</item>
+          <item>黑</item>
+    </string-array>
+    
+     <string-array name="plateType">
+        <item>未知类型</item>
+        <item>蓝牌小汽车</item>
+        <item>黑牌小汽车</item>
+        <item>单排黄牌</item>
+        <item>双排黄牌</item>
+         <item>警车车牌</item>
+         <item>武警车牌</item>
+         <item>个性化车牌</item>
+         <item>单排军车</item>
+         <item>双排车牌</item>
+         <item>使馆车牌</item>
+         <item>香港进出口车牌</item>
+         <item>农用车牌</item>
+         <item>教练车牌</item>
+         <item>澳门进出中国</item>
+         <item>双层武警车牌</item>
+         <item>武警总队车牌</item>
+         <item>双层武警总队车牌</item>
+    </string-array>
+    <string-array name="gateNum">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+</resources>

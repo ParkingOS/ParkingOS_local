@@ -1,0 +1,23 @@
+@charset "gb2312";
+.chker, .chkok
+{
+	float:left;
+	text-align:left;
+	padding-left: 20px;
+	font-weight: bold;
+	clear:both;
+	background-image: url(../images/form/info.gif);
+	background-repeat: no-repeat;
+	
+}
+.chker{ color: #333; background-position: 0 0; }
+.chkok{ color: #00f; background-position: 0 -84px; }
+.chkaj
+{
+	margin-left: 5px;
+	padding-left: 20px;
+	font-weight: bold;
+	background-image: url(../images/form/wait.gif);
+	background-repeat: no-repeat;
+}
+input.error,textarea.error{border: 1px solid #C00;background:#FF9;height:20px;}

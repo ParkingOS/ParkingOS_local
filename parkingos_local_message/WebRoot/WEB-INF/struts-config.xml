@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<data-sources />
+	<form-beans />
+	<global-exceptions />
+	<global-forwards />
+	<action-mappings>
+		<action path="/getmesg"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+		<action path="/getshare"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+		<action path="/carmessage"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+		<action path="/parkermesg"
+			type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+		</action>
+	</action-mappings>
+</struts-config>
+

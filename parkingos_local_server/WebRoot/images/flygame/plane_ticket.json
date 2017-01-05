@@ -1,0 +1,9 @@
+{
+  "framerate":10,
+  "images":["images/flygame/plane_ticket.png"],
+  "frames":{"width":116,"height":59,"count":2},
+  "animations":{
+    "left":[1],
+    "right":[0]
+  }
+}

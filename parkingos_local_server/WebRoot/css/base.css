@@ -1,0 +1,91 @@
+@charset "gb2312";
+/*all*/
+html, body{width:100%;height:100%;overflow:hidden;margin:0px;padding:0px;font-size:12px;list-style:none; background:#fff url(../images/headbg.png) repeat-x;}
+iframe,form{margin:0px;padding:0px;}
+img{border:0px;vertical-align:middle;margin:0px;padding:0px;}
+a{color:#000;text-decoration:none;}
+.logo{float:left;width:150px;height:60px;background:url(../images/logo.png) no-repeat;}
+.user_info{height:28px;line-height:26px;color:#fff;position: absolute;right:10px;top:0px;}
+.user_info a{color:#fff;}
+#page-tabs {
+	margin: 0px; padding:0px;  overflow: hidden; position: absolute;left:155px;top:28px;height:26px;
+}
+#page-tabs ul {
+	list-style: none;margin: 0px; padding:0px; 
+}
+#page-tabs li {
+	margin: 0px; padding:0px; height: 27px; line-height: 27px; font-size: 12px; float: left; display: inline;
+}
+#page-tabs div {
+	background: url("../images/tabsbg.png") no-repeat 0px -54px; width: 26px; height: 27px; float: left;
+}
+#page-tabs a {
+	background: url("../images/tabsbg.png") repeat-x 0px -297px; padding: 0px 1px; color:#000; float: left;
+}
+#page-tabs a:hover {
+	color: #000; font-weight:700; text-decoration: none;
+}
+#page-tabs a:focus {
+	color: #000; text-decoration: none;
+}
+#page-tabs .last .last {
+	background: url("../images/tabsbg.png") no-repeat 0px -108px; width: 21px;
+}
+#page-tabs li:first-child div:first-child {
+	width: 9px;
+}
+#page-tabs :first-child.selected div:first-child {
+	width: 9px;
+}
+#page-tabs li:first-child div:first-child {
+	background: url("../images/tabsbg.png") no-repeat 0px -189px;
+}
+#page-tabs .selected a {
+	color: #000; font-weight:700; 
+	background: url("../images/tabsbg.png") repeat-x 0px -324px;
+}
+#page-tabs .selected div {
+	background: url("../images/tabsbg.png") no-repeat 0px 0px;
+}
+#page-tabs .last.selected .last {
+	background: url("../images/tabsbg.png") no-repeat 0px -135px;
+}
+#page-tabs .selected + li div {
+	background: url("../images/tabsbg.png") no-repeat 0px -27px;
+}
+#page-tabs :first-child.selected div:first-child {
+	background: url("../images/tabsbg.png") no-repeat 0px -243px;
+}
+#page-tabs .right {
+	float: right;
+}
+#page-tabs .right li:first-child div:first-child {
+	width: 21px;
+}
+#page-tabs .right :first-child.selected div:first-child {
+	width: 21px;
+}
+#page-tabs .right li:first-child div:first-child {
+	background: url("../images/tabsbg.png") no-repeat 0px -81px;
+}
+#page-tabs .right .last .last {
+	background: url("../images/tabsbg.png") no-repeat 0px -216px; width: 9px;
+}
+#page-tabs .right .last.selected .last {
+	background: url("../images/tabsbg.png") no-repeat 0px -270px;
+}
+#page-tabs .right :first-child.selected div:first-child {
+	background: url("../images/tabsbg.png") no-repeat 0px -162px;
+}
+
+
+#page-tabs .first div{
+	width: 9px;background: url("../images/tabsbg.png") no-repeat 0px -189px;
+}
+#page-tabs .first.selected div{
+	background: url("../images/tabsbg.png") no-repeat 0px -243px;
+}
+
+
+
+

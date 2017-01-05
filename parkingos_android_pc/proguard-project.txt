@@ -1,0 +1,157 @@
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#   public *
+#}
+
+#设置混淆的压缩比率 0~7
+-optimizationpasses 5
+
+#包明不混合大小写
+-dontusemixedcaseclassnames
+
+#指定不去忽略非公共的库类。如果应用程序引入的有jar包,并且想混淆jar包里面的class
+-dontskipnonpubliclibraryclasses
+
+#混淆后生产映射文件 map 类名->转化后类名的映射-记录日志
+-verbose
+
+#不优化输入的类文件
+-dontoptimize
+
+#不预校验
+-dontpreverify
+
+#保护注解
+-keepattributes *Annotation*
+
+#忽略警告
+-ignorewarning
+
+#如果有引用v4包可以添加下面这行
+-keep public class * extends android.support.v4.app.Fragment
+
+#优化-混淆时所采用的算法
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+
+#避免混淆泛型 如果混淆报错建议关掉
+-keepattributes Signature
+
+# 混淆保护自己项目的部分代码以及引用的第三方jar包library
+-libraryjars libs/android-query-full.0.26.8.jar  
+-libraryjars libs/android-support-v4.jar
+-libraryjars libs/BaiduLBS_Android.jar
+-libraryjars libs/gson-2.2.4.jar
+-libraryjars libs/Msc.jar
+-libraryjars libs/nbs.newlens.agent.jar
+-libraryjars libs/umeng-analytics-v5.2.3.jar
+-libraryjars libs/umeng-fb-v4.3.2.jar
+-libraryjars libs/universal-image-loader-1.9.2.jar
+
+# 以下包 不进行混淆
+
+# 保持com.xx.bbb.**这个包里面的所有类和所有方法而不混淆，
+-keep class oauth.signpost.**
+-keep class oauth.signpost.**{ *;}
+-keep class com.zld.ui.**
+-keep class com.zld.ui.**{*;}  
+-keep class com.zld.bean.**
+-keep class com.zld.bean.**{*;}  
+-keep class org.json.JSONObject.**
+-keep class org.json.JSONObject.**{ *;}
+-keep class com.umeng.**
+-keep class com.umeng.**{ *;}
+
+# 去除警告
+-dontwarn oauth.signpost.**
+-dontwarn android.support.**
+
+#某些构造方法不能去混淆，但条件是所有指定的类和类成员是要存在
+-keepclasseswithmembers class * {
+    public <init>(org.json.JSONObject);
+}
+-keepclasseswithmembers class * {
+public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+#所有native的方法不能去混淆
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+-keepclassmembers public class * extends android.view.View {
+   void set*(***);
+   *** get*();
+}
+
+-keepclassmembers class * extends android.app.Activity {
+   public void *(android.view.View);
+}
+
+#枚举不混淆
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+#不进行混淆保持原样
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class com.android.vending.licensing.ILicensingService
+
+-keep public class com.google.vending.licensing.ILicensingService
+-keep public class com.android.vending.licensing.ILicensingService
+
+
+#所有方法不进行混淆
+-keep public abstract interface com.asqw.android.Listener{
+public protected <methods>;
+}
+
+#对该方法不进行混淆
+-keep public class com.asqw.android{
+public void Start(java.lang.String);
+}
+
+#保护指定类的成员，如果此类受到保护他们会保护的更好
+-keepclassmembers class * extends android.app.Activity {
+public void *(android.view.View);
+}
+
+#保护指定的类文件和类的成员
+-keep class * implements android.os.Parcelable {
+public static final android.os.Parcelable$Creator *;
+}
+
+#过滤R文件的混淆：
+-keep class **.R$* { *; }
+
+#不混淆资源类
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}
+
+#保持 Parcelable 不被混淆
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+ 
+#保持 Serializable 不被混淆
+-keepnames class * implements java.io.Serializable
+
+#保持 Serializable 不被混淆并且enum 类也不被混淆
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+    public <fields>;
+}
+# ProGuard configurations for NetworkBench Lens
+-keep class com.networkbench.** { *; }
+-dontwarn com.networkbench.**
+-keepattributes Exceptions, Signature, InnerClasses
+# End NetworkBench Lens

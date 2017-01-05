@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:vzvision="http://schemas.android.com/apk/res/com.example.vzvision"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android1="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout_vedioset_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android1:measureWithLargestChild="false" >
+
+    <RelativeLayout
+        android:id="@+id/LinearLayout_Vedio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android1:layout_weight="1"
+        android:padding="2dp" >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/textView_VideoDeviceName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="设备名"
+                android:textColor="#ffd0d0d0"
+                android:textSize="15sp"
+                android1:visibility="gone" />
+
+            <TextView
+                android:id="@+id/textView_PicTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:text="TextView"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/textView_FrameTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="TextView"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView_plateID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="错误信息"
+                android:textColor="#ffd0d0d0"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android1:visibility="gone"
+                android:id="@+id/LinearLayout_ImgGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/imageView_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/play" />
+
+                <ImageView
+                    android:id="@+id/imageView_stop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stop"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/imageView_config"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/config" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <com.vzvison.device.MyImageView
+        android:id="@+id/imageView_snapPlate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_weight="1"
+        android:scaleType="fitXY"
+        android:src="@android:color/black"
+        android1:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textView_trriglePlate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="车牌号"
+        android:textColor="#ffd0d0d0"
+        android:textSize="20sp"
+        android1:visibility="gone" />
+
+</LinearLayout>

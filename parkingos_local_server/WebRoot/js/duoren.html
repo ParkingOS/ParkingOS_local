@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>个人信息</title>
+<style type="text/css"> 
+html,body{margin:0px;padding:0px;font-size: 12px;font-family: Arial,Verdana,sans-serif,"Lucida Grande","Lucida Sans Unicode","宋体";height: 100%;width: 100%;overflow-x:hidden;background:#E2EBED}
+a{color:#000;text-decoration:none;}
+ul{list-style:none;margin:0px;padding:0px;}
+li{list-style:none}
+em{font-style:normal;}
+a.userli{width:100%;float:left;text-align:left;cursor:pointer;_cursor:hand;margin:0px 1px 0px 0px;padding:1px;}
+a.departli{width:100%;float:left;text-align:left;margin-top:3px;}
+a.userli:hover{background:#C2D8DE;}
+a.usersel{width:100%;float:left;text-align:left;cursor:pointer;_cursor:hand;margin:0px 1px 0px 0px;padding:1px;background:#C2D8DE;}
+.ctree{overflow:hidden;border:solid 1px #889DAD;margin:1px 1px 1px 1px;width:170px; height:200px;background-color:#fff;float:left;}
+.selectul{overflow-x:hidden;overflow-y:auto;width:170px;height:170px;}
+.sellist{line-height:14px;overflow:hidden;border:solid 0px ;margin:0px;width:100%; height:200px;background-color:#fff;float:left;white-space:nowrap;}
+.sellist li{float:left;overflow:hidden;padding:1px 0px 0px 1px;width:100%; background-color:#fff}
+.sellist li:hover{background-color:#eee;}
+span.ldelete{display:block;float:right;height:16px;padding-left:20px;*margin-right:15px;*margin-top:-16px;_margin-right:7px;background: url(tqccresource/tq_images/icons/sdelete.png) no-repeat 0px 2px;cursor:pointer;_cursor:hand}
+span.adelete{display:block;float:right;height:16px;padding-left:16px;*margin-top:-16px;background: url(tqccresource/tq_images/icons/trash.gif) no-repeat 0px 3px;cursor:pointer;_cursor:hand}
+span.qdelete{display:block;float:left;margin-top:3px;height:16px;padding-left:16px;background: url(tqccresource/tq_images/icons/sdelete.png) no-repeat 0px 5px;}
+span.uquery{padding-left: 16px;background: url(tqccresource/tq_images/icons/search.png) no-repeat 0px 2px;}
+.titlepanel{background:#DDE7EA;height:20px;border-bottom: #889DAD 1px solid;vertical-align:middle;padding:2px 2px;width:170px;line-height:14px;overflow:hidden;}
+.depart{background:url("tqccresource/tq_images/icons/depart.png") no-repeat;}   
+span.usercontainer em{display:block;float:left;height:16px;cursor:pointer;_cursor:hand;padding:5px 0px 0px 16px;margin:0px 3px 0px 16px;_margin:0px 3px 0px 8px;}
+.nosel{background: url(tqccresource/tq_images/icons/checkbox_0.gif) no-repeat 0px 3px;}
+.sel{background: url(tqccresource/tq_images/icons/checkbox_1.gif) no-repeat 0px 3px;}
+input.loading{background:url("tqccresource/tq_images/icons/indicator.gif") no-repeat right center;}
+.loadtip{position:absolute;top:0px;left:0px;border-style:none;height:200px;width:340px;background:#DDE7EA;padding:5px;}
+ 
+/*个人信息*/
+.tq_user_box { width:100%; margin:auto; background:#fbfbfb; padding-top:10px}
+.tq_user_list { width:98%; margin:auto; color:#666666; margin-top:10px}
+.tq_user_list .input { border:1px solid #999; background:#FFF; height:16px }
+.tq_user_list th { color:#333333; font-weight:normal; width:100px; text-align:right}
+.tq_user_list td { color:#000;}
+.tq_user_list #tip { font-size:12px; color:#666666}
+.tq_user_list tr { height:24px; padding:0px;}
+.tq_user_list .red { color:#FF0000}
+.tq_user_list dfn { font-size:12px;font-style:normal;font-weight:normal; color:#999;margin-left: 7px;}
+.tq_user_list td:hover dfn, .tq_user_list td.hover dfn {display:inline;margin-left: 7px;color: #676767;}
+.tq_user_list_l { border-bottom:1px dashed #d8d8d8; width:25%; text-align:right; padding-right:5px; color:#333333}
+.tq_user_list_r { border-bottom:1px dashed #d8d8d8; width:80%; text-align:left; line-height:180%;}
+.btn02 { width:60px; height:24px; border:1px solid #87a3c1; background:url(../images2010/Search_button.gif); color:#336bc1; font-size:12px; line-height:180%; cursor:pointer;}
+.btn04 { width:60px; height:24px; border:1px solid #a2904d; background:url(../images2010/Search_button.gif) 0 -66px; color:#630; font-size:12px; cursor:pointer; line-height:180%;}
+fieldset {margin:auto;padding:0px;width:96%;color:#333;border:#06c dashed 1px} 
+legend {color:#06c;	font-weight:800;	background:#fff} 
+</style>
+<script src="tq.js" type="text/javascript"></script>
+<script src="tq.hash.js" type="text/javascript"></script>
+<script type="text/javascript"> 
+var flag;
+var tar=false;
+//多选用户
+ 
+  function sel(val,obj1){
+  	for(i=0;i<obj1.length;i++){
+  		if(obj1[i]==val){
+  			return i;
+  		}
+  	}
+  	if (i==obj1.length){return 0;}
+  }
+ 
+ 
+function setallselected(floatuin){
+for(var x=0; x<floatuin.length; x++)
+{
+        var myopt =floatuin.options[x];
+        myopt.selected=true;
+}
+}
+ 
+function changeKefus()
+{
+	var str = "";
+	for(var users in userHash.items)
+	{
+		if(parseInt(users)>0)
+			str += "|"+users;
+	}
+	document.form.kefus.value = str.substring(1)||str;
+}
+ 
+function MyTrim(obj)
+{
+	var r = new RegExp(/\s/g);
+	if (r.test(obj.value))
+	{
+		document.getElementById("tips").innerHTML = "策略名中不能包含空";
+		obj.focus();
+	}
+}
+ 
+function tacticCode(obj)
+{
+	var r = obj.value;
+	if (r==0)
+	{
+		document.getElementById("tips2").innerHTML = "策略代码不能设置为0";
+		obj.focus();
+	}
+}
+ 
+var comeon = false;
+var tip;
+function submitForm(){
+	document.getElementById('eidttaticform').target="info";
+	tip=tqctip('正在提交数据，请稍候...',120,300,'center','true',60);
+	document.getElementById('eidttaticform').submit();
+	checkSubmitFlg=true;
+}
+function closeArtDialog(){
+	if(checkSubmitFlg==true){
+		tqshortalert('修改成功！');
+		art.dialog.parent.reloadpage();
+		art.dialog.close();
+	}
+}
+function suckerfish(type, tag, parentId) {
+if (window.attachEvent) {
+window.attachEvent("onload", function() {
+var sfEls = (parentId==null)?document.getElementsByTagName(tag):document.getElementById(parentId).getElementsByTagName(tag);
+type(sfEls);
+});
+}
+}
+hover = function(sfEls) {
+for (var i=0; i<sfEls.length; i++) {
+sfEls[i].onmouseover=function() {
+this.className+=" hover";
+}
+sfEls[i].onmouseout=function() {
+this.className=this.className.replace(new RegExp(" hover\\b"), "");
+}
+}
+}
+suckerfish(hover, "td")
+	function changeTip(){
+	     var msg="";
+		 var rule = document.getElementById("distribute_rule").value;
+		 var tipspan = document.getElementById("tip");
+		 switch(rule){
+		 case "1" : msg="<b>顺序优先</b>: 按预先设置的先后顺序分配。";break;
+		 case "2" : msg="<b>随机分配</b>: 在线且空闲的座席中随机分配。";break;
+		 case "3" : msg="<b>轮循平均</b>：依次平均分配给在线且空闲的座席。";break;
+		 case "4" : msg="<b>熟客优先</b>：自通接通前次接待的座席。";break;
+		 case "5" : msg="<b>级别优先</b>：设置座席为访座席务的优先级别,一旦选择级别优先或区域匹配将导致该策略分配方式不能被修改。" ;break;
+		 case "6" : msg="<b>区域匹配</b>：根据访客的所在地智能接通的负责该地区的座席,此策略只可创建一层子策略，每个子策略对应座席负责的区域,所有子策略座席不在线时将从该策略设置的座席中选取,一旦选择级别优先或区域匹配将导致该策略分配方式不能被修改。" ;break;
+		 case "8" : msg="&nbsp;等待应答：此分配方式目前仅限于专用客户端软件，TQ7及以下版本不能使用!" ;break;
+		 }
+		tipspan.innerHTML=msg; 
+	}
+ 
+</script>
+</head>
+<body>
+<form name="form" id="eidttaticform"  action="editTactic.do" method="post">
+<input type="hidden" id='id' name='id' value="30446" />
+<input type="hidden" id="priority" name="priority" size="11" value="1" />
+<input type="hidden" id="old_type_code" name="old_type_code" size="11" />
+<input type="hidden" id="type" value="edittatic" name="type"/>
+<div id="tq_user">
+  <div class="tq_user_box">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tq_user_list">
+      <tr>
+        <td class="tq_user_list_l">策略名称：</td>
+        <td class="tq_user_list_r"><input id="type_name" name="type_name" type="text" onblur="MyTrim(this)" value="顺序优先"/> <font id="tips" class="red">*</font></td>
+      </tr>
+      <tr>
+        <td class="tq_user_list_l">策略代码：</td>
+        <td class="tq_user_list_r"><input id="type_code" name="type_code" type="text" value="10" onblur="tacticCode(this)" maxlength="10"/> <font id="tips2" class="red">*</font></td>
+      </tr>
+	  	       <tr>
+        <td class="tq_user_list_l">所属部门：</td>
+        <td class="tq_user_list_r">
+            <select name="departid" size="1" id="departid" style="width:150px">
+                                            <option value="-1" id="|-全局"  selected >|-全局</option>
+                                            <option value="9493750" id="|-执行委员会" >|-执行委员会</option>
+                                            <option value="9660280" id="|---执行2" >|---执行2</option>
+                                            <option value="9660293" id="|---adsfasdf" >|---adsfasdf</option>
+                                            <option value="8104877" id="|-产品研发部" >|-产品研发部</option>
+                                            <option value="9493758" id="|---产品组" >|---产品组</option>
+                                            <option value="9520925" id="|---研发备用" >|---研发备用</option>
+                                            <option value="8368872" id="|-技术支持部" >|-技术支持部</option>
+                                            <option value="9493753" id="|-系统管理员" >|-系统管理员</option>
+                                            <option value="8775360" id="|-TQ营销中心" >|-TQ营销中心</option>
+                                            <option value="9493760" id="|---保留号" >|---保留号</option>
+                                            <option value="9185767" id="|---鲲鹏部" >|---鲲鹏部</option>
+                                            <option value="9477705" id="|-----鲲鹏1" >|-----鲲鹏1</option>
+                                            <option value="9477706" id="|-----鲲鹏2" >|-----鲲鹏2</option>
+                                            <option value="9477707" id="|-----鲲鹏3" >|-----鲲鹏3</option>
+                                            <option value="9477708" id="|-----鲲鹏4" >|-----鲲鹏4</option>
+                                            <option value="9520711" id="|-----鲲鹏5" >|-----鲲鹏5</option>
+                                            <option value="9520756" id="|-----鲲鹏备用" >|-----鲲鹏备用</option>
+                                            <option value="9185713" id="|---雄鹰部" >|---雄鹰部</option>
+                                            <option value="9477699" id="|-----雄鹰1" >|-----雄鹰1</option>
+                                            <option value="9477700" id="|-----雄鹰2" >|-----雄鹰2</option>
+                                            <option value="9477702" id="|-----雄鹰3" >|-----雄鹰3</option>
+                                            <option value="9477704" id="|-----雄鹰5" >|-----雄鹰5</option>
+                                            <option value="9477703" id="|-----雄鹰4" >|-----雄鹰4</option>
+                                            <option value="9520755" id="|-----雄鹰备用" >|-----雄鹰备用</option>
+                                            <option value="9185742" id="|---婚旅部" >|---婚旅部</option>
+                                            <option value="9477711" id="|-----婚旅劲力团" >|-----婚旅劲力团</option>
+                                            <option value="9478362" id="|-----婚旅动力团" >|-----婚旅动力团</option>
+                                            <option value="9478364" id="|-----婚旅魅力团" >|-----婚旅魅力团</option>
+                                            <option value="9478363" id="|-----婚旅威力团" >|-----婚旅威力团</option>
+                                            <option value="9650845" id="|-----婚旅魔力团" >|-----婚旅魔力团</option>
+                                            <option value="9477713" id="|-----婚旅备用" >|-----婚旅备用</option>
+                                            <option value="9185973" id="|---烽火狼部门" >|---烽火狼部门</option>
+                                            <option value="9520747" id="|-----孟小敏1组" >|-----孟小敏1组</option>
+                                            <option value="9520749" id="|-----小敏备用" >|-----小敏备用</option>
+                                            <option value="9520757" id="|-----小敏备用" >|-----小敏备用</option>
+                                            <option value="9185986" id="|---山口组" >|---山口组</option>
+                                            <option value="9520758" id="|-----山口1" >|-----山口1</option>
+                                            <option value="9520759" id="|-----山口2" >|-----山口2</option>
+                                            <option value="9520760" id="|-----山口备用" >|-----山口备用</option>
+                                            <option value="9185712" id="|---群英队" >|---群英队</option>
+                                            <option value="9532739" id="|-----群英1组" >|-----群英1组</option>
+                                            <option value="9532741" id="|-----群英2组" >|-----群英2组</option>
+                                            <option value="9532821" id="|-----群英3组" >|-----群英3组</option>
+                                            <option value="9520762" id="|-----群英备用" >|-----群英备用</option>
+                                            <option value="9477692" id="|---雪狼队" >|---雪狼队</option>
+                                            <option value="9477723" id="|-----雪狼1" >|-----雪狼1</option>
+                                            <option value="9477724" id="|-----雪狼2" >|-----雪狼2</option>
+                                            <option value="9520764" id="|-----雪狼3" >|-----雪狼3</option>
+                                            <option value="9520768" id="|-----雪狼备用" >|-----雪狼备用</option>
+                                            <option value="9626104" id="|-----雪狼4队" >|-----雪狼4队</option>
+                                            <option value="9477693" id="|---财狼组" >|---财狼组</option>
+                                            <option value="9479337" id="|-----财狼1组" >|-----财狼1组</option>
+                                            <option value="9479338" id="|-----财狼2组" >|-----财狼2组</option>
+                                            <option value="9520771" id="|-----财狼备用" >|-----财狼备用</option>
+                                            <option value="9493743" id="|---证券部" >|---证券部</option>
+                                            <option value="9532859" id="|-----证券一部" >|-----证券一部</option>
+                                            <option value="9520775" id="|-----证券备用" >|-----证券备用</option>
+                                            <option value="9185717" id="|---东旭部" >|---东旭部</option>
+                                            <option value="9477696" id="|-----东旭2" >|-----东旭2</option>
+                                            <option value="9477695" id="|-----东旭1" >|-----东旭1</option>
+                                            <option value="9477697" id="|-----东旭3" >|-----东旭3</option>
+                                            <option value="9477698" id="|-----东旭4" >|-----东旭4</option>
+                                            <option value="9520753" id="|-----东旭备用" >|-----东旭备用</option>
+                                            <option value="9493736" id="|-售后服务部" >|-售后服务部</option>
+                                            <option value="9493738" id="|---售后新风" >|---售后新风</option>
+                                            <option value="9493739" id="|---售后清雨" >|---售后清雨</option>
+                                            <option value="9493737" id="|---售后朝阳" >|---售后朝阳</option>
+                                            <option value="9520777" id="|---售后皓月" >|---售后皓月</option>
+                                            <option value="9489343" id="|-人事行政部" >|-人事行政部</option>
+                                            <option value="8123761" id="|-财务部" >|-财务部</option>
+                                            <option value="9493741" id="|-培训部" >|-培训部</option>
+                                            <option value="9493749" id="|-市场部" >|-市场部</option>
+                                            <option value="8105445" id="|-渠道部" >|-渠道部</option>
+                                            <option value="9520902" id="|---烈焰队" >|---烈焰队</option>
+                                            <option value="9520903" id="|---超越队" >|---超越队</option>
+                                            <option value="9520905" id="|---渠道备用" >|---渠道备用</option>
+                                            <option value="9652586" id="|-华东运营中心" >|-华东运营中心</option>
+                                            <option value="9656027" id="|---江苏大区" >|---江苏大区</option>
+                                            <option value="9656672" id="|-----烈火队" >|-----烈火队</option>
+                                            <option value="9656750" id="|-----蓝海队" >|-----蓝海队</option>
+                                            <option value="9656751" id="|-----海豹队" >|-----海豹队</option>
+                                            <option value="9662761" id="|---浙江大区" >|---浙江大区</option>
+                                            <option value="9662800" id="|-----亮剑队" >|-----亮剑队</option>
+                                            <option value="9662801" id="|-----雪豹队" >|-----雪豹队</option>
+                                            <option value="9662815" id="|---上海分公司" >|---上海分公司</option>
+                                            <option value="9662816" id="|-----上海群鹰队" >|-----上海群鹰队</option>
+                                            <option value="9662818" id="|-----婚旅飞跃团" >|-----婚旅飞跃团</option>
+                                            <option value="9662819" id="|-----上海激昂队" >|-----上海激昂队</option>
+                                            <option value="9662820" id="|-----上海给力队" >|-----上海给力队</option>
+                                            <option value="9662821" id="|-----上海王者队" >|-----上海王者队</option>
+                                            <option value="9662822" id="|-----上海野狼队" >|-----上海野狼队</option>
+                                            <option value="9662823" id="|-----上海先锋队" >|-----上海先锋队</option>
+                                            <option value="9662825" id="|-----上海客服部" >|-----上海客服部</option>
+                                            <option value="9662826" id="|-----上海行政助理" >|-----上海行政助理</option>
+                                            <option value="9662828" id="|-----上海备用号" >|-----上海备用号</option>
+                                            <option value="9660275" id="|-测试一" >|-测试一</option>
+           </select>
+		</td>
+      </tr>
+	 		
+      <tr>
+        <td class="tq_user_list_l">分配规则：</td>
+        <td class="tq_user_list_r">
+			 <select id=distribute_rule name=distribute_rule onChange="changeTip()"><option value=1 selected  >顺序优先</option><option value=2  >随机分配</option><option value=3  >轮循平均</option><option value=4  >熟客优先</option><option value=8  >等待应答</option></select>
+						<font class="red">*</font><dfn><span id="tip"><b>顺序优先</b>:按策略中设置的座席从前到后的顺序分配。</span></dfn>
+			<input type="hidden" name="is_overflow_to_parent" id="is_overflow_to_parent" value="0" />
+		</td>
+      </tr>
+	      <tr>
+        <td class="tq_user_list_l">策略层级：</td>
+        <td class="tq_user_list_r">第0级<input type="hidden" id="levelid" name="levelid" value=></td>
+      </tr>
+      <tr>
+        <td class="tq_user_list_l">座席人员：</td>
+       <td class="tq_user_list_r">
+			<script type="text/javascript">
+				var kefulist=eval("[{'id':'-1','text':'--无部门--', 'hasChildren': true, 'ChildNodes':[{'id': '-1', 'text':'公共区', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9493750','text':'执行委员会', 'hasChildren': true, 'ChildNodes':[{'id': '9257704', 'text':'cs', 'hasChildren': false, 'ChildNodes': null },{'id': '8049358', 'text':'吕晓波', 'hasChildren': false, 'ChildNodes': null },{'id': '1063', 'text':'李科', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9660280','text':'执行2', 'hasChildren': true, 'ChildNodes':[]},{'id':'9660293','text':'adsfasdf', 'hasChildren': true, 'ChildNodes':[]},{'id':'8104877','text':'产品研发部', 'hasChildren': true, 'ChildNodes':[{'id': '9257709', 'text':'刘荣荣', 'hasChildren': false, 'ChildNodes': null },{'id': '9240269', 'text':'王海涛', 'hasChildren': false, 'ChildNodes': null },{'id': '9174075', 'text':'曲凤磊', 'hasChildren': false, 'ChildNodes': null },{'id': '9167345', 'text':'唐天俊', 'hasChildren': false, 'ChildNodes': null },{'id': '9150070', 'text':'刘永华', 'hasChildren': false, 'ChildNodes': null },{'id': '9134327', 'text':'杨建峰', 'hasChildren': false, 'ChildNodes': null },{'id': '9134325', 'text':'钱东生', 'hasChildren': false, 'ChildNodes': null },{'id': '9116995', 'text':'宋超', 'hasChildren': false, 'ChildNodes': null },{'id': '9070722', 'text':'邓新国', 'hasChildren': false, 'ChildNodes': null },{'id': '8944469', 'text':'唐天俊', 'hasChildren': false, 'ChildNodes': null },{'id': '8111206', 'text':'佟绍禹', 'hasChildren': false, 'ChildNodes': null },{'id': '8008888', 'text':'赵宝泽', 'hasChildren': false, 'ChildNodes': null },{'id': '8008122', 'text':'孙志强', 'hasChildren': false, 'ChildNodes': null },{'id': '1222', 'text':'薛永艳', 'hasChildren': false, 'ChildNodes': null },{'id': '1209', 'text':'吴锦涛', 'hasChildren': false, 'ChildNodes': null },{'id': '1100', 'text':'高小虎', 'hasChildren': false, 'ChildNodes': null },{'id': '1078', 'text':'姚秀东', 'hasChildren': false, 'ChildNodes': null },{'id': '1061', 'text':'彭贺亮', 'hasChildren': false, 'ChildNodes': null },{'id': '1053', 'text':'潘宣辰111', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9493758','text':'产品组', 'hasChildren': true, 'ChildNodes':[{'id': '9257748', 'text':'jiaotest', 'hasChildren': false, 'ChildNodes': null },{'id': '9257746', 'text':'排队测试', 'hasChildren': false, 'ChildNodes': null },{'id': '9237990', 'text':'姣测试', 'hasChildren': false, 'ChildNodes': null },{'id': '9214802', 'text':' 雪姣', 'hasChildren': false, 'ChildNodes': null },{'id': '9210168', 'text':'张超', 'hasChildren': false, 'ChildNodes': null },{'id': '9209321', 'text':'殷俊', 'hasChildren': false, 'ChildNodes': null },{'id': '9184512', 'text':'志斌测试2', 'hasChildren': false, 'ChildNodes': null },{'id': '9184509', 'text':'志斌测试1', 'hasChildren': false, 'ChildNodes': null },{'id': '9172425', 'text':'志斌测试4', 'hasChildren': false, 'ChildNodes': null },{'id': '9172421', 'text':'志斌测试3', 'hasChildren': false, 'ChildNodes': null },{'id': '9158742', 'text':'志斌测试2', 'hasChildren': false, 'ChildNodes': null },{'id': '9158740', 'text':'志斌测试1', 'hasChildren': false, 'ChildNodes': null },{'id': '9152835', 'text':'刘建军', 'hasChildren': false, 'ChildNodes': null },{'id': '9152780', 'text':'闫帅', 'hasChildren': false, 'ChildNodes': null },{'id': '8973929', 'text':'刘建军', 'hasChildren': false, 'ChildNodes': null },{'id': '8964319', 'text':'王庆祝（测试）', 'hasChildren': false, 'ChildNodes': null },{'id': '1079', 'text':'王庆祝', 'hasChildren': false, 'ChildNodes': null },{'id': '1069', 'text':'王志斌', 'hasChildren': false, 'ChildNodes': null },{'id': '1022', 'text':'唐智', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9520925','text':'研发备用', 'hasChildren': true, 'ChildNodes':[{'id': '1044', 'text':'边 瑞 华', 'hasChildren': false, 'ChildNodes': null }]},{'id':'8368872','text':'技术支持部', 'hasChildren': true, 'ChildNodes':[{'id': '9223808', 'text':'111', 'hasChildren': false, 'ChildNodes': null },{'id': '9169112', 'text':'王楠', 'hasChildren': false, 'ChildNodes': null },{'id': '9169109', 'text':'田郡洁', 'hasChildren': false, 'ChildNodes': null },{'id': '9139330', 'text':'段金良', 'hasChildren': false, 'ChildNodes': null },{'id': '9127263', 'text':'王立霞', 'hasChildren': false, 'ChildNodes': null },{'id': '9127262', 'text':'朱学武', 'hasChildren': false, 'ChildNodes': null },{'id': '9013138', 'text':'张艺', 'hasChildren': false, 'ChildNodes': null },{'id': '8925871', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8304148', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8275391', 'text':'电脑专卖邢磊', 'hasChildren': false, 'ChildNodes': null },{'id': '8091207', 'text':'陈惠彦', 'hasChildren': false, 'ChildNodes': null },{'id': '8051266', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1106', 'text':'曾玉婷', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9493753','text':'系统管理员', 'hasChildren': true, 'ChildNodes':[{'id': '8008115', 'text':'超级管理员', 'hasChildren': false, 'ChildNodes': null }]},{'id':'8775360','text':'TQ营销中心', 'hasChildren': true, 'ChildNodes':[]},{'id':'9493760','text':'保留号', 'hasChildren': true, 'ChildNodes':[{'id': '9135939', 'text':'123', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9185767','text':'鲲鹏部', 'hasChildren': true, 'ChildNodes':[{'id': '8351100', 'text':'赵化菊', 'hasChildren': false, 'ChildNodes': null },{'id': '1046', 'text':'李丹丹', 'hasChildren': false, 'ChildNodes': null },{'id': '1005', 'text':'刘云', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9477705','text':'鲲鹏1', 'hasChildren': true, 'ChildNodes':[{'id': '9130350', 'text':'陈莉-经理', 'hasChildren': false, 'ChildNodes': null },{'id': '9130344', 'text':'陈依欣', 'hasChildren': false, 'ChildNodes': null },{'id': '1090', 'text':'刘凤', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9477706','text':'鲲鹏2', 'hasChildren': true, 'ChildNodes':[{'id': '8038888', 'text':'刘培', 'hasChildren': false, 'ChildNodes': null },{'id': '1056', 'text':'郝旭', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9477707','text':'鲲鹏3', 'hasChildren': true, 'ChildNodes':[{'id': '1212', 'text':'产品顾问-夏军', 'hasChildren': false, 'ChildNodes': null },{'id': '1043', 'text':'顾问--武飞', 'hasChildren': false, 'ChildNodes': null },{'id': '1026', 'text':'刘艳青', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9477708','text':'鲲鹏4', 'hasChildren': true, 'ChildNodes':[{'id': '8327333', 'text':'赵化菊', 'hasChildren': false, 'ChildNodes': null },{'id': '1051', 'text':'马春刚', 'hasChildren': false, 'ChildNodes': null },{'id': '1039', 'text':'TQ、臧雷', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9520711','text':'鲲鹏5', 'hasChildren': true, 'ChildNodes':[]},{'id':'9520756','text':'鲲鹏备用', 'hasChildren': true, 'ChildNodes':[{'id': '9190818', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9152248', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9135950', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9135948', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9135685', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9130346', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8830825', 'text':'刘凤组', 'hasChildren': false, 'ChildNodes': null },{'id': '1218', 'text':'赵闪闪', 'hasChildren': false, 'ChildNodes': null },{'id': '1205', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1200', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1081', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1077', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1054', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1042', 'text':'备用', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9185713','text':'雄鹰部', 'hasChildren': true, 'ChildNodes':[{'id': '1041', 'text':'总部-肖洁玉', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9477699','text':'雄鹰1', 'hasChildren': true, 'ChildNodes':[{'id': '1220', 'text':'TQ总部许振焱', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9477700','text':'雄鹰2', 'hasChildren': true, 'ChildNodes':[{'id': '9126332', 'text':'陈增帅', 'hasChildren': false, 'ChildNodes': null },{'id': '1215', 'text':'王丽', 'hasChildren': false, 'ChildNodes': null },{'id': '1093', 'text':'曹望成', 'hasChildren': false, 'ChildNodes': null },{'id': '1014', 'text':'TQ闫志鹏', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9477702','text':'雄鹰3', 'hasChildren': true, 'ChildNodes':[]},{'id':'9477704','text':'雄鹰5', 'hasChildren': true, 'ChildNodes':[{'id': '9138244', 'text':'程颖', 'hasChildren': false, 'ChildNodes': null },{'id': '1037', 'text':'咨询顾问-李冉', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9477703','text':'雄鹰4', 'hasChildren': true, 'ChildNodes':[{'id': '9126334', 'text':'田存燕', 'hasChildren': false, 'ChildNodes': null },{'id': '1085', 'text':'张海盈', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9520755','text':'雄鹰备用', 'hasChildren': true, 'ChildNodes':[{'id': '9253777', 'text':'李冉', 'hasChildren': false, 'ChildNodes': null },{'id': '9133948', 'text':'雄鹰备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9126333', 'text':'雄鹰备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9125725', 'text':'雄鹰备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9125724', 'text':'雄鹰备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8327332', 'text':'雄鹰备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1229', 'text':'雄鹰备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1207', 'text':'雄鹰备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1109', 'text':'杨红伟', 'hasChildren': false, 'ChildNodes': null },{'id': '1095', 'text':'陈凡', 'hasChildren': false, 'ChildNodes': null },{'id': '1070', 'text':'许振焱', 'hasChildren': false, 'ChildNodes': null },{'id': '1062', 'text':'雄鹰备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1040', 'text':'雄鹰备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1035', 'text':'雄鹰', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9185742','text':'婚旅部', 'hasChildren': true, 'ChildNodes':[{'id': '1002', 'text':'李进兵', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9477711','text':'婚旅劲力团', 'hasChildren': true, 'ChildNodes':[{'id': '9122250', 'text':'刘永坤', 'hasChildren': false, 'ChildNodes': null },{'id': '9122233', 'text':'王莉', 'hasChildren': false, 'ChildNodes': null },{'id': '8985999', 'text':'魏凤云', 'hasChildren': false, 'ChildNodes': null },{'id': '1091', 'text':'TQ总部江静', 'hasChildren': false, 'ChildNodes': null },{'id': '1073', 'text':'张立新', 'hasChildren': false, 'ChildNodes': null },{'id': '1027', 'text':'杨威', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9478362','text':'婚旅动力团', 'hasChildren': true, 'ChildNodes':[{'id': '8275390', 'text':'马冬青', 'hasChildren': false, 'ChildNodes': null },{'id': '1059', 'text':'TQ钟佛生', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9478364','text':'婚旅魅力团', 'hasChildren': true, 'ChildNodes':[{'id': '8337781', 'text':'张雅丽', 'hasChildren': false, 'ChildNodes': null },{'id': '1019', 'text':'陈雪', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9478363','text':'婚旅威力团', 'hasChildren': true, 'ChildNodes':[{'id': '9122237', 'text':'TQ总部--江铭', 'hasChildren': false, 'ChildNodes': null },{'id': '8985996', 'text':'吴海森', 'hasChildren': false, 'ChildNodes': null },{'id': '1102', 'text':'刘天亮', 'hasChildren': false, 'ChildNodes': null },{'id': '1084', 'text':'肖雪', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9650845','text':'婚旅魔力团', 'hasChildren': true, 'ChildNodes':[{'id': '1060', 'text':'张倩', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9477713','text':'婚旅备用', 'hasChildren': true, 'ChildNodes':[{'id': '9122252', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9122245', 'text':'w', 'hasChildren': false, 'ChildNodes': null },{'id': '9122243', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9122238', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9122234', 'text':'魅力团吴斯', 'hasChildren': false, 'ChildNodes': null },{'id': '9122232', 'text':'魅力团张雅丽', 'hasChildren': false, 'ChildNodes': null },{'id': '9122231', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9122216', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9122213', 'text':'威力团备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9061004', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8986002', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8473894', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8275392', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8275385', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1224', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1094', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1028', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1020', 'text':'备用', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9185973','text':'烽火狼部门', 'hasChildren': true, 'ChildNodes':[{'id': '1080', 'text':'孟小敏', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9520747','text':'孟小敏1组', 'hasChildren': true, 'ChildNodes':[{'id': '9158451', 'text':'李楠', 'hasChildren': false, 'ChildNodes': null },{'id': '9135683', 'text':'徐艳平', 'hasChildren': false, 'ChildNodes': null },{'id': '1024', 'text':'任晓玲', 'hasChildren': false, 'ChildNodes': null },{'id': '1023', 'text':'冯艳群', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9520749','text':'小敏备用', 'hasChildren': true, 'ChildNodes':[{'id': '9158453', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9135667', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1203', 'text':'备用', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9520757','text':'小敏备用', 'hasChildren': true, 'ChildNodes':[{'id': '9158454', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9135670', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8906697', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8013357', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1221', 'text':'备用', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9185986','text':'山口组', 'hasChildren': true, 'ChildNodes':[{'id': '1008', 'text':'穆海涛', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9520758','text':'山口1', 'hasChildren': true, 'ChildNodes':[]},{'id':'9520759','text':'山口2', 'hasChildren': true, 'ChildNodes':[]},{'id':'9520760','text':'山口备用', 'hasChildren': true, 'ChildNodes':[{'id': '9162447', 'text':'刘冲', 'hasChildren': false, 'ChildNodes': null },{'id': '9162445', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9135947', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9135946', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9135944', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9135942', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9135940', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8925810', 'text':'山口组', 'hasChildren': false, 'ChildNodes': null },{'id': '8925775', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1204', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1065', 'text':'在线客服', 'hasChildren': false, 'ChildNodes': null },{'id': '1032', 'text':'备用', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9185712','text':'群英队', 'hasChildren': true, 'ChildNodes':[{'id': '1075', 'text':'吴向前', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9532739','text':'群英1组', 'hasChildren': true, 'ChildNodes':[{'id': '9146346', 'text':'贾韩', 'hasChildren': false, 'ChildNodes': null },{'id': '1074', 'text':'古灿根', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9532741','text':'群英2组', 'hasChildren': true, 'ChildNodes':[]},{'id':'9532821','text':'群英3组', 'hasChildren': true, 'ChildNodes':[{'id': '1067', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1031', 'text':'群英', 'hasChildren': false, 'ChildNodes': null },{'id': '1029', 'text':'群英', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9520762','text':'群英备用', 'hasChildren': true, 'ChildNodes':[{'id': '9203366', 'text':'qunying5', 'hasChildren': false, 'ChildNodes': null },{'id': '9203365', 'text':'qunying4', 'hasChildren': false, 'ChildNodes': null },{'id': '9203364', 'text':'备注', 'hasChildren': false, 'ChildNodes': null },{'id': '9146343', 'text':'群英', 'hasChildren': false, 'ChildNodes': null },{'id': '1096', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1086', 'text':'备注', 'hasChildren': false, 'ChildNodes': null },{'id': '1064', 'text':'群英', 'hasChildren': false, 'ChildNodes': null },{'id': '1050', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1048', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1033', 'text':'备用', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9477692','text':'雪狼队', 'hasChildren': true, 'ChildNodes':[{'id': '9135937', 'text':'王少兵', 'hasChildren': false, 'ChildNodes': null },{'id': '1101', 'text':'杨荣粉', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9477723','text':'雪狼1', 'hasChildren': true, 'ChildNodes':[{'id': '9204803', 'text':'李珊珊', 'hasChildren': false, 'ChildNodes': null },{'id': '1097', 'text':'刘春燕', 'hasChildren': false, 'ChildNodes': null },{'id': '1045', 'text':'董龙华', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9477724','text':'雪狼2', 'hasChildren': true, 'ChildNodes':[{'id': '9204841', 'text':'刘富东', 'hasChildren': false, 'ChildNodes': null },{'id': '1211', 'text':'陈姣', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9520764','text':'雪狼3', 'hasChildren': true, 'ChildNodes':[{'id': '9134149', 'text':'李宁', 'hasChildren': false, 'ChildNodes': null },{'id': '1206', 'text':'张昌雷', 'hasChildren': false, 'ChildNodes': null },{'id': '1001', 'text':'李爽', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9520768','text':'雪狼备用', 'hasChildren': true, 'ChildNodes':[{'id': '9204878', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9204859', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9204833', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9161391', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9160841', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9158458', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9158455', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9134155', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9134153', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9134152', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9134150', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9134147', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9062850', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8185078', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1223', 'text':'123', 'hasChildren': false, 'ChildNodes': null },{'id': '1210', 'text':'tq客服', 'hasChildren': false, 'ChildNodes': null },{'id': '1092', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1087', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1030', 'text':'备用', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9626104','text':'雪狼4队', 'hasChildren': true, 'ChildNodes':[]},{'id':'9477693','text':'财狼组', 'hasChildren': true, 'ChildNodes':[{'id': '8327327', 'text':'许晴', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9479337','text':'财狼1组', 'hasChildren': true, 'ChildNodes':[{'id': '1017', 'text':'胡晓俊', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9479338','text':'财狼2组', 'hasChildren': true, 'ChildNodes':[]},{'id':'9520771','text':'财狼备用', 'hasChildren': true, 'ChildNodes':[{'id': '9137486', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9137485', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9137481', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9136131', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9136130', 'text':'备用 ', 'hasChildren': false, 'ChildNodes': null },{'id': '1227', 'text':'高家臣', 'hasChildren': false, 'ChildNodes': null },{'id': '1082', 'text':'总部陈明飞', 'hasChildren': false, 'ChildNodes': null },{'id': '1072', 'text':'盛龙', 'hasChildren': false, 'ChildNodes': null },{'id': '1057', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1034', 'text':'备用', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9493743','text':'证券部', 'hasChildren': true, 'ChildNodes':[]},{'id':'9532859','text':'证券一部', 'hasChildren': true, 'ChildNodes':[]},{'id':'9520775','text':'证券备用', 'hasChildren': true, 'ChildNodes':[]},{'id':'9185717','text':'东旭部', 'hasChildren': true, 'ChildNodes':[{'id': '9248934', 'text':'东旭备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9246308', 'text':'客服', 'hasChildren': false, 'ChildNodes': null },{'id': '1010', 'text':'张崴', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9477696','text':'东旭2', 'hasChildren': true, 'ChildNodes':[{'id': '1214', 'text':'郭萱', 'hasChildren': false, 'ChildNodes': null },{'id': '1004', 'text':'顾问-隋晓军', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9477695','text':'东旭1', 'hasChildren': true, 'ChildNodes':[{'id': '9026650', 'text':'王中才', 'hasChildren': false, 'ChildNodes': null },{'id': '1226', 'text':'施建华', 'hasChildren': false, 'ChildNodes': null },{'id': '1217', 'text':'高丽', 'hasChildren': false, 'ChildNodes': null },{'id': '1202', 'text':'余曼', 'hasChildren': false, 'ChildNodes': null },{'id': '1088', 'text':'贾知音', 'hasChildren': false, 'ChildNodes': null },{'id': '1076', 'text':'杜万良', 'hasChildren': false, 'ChildNodes': null },{'id': '1013', 'text':'胡倩', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9477697','text':'东旭3', 'hasChildren': true, 'ChildNodes':[{'id': '9146424', 'text':'杜庆华', 'hasChildren': false, 'ChildNodes': null },{'id': '1208', 'text':'王贺', 'hasChildren': false, 'ChildNodes': null },{'id': '1052', 'text':'李保磊', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9477698','text':'东旭4', 'hasChildren': true, 'ChildNodes':[{'id': '9209440', 'text':'黄惠珍', 'hasChildren': false, 'ChildNodes': null },{'id': '9207153', 'text':'何庆茹', 'hasChildren': false, 'ChildNodes': null },{'id': '1111', 'text':'王金涛', 'hasChildren': false, 'ChildNodes': null },{'id': '1089', 'text':'张学前', 'hasChildren': false, 'ChildNodes': null },{'id': '1055', 'text':'葛俊辉', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9520753','text':'东旭备用', 'hasChildren': true, 'ChildNodes':[{'id': '9214394', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9198532', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9159516', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9146422', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9135834', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9135832', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9135831', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9135669', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9056634', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8969286', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8574855', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8337786', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8275387', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8179263', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1228', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1213', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1201', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1009', 'text':'备用', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9493736','text':'售后服务部', 'hasChildren': true, 'ChildNodes':[]},{'id':'9493738','text':'售后新风', 'hasChildren': true, 'ChildNodes':[{'id': '9127542', 'text':'王丽媛', 'hasChildren': false, 'ChildNodes': null },{'id': '9127540', 'text':'仉增超', 'hasChildren': false, 'ChildNodes': null },{'id': '9127539', 'text':'马宏磊', 'hasChildren': false, 'ChildNodes': null },{'id': '8318808', 'text':'新风备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1216', 'text':'姚晓秀', 'hasChildren': false, 'ChildNodes': null },{'id': '1098', 'text':'李洋', 'hasChildren': false, 'ChildNodes': null },{'id': '1058', 'text':'闫紫宁', 'hasChildren': false, 'ChildNodes': null },{'id': '1047', 'text':'牛焕琴', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9493739','text':'售后清雨', 'hasChildren': true, 'ChildNodes':[{'id': '9197821', 'text':'清雨备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9197819', 'text':'史师军', 'hasChildren': false, 'ChildNodes': null },{'id': '9143170', 'text':'吴凡', 'hasChildren': false, 'ChildNodes': null },{'id': '9136167', 'text':'杨少春', 'hasChildren': false, 'ChildNodes': null },{'id': '9136162', 'text':'徐浪', 'hasChildren': false, 'ChildNodes': null },{'id': '1225', 'text':'冯俊锵', 'hasChildren': false, 'ChildNodes': null },{'id': '1012', 'text':'李爱爱', 'hasChildren': false, 'ChildNodes': null },{'id': '1003', 'text':'李学志', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9493737','text':'售后朝阳', 'hasChildren': true, 'ChildNodes':[{'id': '9143164', 'text':'王金真', 'hasChildren': false, 'ChildNodes': null },{'id': '9139276', 'text':'朝阳备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9126467', 'text':'焦红超', 'hasChildren': false, 'ChildNodes': null },{'id': '9126466', 'text':'田纪辉', 'hasChildren': false, 'ChildNodes': null },{'id': '9126465', 'text':'刘晓英', 'hasChildren': false, 'ChildNodes': null },{'id': '9126464', 'text':'易建雄 ', 'hasChildren': false, 'ChildNodes': null },{'id': '9126329', 'text':'刘立娟', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9520777','text':'售后皓月', 'hasChildren': true, 'ChildNodes':[{'id': '9256519', 'text':'售后十四', 'hasChildren': false, 'ChildNodes': null },{'id': '9197820', 'text':'皓月备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9143168', 'text':'皓月备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9143165', 'text':'陈爽', 'hasChildren': false, 'ChildNodes': null },{'id': '9136169', 'text':'TQ冯芳', 'hasChildren': false, 'ChildNodes': null },{'id': '9127538', 'text':'李秀龙', 'hasChildren': false, 'ChildNodes': null },{'id': '9122214', 'text':'售后 龙凯', 'hasChildren': false, 'ChildNodes': null },{'id': '8117902', 'text':'张莹莹', 'hasChildren': false, 'ChildNodes': null },{'id': '1025', 'text':'TQ-李研', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9489343','text':'人事行政部', 'hasChildren': true, 'ChildNodes':[{'id': '8252599', 'text':'李艳新', 'hasChildren': false, 'ChildNodes': null },{'id': '1105', 'text':'侯彦明', 'hasChildren': false, 'ChildNodes': null },{'id': '1104', 'text':'杨周欣', 'hasChildren': false, 'ChildNodes': null },{'id': '1071', 'text':'王振兴', 'hasChildren': false, 'ChildNodes': null },{'id': '1016', 'text':'王希', 'hasChildren': false, 'ChildNodes': null },{'id': '1011', 'text':'杨宁', 'hasChildren': false, 'ChildNodes': null },{'id': '1007', 'text':'陈燕', 'hasChildren': false, 'ChildNodes': null }]},{'id':'8123761','text':'财务部', 'hasChildren': true, 'ChildNodes':[{'id': '8652020', 'text':'俞朝霞01', 'hasChildren': false, 'ChildNodes': null },{'id': '8040858', 'text':'吕维维', 'hasChildren': false, 'ChildNodes': null },{'id': '1038', 'text':'俞朝霞', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9493741','text':'培训部', 'hasChildren': true, 'ChildNodes':[{'id': '1068', 'text':'TQ-陈秀霞', 'hasChildren': false, 'ChildNodes': null },{'id': '1066', 'text':'庞洪刚', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9493749','text':'市场部', 'hasChildren': true, 'ChildNodes':[{'id': '9138411', 'text':'李文娟', 'hasChildren': false, 'ChildNodes': null },{'id': '8026410', 'text':'邹顺', 'hasChildren': false, 'ChildNodes': null },{'id': '1219', 'text':'廖东轩', 'hasChildren': false, 'ChildNodes': null }]},{'id':'8105445','text':'渠道部', 'hasChildren': true, 'ChildNodes':[{'id': '1018', 'text':'梁丽', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9520902','text':'烈焰队', 'hasChildren': true, 'ChildNodes':[{'id': '10006', 'text':'接飞(渠道代理)', 'hasChildren': false, 'ChildNodes': null },{'id': '10005', 'text':'贾祖光', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9520903','text':'超越队', 'hasChildren': true, 'ChildNodes':[{'id': '8937657', 'text':'李文龙', 'hasChildren': false, 'ChildNodes': null },{'id': '8914830', 'text':'郭丽霞', 'hasChildren': false, 'ChildNodes': null },{'id': '8881172', 'text':'储娟', 'hasChildren': false, 'ChildNodes': null },{'id': '10003', 'text':'李怀迎', 'hasChildren': false, 'ChildNodes': null },{'id': '10002', 'text':'王琛伟', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9520905','text':'渠道备用', 'hasChildren': true, 'ChildNodes':[{'id': '9205598', 'text':'小爱', 'hasChildren': false, 'ChildNodes': null },{'id': '9081454', 'text':'王少峰', 'hasChildren': false, 'ChildNodes': null },{'id': '8963156', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '8963154', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '10004', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '10001', 'text':'陈琪', 'hasChildren': false, 'ChildNodes': null },{'id': '1107', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '1103', 'text':'渠道贾祖光', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9652586','text':'华东运营中心', 'hasChildren': true, 'ChildNodes':[{'id': '9253460', 'text':'马成岗', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9656027','text':'江苏大区', 'hasChildren': true, 'ChildNodes':[]},{'id':'9656672','text':'烈火队', 'hasChildren': true, 'ChildNodes':[{'id': '9259987', 'text':'王海燕', 'hasChildren': false, 'ChildNodes': null },{'id': '9259857', 'text':'袁增增', 'hasChildren': false, 'ChildNodes': null },{'id': '9259856', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9259854', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9256462', 'text':'郑健', 'hasChildren': false, 'ChildNodes': null },{'id': '9252284', 'text':'孙一华', 'hasChildren': false, 'ChildNodes': null },{'id': '9252282', 'text':'朱凡', 'hasChildren': false, 'ChildNodes': null },{'id': '9252279', 'text':'胡为为', 'hasChildren': false, 'ChildNodes': null },{'id': '9252276', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9155412', 'text':'备用', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9656750','text':'蓝海队', 'hasChildren': true, 'ChildNodes':[{'id': '9260064', 'text':'鲍玲', 'hasChildren': false, 'ChildNodes': null },{'id': '9258537', 'text':'许红燕', 'hasChildren': false, 'ChildNodes': null },{'id': '9257515', 'text':'管理备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9256460', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9253851', 'text':'杨佳丽', 'hasChildren': false, 'ChildNodes': null },{'id': '9253844', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9155407', 'text':'邓升平', 'hasChildren': false, 'ChildNodes': null },{'id': '9155405', 'text':'张菁菁', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9656751','text':'海豹队', 'hasChildren': true, 'ChildNodes':[{'id': '9259993', 'text':'李令国', 'hasChildren': false, 'ChildNodes': null },{'id': '9258520', 'text':'杨莎', 'hasChildren': false, 'ChildNodes': null },{'id': '9258519', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9256887', 'text':'雷凯', 'hasChildren': false, 'ChildNodes': null },{'id': '9256461', 'text':'侯跃伟', 'hasChildren': false, 'ChildNodes': null },{'id': '9253849', 'text':'汪云锋', 'hasChildren': false, 'ChildNodes': null },{'id': '9253842', 'text':'李艳', 'hasChildren': false, 'ChildNodes': null },{'id': '9252280', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9202426', 'text':'备用', 'hasChildren': false, 'ChildNodes': null },{'id': '9202418', 'text':'雷凯', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9662761','text':'浙江大区', 'hasChildren': true, 'ChildNodes':[]},{'id':'9662800','text':'亮剑队', 'hasChildren': true, 'ChildNodes':[{'id': '9260358', 'text':'汪小涛', 'hasChildren': false, 'ChildNodes': null },{'id': '9260356', 'text':'李金龙', 'hasChildren': false, 'ChildNodes': null },{'id': '9260354', 'text':'鲍玲', 'hasChildren': false, 'ChildNodes': null },{'id': '9260353', 'text':'刘丹', 'hasChildren': false, 'ChildNodes': null },{'id': '9260352', 'text':'郭双双', 'hasChildren': false, 'ChildNodes': null },{'id': '9260351', 'text':'殷俊', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9662801','text':'雪豹队', 'hasChildren': true, 'ChildNodes':[{'id': '9261369', 'text':'聂帅', 'hasChildren': false, 'ChildNodes': null },{'id': '9260362', 'text':'田明星', 'hasChildren': false, 'ChildNodes': null },{'id': '9260361', 'text':'王群', 'hasChildren': false, 'ChildNodes': null },{'id': '9260360', 'text':'王宝珠', 'hasChildren': false, 'ChildNodes': null },{'id': '9260359', 'text':'方庆平', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9662815','text':'上海分公司', 'hasChildren': true, 'ChildNodes':[{'id': '1021', 'text':'开通咨询', 'hasChildren': false, 'ChildNodes': null },{'id': '1006', 'text':'开通顾问-王冰', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9662816','text':'上海群鹰队', 'hasChildren': true, 'ChildNodes':[{'id': '9146765', 'text':'李亚娜', 'hasChildren': false, 'ChildNodes': null },{'id': '9142413', 'text':'林振宇', 'hasChildren': false, 'ChildNodes': null },{'id': '1036', 'text':'张丹凤', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9662818','text':'婚旅飞跃团', 'hasChildren': true, 'ChildNodes':[{'id': '9140092', 'text':'潘会敏', 'hasChildren': false, 'ChildNodes': null },{'id': '9140090', 'text':'罗莉华', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9662819','text':'上海激昂队', 'hasChildren': true, 'ChildNodes':[{'id': '9146771', 'text':'TQ-彭小芳', 'hasChildren': false, 'ChildNodes': null },{'id': '9146767', 'text':'刘琼', 'hasChildren': false, 'ChildNodes': null },{'id': '9142419', 'text':'李晓鸣', 'hasChildren': false, 'ChildNodes': null },{'id': '9140103', 'text':'吴允刚', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9662820','text':'上海给力队', 'hasChildren': true, 'ChildNodes':[{'id': '9146768', 'text':'苏玉涵', 'hasChildren': false, 'ChildNodes': null },{'id': '9142414', 'text':'王刘锁', 'hasChildren': false, 'ChildNodes': null },{'id': '9140099', 'text':'陆梦', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9662821','text':'上海王者队', 'hasChildren': true, 'ChildNodes':[{'id': '9157971', 'text':'倪圆', 'hasChildren': false, 'ChildNodes': null },{'id': '9155409', 'text':'TQ-孙浩', 'hasChildren': false, 'ChildNodes': null },{'id': '9140109', 'text':'熊丹丹', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9662822','text':'上海野狼队', 'hasChildren': true, 'ChildNodes':[{'id': '9202422', 'text':'黄鹏翔', 'hasChildren': false, 'ChildNodes': null },{'id': '9157969', 'text':'洪陈炬', 'hasChildren': false, 'ChildNodes': null },{'id': '9142418', 'text':'刘谢雨', 'hasChildren': false, 'ChildNodes': null },{'id': '9140106', 'text':'阳光', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9662823','text':'上海先锋队', 'hasChildren': true, 'ChildNodes':[{'id': '9155413', 'text':'欧长久', 'hasChildren': false, 'ChildNodes': null },{'id': '9146772', 'text':'王天强', 'hasChildren': false, 'ChildNodes': null },{'id': '9142415', 'text':'关丽', 'hasChildren': false, 'ChildNodes': null },{'id': '9140112', 'text':'廖先龙', 'hasChildren': false, 'ChildNodes': null },{'id': '9140110', 'text':'宋嘉', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9662825','text':'上海客服部', 'hasChildren': true, 'ChildNodes':[{'id': '1099', 'text':'黄小辉', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9662826','text':'上海行政助理', 'hasChildren': true, 'ChildNodes':[{'id': '9193681', 'text':'郝婧', 'hasChildren': false, 'ChildNodes': null },{'id': '9144243', 'text':'王楠', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9662828','text':'上海备用号', 'hasChildren': true, 'ChildNodes':[{'id': '9202425', 'text':'施正东', 'hasChildren': false, 'ChildNodes': null },{'id': '9202420', 'text':'李晨', 'hasChildren': false, 'ChildNodes': null },{'id': '9202417', 'text':'TQ童海光', 'hasChildren': false, 'ChildNodes': null },{'id': '9202416', 'text':'邓正恒', 'hasChildren': false, 'ChildNodes': null },{'id': '9157970', 'text':'张娟', 'hasChildren': false, 'ChildNodes': null },{'id': '9155411', 'text':'余丞', 'hasChildren': false, 'ChildNodes': null },{'id': '9155410', 'text':'客服', 'hasChildren': false, 'ChildNodes': null }]},{'id':'9660275','text':'测试一', 'hasChildren': true, 'ChildNodes':[{'id': '9257702', 'text':'ceshi10', 'hasChildren': false, 'ChildNodes': null },{'id': '9257701', 'text':'ceshi1', 'hasChildren': false, 'ChildNodes': null }]}]");
+			</script>   
+			  <div id="treecontainer" class="ctree">
+			    <div id="querypanel" class="titlepanel">
+			        <input type="text" id="querytext" class="querytext" value="输入姓名关键字回车" style="height:18px;width:164px;padding:0px;float:left;border:1px solid #889DAD" />	
+			        <a href="javascript:void(0);" id="btnQuery" class="tbbtn"><span class="uquery" style="display:block;float:left;margin:0px 0px 0px -18px;_cursor:hand;" title="查找">&nbsp;</span></a>
+			        <a href="javascript:void(0);" id="btnClearQuery" class="tbbtn" style="display:none;">
+			            <span class="qdelete" title="取消查找"  style="float:left;margin:0px 0px 0px -18px;_cursor:hand;">&nbsp;</span>
+			        </a>
+			    </div>
+			    <div id="usertree" style="overflow-x:hidden;overflow-y:auto;float:left;width:100%;height:170px;"></div>
+			    <div id="userlist" style="display:none;overflow-x:hidden;overflow-y:auto;float:left;width:100%;height:170px"></div>
+			</div>
+			<div class="ctree">
+			<div class="titlepanel">
+			当前已选择<span style="color:#c00;" id="numtip">0</span>个
+			    <a href="javascript:void(0);" onClick="delAll();"class="tbbtn">
+			       <span class="adelete" title="取消全部">&nbsp;</span>
+			    </a>
+			 </div>
+			<div id="selectcontainer" class="sellist">
+			<ul id="selectulid" class="selectul"></ul>
+			</div>
+			</div> 
+			 <input type="hidden" name="kefus" id="kefus" value="9257709|1022|9152780|9172425|8071236" />
+		</td>
+     </tr>
+	<!--
+    <tr>
+      <td height="50" colspan="3" align="center">
+		<input type="button" name="button1" id="button1" onClick="checkform()" class="btn02" onmouseover="this.className='btn04'" onmouseout="this.className='btn02'" value=" 确 定 " />&nbsp;&nbsp;&nbsp;
+		<input type="reset" name="button2" id="button2" class="btn02" onmouseover="this.className='btn04'" onmouseout="this.className='btn02'" value="重置条件" />&nbsp;&nbsp;&nbsp;
+		注：<font class="red">*</font> 号内容为必填项</td>
+    </tr>
+	-->
+    </table>
+  </div>
+</div>
+</form>
+</body>
+</html>
+<script> 
+var checkSubmitFlg=false;
+ 
+function editTactic(){
+	if(checkSubmitFlg == false){
+		checkform();
+	}else{
+		if(comeon)
+			tqshortalert("请稍后,正在更新...");
+		else
+			checkform();
+	}
+}
+ 
+ 
+document.form.old_type_code.value = document.form.type_code.value;
+function checkform()
+{
+	if(document.form.type_name.value.trim()=="")
+	{
+		tqshortalert("请输入策略名称");
+		return false;
+	}
+	if(document.form.type_code.value=="")
+	{
+		tqshortalert("请输入策略代码");
+		return false;
+	}
+	if(document.form.type_code.value=="0")
+	{
+		tqshortalert("策略代码不能设置为0");
+		return false;
+	}
+	code = document.form.type_code.value;
+	for (i=0; i<code.length; i++) 
+	{
+		if (!isNum(code.charAt(i)))
+		{
+			tqshortalert("策略代码只能是数字");
+			return false;
+		}
+	}
+	if(document.form.priority.value=="")
+	{
+		tqshortalert("请输入优先级代码");
+		return false;
+	}
+	code_p = document.form.priority.value;
+	for (i=0; i<code_p.length; i++) 
+	{
+		if (!isNum(code_p.charAt(i)))
+		{
+			tqshortalert("请输入正确的优先级代码");
+			return false;
+		}
+	}
+	if(document.form.kefus.value=="")
+	{
+		tqshortalert("请设置座席人员");
+		return false;
+	}
+	submitForm();
+}
+function isNum(ch)
+{
+	if(ch >= '0' && ch <= '9')return true;
+	return false;
+}
+window.focus();
+ 
+function setOpacity(obj, value){
+    if(document.all){
+        if(value == 100){
+            obj.style.filter = "";
+        }else{
+            obj.style.filter = "alpha(opacity=" + value + ")";    
+        }
+    }else{
+        obj.style.MozOpacity = value / 100;
+    }
+}
+function changeOpacity(obj, startValue, endValue, step, speed){
+    if(step > 0 && startValue < endValue || step < 0 && startValue > endValue){
+        setOpacity(obj, endValue);
+        return;
+    }
+    setOpacity(obj, startValue);
+    setTimeout(function(){changeOpacity(obj, startValue-step, endValue, step, speed);}, speed);
+}
+function showMsg(){
+    var msg = document.getElementById("divMsg");
+	msg.style.visibility = "visible"; 
+    var step = 4, speed = 30;
+    msg.isShow = !msg.isShow;
+    if(msg.isShow){
+        changeOpacity(msg, 0, 100, -step, speed);
+    }else{
+        changeOpacity(msg, 100, 0, step, speed);
+    }
+}
+	function  getAbsPosition(obj)   
+	{   
+	  var   abs={x:0,y:0}   
+	  while(obj!=document.body){   
+	  abs.x+=obj.offsetLeft;   
+	  abs.y+=obj.offsetTop;   
+	  obj=obj.offsetParent;   
+	  }   
+	  return   abs;   
+	}
+</script>
+<script type="text/javascript"> 
+/*================================
+初始化，判断是否有已选中对象等
+=================================*/
+var select_name = window.name; //存放名称的input的ID
+var select_id = select_name.substring(0,select_name.length-5); //存放名称对应id的input的ID
+//var initialize_users = parent.T(select_name).val();
+var initialize_users = [{"name":"刘荣荣",id:"9257709"},{"name":"唐智",id:"1022"},{"name":"闫帅",id:"9152780"},{"name":"志斌测试4",id:"9172425"},{"name":"丁建忠",id:"8071236"}];//[{name:"刘荣荣",id:"9257709"},{name:"唐智",id:"1022"}];
+var userHash =new Hash();//临时选中数组对象
+for(var i=0;i<initialize_users.length;i++){
+	var aobj = initialize_users[i];
+	userHash.setItem(aobj.id,aobj.name);
+}
+changeKefus();
+/*================================
+列出选中成员
+=================================*/
+var selectul = document.getElementById("selectulid");
+for(var u=0;u<initialize_users.length;u++)
+{
+	var uname = initialize_users[u].name;
+	var uid = initialize_users[u].id;
+	var uchild = document.createElement("li");
+	uchild.id = "li_"+uid+"";
+	uchild.innerHTML = ""+uname+"<span class=\"ldelete\" onclick=\"selOK(\'"+uid+"\',\'"+uname+"\')\"></span>";
+	selectul.appendChild(uchild);
+	T("#numtip").innerHTML = userHash.length;
+}
+/*================================
+列出成员
+=================================*/
+var listgul = document.createElement("ul");
+for(var m=0;m<kefulist.length;m++){
+	var userItem = kefulist[m];
+	var li = document.createElement("a");
+	li.className = "departli";
+	li.id = "li"+m;
+	li.href = "javascript:void(0)";
+	li.innerHTML = "<em class=\"depart\" style='float:left;padding-left:20px;height:16px;margin-left:2px;'>"+ userItem.text+"</em>";
+	(T.ie)?li.onkeydown = initialg:li.onkeypress = initialg;
+	listgul.appendChild(li);
+	if (userItem.hasChildren = true){
+		for (var j=0;j<userItem.ChildNodes.length;j++){
+			var listga = document.createElement("a");
+			listga.id = userItem.ChildNodes[j].id;
+			listga.href = "javascript:void(0)";
+			listga.title = userItem.ChildNodes[j].text;
+			listga.className = "userli";
+			if(userHash.hasItem(userItem.ChildNodes[j].id))
+			{
+				listga.innerHTML = "<span class=\"usercontainer\"><em class=\"sel\">"+userItem.ChildNodes[j].text+"("+userItem.ChildNodes[j].id+")</em></span>";
+			}else{
+				listga.innerHTML = "<span class=\"usercontainer\"><em class=\"nosel\">"+userItem.ChildNodes[j].text+"("+userItem.ChildNodes[j].id+")</em></span>";
+			};
+			listga.onclick = function(){selOK(this.id,this.title)};
+			(T.ie)?	listga.onkeydown = initialg:listga.onkeypress = initialg;
+			listgul.appendChild(listga);
+		}
+	}
+};
+T("usertree").apch(listgul);
+ 
+/*================================
+所有成员（查询用）
+=================================*/
+var userAllHash =new Hash();//全部成员数组对象
+for(var i=0;i<kefulist.length;i++){
+	var aobj = kefulist[i];
+	if (aobj.hasChildren = true){
+		for (var j=0;j<aobj.ChildNodes.length;j++){
+			userAllHash.setItem(aobj.ChildNodes[j].id,aobj.ChildNodes[j].text);
+		}
+	}
+}
+/*================================
+查询
+=================================*/
+T("querytext").focus(function(e){
+	var v = this.value;
+	if(v=="输入姓名关键字回车")
+	{
+		this.value ="";
+	}
+}).blur(function(e){               
+	var v = this.value;
+	if(v=="")
+	{
+		this.value ="输入姓名关键字回车";
+	}
+});
+(T.ie)?	T("#querytext").onkeydown = (searchorder):T("#querytext").onkeypress = (searchorder);
+(T.iev=="6.0")?T("#querytext").onkeypress = (searchorder):"";
+T("btnQuery").click(query);
+T("btnClearQuery").click(function(e){
+	T("#querytext").value = "";
+	T("#userlist").innerHTML = "";
+	T("#userlist").style.display = "none";
+	T("#usertree").style.display = "block";
+	T("#btnQuery").style.display = "block";
+	T("#"+this.id).style.display = "none";
+});
+function query()
+{
+	var q =T("querytext");
+	var qtext =q.val();
+	if(qtext && qtext !="输入姓名关键字回车" ) //如果有内容
+	{
+	q.stcs("loading");
+	var listul = document.createElement("ul");
+	listul.style.paddingTop = "5px";
+	var data=userAllHash.items;
+		if (data) {   
+			for(var user_id in data)
+			{
+				user_name = userAllHash.getItem(user_id);
+				if (user_name.indexOf(qtext) != -1){
+					var lista = document.createElement("a");
+					lista.id = "sli"+user_id;
+					lista.href = "javascript:void(0)";
+					lista.title = user_name;
+					lista.className = "userli";
+					if(userHash.hasItem(user_id))
+					{
+						lista.innerHTML = "<span class=\"usercontainer\"><em class=\"sel\">"+user_name+"("+user_id+")</em></span>";
+					}else{
+						lista.innerHTML = "<span class=\"usercontainer\"><em class=\"nosel\">"+user_name+"("+user_id+")</em></span>";
+					};
+					lista.onclick = function(){selOK(this.id.substr(3),this.title)};
+					(T.ie)?	lista.onkeydown = searchlist:lista.onkeypress = searchlist;
+					listul.appendChild(lista);
+					var hasuser = 1;
+				}
+			}
+			if(hasuser != 1){
+				listul.innerHTML = "<center style='margin-top:10px;'>无此用户，请重新搜索。</center>";
+			}
+		} 
+		T("#userlist").innerHTML = "";
+		T("userlist").apch(listul);
+		T("#userlist").style.display = "block";
+		T("#usertree").style.display = "none";
+		T("#btnQuery").style.display = "none";
+		T("#btnClearQuery").style.display = "block";
+		T("querytext").rcls("loading");
+	}else{
+		T("#userlist").innerHTML = "";
+		T("#userlist").style.display = "none";
+		T("#usertree").style.display = "block";
+		T("#btnQuery").style.display = "block";
+		T("#btnClearQuery").style.display = "none";
+		//查询end
+	}
+};
+function initialg(e){
+var e = e || event;
+var key = e.keyCode||e.which;
+var utag = T("usertree").gtag("a");
+if (key.toString() == "40") {
+	for(var i=0;i<utag.length-1;i++){
+		if(utag[i].id == this.id){
+			utag[i].className = "userli";
+			getNext(utag[i]).focus();
+			getNext(utag[i]).className="usersel";
+		}
+	}
+};
+if (key.toString() == "38") {
+	if(utag[0].id == this.id){T(utag[0]).acls("userli");T("#querytext").value="";T("#querytext").focus()};
+	for(var i=1;i<utag.length;i++){
+		if(utag[i].id == this.id ){
+			utag[i].className = "userli";
+			getPre(utag[i]).focus();
+			getPre(utag[i]).className="usersel";
+		}
+	};
+}
+};
+function searchlist(e){
+var e = e || event;
+var key = e.keyCode||e.which;
+var utag = T("userlist").gtag("a");
+if (key.toString() == "40") {
+	for(var i=0;i<utag.length-1;i++){
+		if(utag[i].id == this.id){
+			utag[i].className = "userli";
+			getNext(utag[i]).focus();
+			getNext(utag[i]).className="usersel";
+		}
+	}
+};
+if (key.toString() == "38") {
+	if(utag[0].id == this.id){T(utag[0]).acls("userli");T("#querytext").value="";T("#querytext").focus()};
+	for(var i=1;i<utag.length;i++){
+		if(utag[i].id == this.id ){
+			utag[i].className = "userli";
+			getPre(utag[i]).focus();
+			getPre(utag[i]).className="usersel"
+		}
+	};
+};
+/*if (key.toString() == "13") {
+	for(var i=0;i<utag.length;i++){
+		T(utag[i]).acls("userli");
+		selOK(this.id.substr(3),this.title)
+	};
+}*/
+};
+function searchorder(e){
+var e = e || event;
+var key = e.keyCode||e.which;
+if (key.toString() == "13") {
+	query();
+};
+if (key.toString() == "40") {
+	if(T("#userlist").style.display == "block" && T("#userlist").firstChild.firstChild.nodeName.toLowerCase()=="a"){
+		var ulistf = T("userlist").gtag("a")[0];
+		ulistf.focus();
+		ulistf.className = "usersel";
+	};
+	if(T("#usertree").style.display == "block"){
+		var utreef = T("usertree").gtag("a")[0];
+		utreef.focus();
+		utreef.className = "usersel";
+	}
+}
+};
+function selOK(selid,seltext){
+	var emobj = T("#"+selid).firstChild.firstChild;
+	if(userHash.hasItem(selid))
+	{
+		T("#sli"+selid)?T("#sli"+selid).firstChild.firstChild.className = "nosel":"";
+		emobj.className = "nosel";
+		selectul.removeChild(T("#li_"+selid));
+		userHash.removeItem(selid);
+		T("#numtip").innerHTML = userHash.length;
+	}else{
+		T("#sli"+selid)?T("#sli"+selid).firstChild.firstChild.className = "sel":"";
+		emobj.className = "sel";
+		var ulchild = document.createElement("li");
+		ulchild.id = "li_"+selid;
+		ulchild.innerHTML = ""+seltext+"<span class=\"ldelete\" onclick=\"selOK(\'"+selid+"\',\'"+seltext+"\')\"></span>";
+		selectul.appendChild(ulchild);
+		userHash.setItem(selid,seltext);
+		T("#numtip").innerHTML = userHash.length
+	};
+	changeKefus();
+};
+function delAll(){
+	selectul.innerHTML = "";
+	for(var selids in userHash.items){
+		T("#"+selids).firstChild.firstChild.className = "nosel";
+		T("#sli"+selids)?T("#sli"+selids).firstChild.firstChild.className = "nosel":"";
+	};
+	userHash.clear();
+	T("#numtip").innerHTML = userHash.length;
+	changeKefus();
+};
+function getNext(obj){
+	var node = obj.nextSibling;
+	while(node.nodeType!=1){
+		node=node.nextSibling;
+		if(!node) return null;
+	};
+	return node;
+};
+function getPre(obj){
+     var node=obj.previousSibling;
+     while(node.nodeType!=1){
+          node=node.previousSibling;
+          if(!node) return null;
+     };
+      return node;
+};
+//document.getElementById("loadtip").style.display = "none";
+T("#querytext").focus();
+</script>
+<iframe height=0 width=0 name="info"></iframe>

@@ -1,0 +1,13 @@
+@charset "gb2312";
+.wincontainter{height:auto; width:400px; border:1px solid #889DAD; position:absolute; font-size:13px;float:left;overflow:hidden;}
+.wintitle{height:25px; width:auto; background:#E8EDF0 url(..//images/win/w.gif) 0px -42px;cursor:move;border-bottom:1px solid #889DAD}
+.wintitleTitle{float:left;height:20px; margin-top:2px; margin-left:10px;line-height:20px; vertical-align:middle; color:#495C6B; font-weight:bold; }
+.wintitleico{float:right; height:20px;width:21px;margin-top:2px; margin-right:5px;text-align:center; line-height:20px; vertical-align:middle; background-image:url(..//images/win/w.gif);background-position:-21px 0px;cursor:default;}
+.winbody{padding:0px; width:auto; background-color: #fff;}
+.winbottom{bottom:1px; right:1px;cursor:nw-resize;position:absolute;background-image:url(..//images/win/w.gif);background-position:-42px -10px;width:10px;height:10px;font-size:0;}
+.button_div{position:absolute;bottom:0px;left:0px;padding:4px 100px;width:100%;background:url(..//images/win/w.gif) 0px -68px;text-align:center;}
+input.btnStyle{background:url(..//images/win/w.gif) no-repeat 0px -20px;width:80px;height:21px;line-height:21px;font-size:12px;color:#000;border:0px;text-align:center;float:left;margin-left:10px;cursor:pointer;}
+.win_confirm{float:left;width:48px;height:148px;background:url(..//images/win/i.gif) no-repeat 0px 0px}
+.win_error{float:left;width:48px;height:148px;background:url(..//images/win/i.gif) no-repeat -48px 0px }
+.win_alert{float:left;width:48px;height:148px;background:url(..//images/win/i.gif) no-repeat -96px 0px }
+.win_success{float:left;width:48px;height:148px;background:url(..//images/win/i.gif) no-repeat -144px 0px }

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <fragment
+        android:id="@+id/title_fragment"
+        android:name="com.zld.fragment.TitleFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_marginLeft="2dip"
+        android:layout_marginRight="2dip"
+        android:layout_marginTop="3dip"
+        android:layout_weight="8"
+        android:orientation="horizontal" >
+
+        <fragment
+            android:id="@+id/entrance_fragment"
+            android:name="com.zld.fragment.EntranceFragment"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="2" />
+
+        <fragment
+            android:id="@+id/park_record_fragment"
+            android:name="com.zld.fragment.ParkrecordFragment"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dip"
+            android:layout_marginRight="3dip"
+            android:layout_weight="2" />
+
+        <fragment
+            android:id="@+id/park_info_fragment"
+            android:name="com.zld.fragment.ParkinfoFragment"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_marginLeft="2dip"
+        android:layout_marginRight="2dip"
+        android:layout_marginTop="3dip"
+        android:layout_weight="11"
+        android:orientation="horizontal" >
+
+        <fragment
+            android:id="@+id/exit_fragment"
+            android:name="com.zld.fragment.ExitFragment"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="2" />
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dip"
+            android:layout_marginRight="3dip"
+            android:layout_weight="2" >
+
+            <fragment
+                android:id="@+id/order_list_fragment"
+                android:name="com.zld.fragment.OrderListFragment"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_marginRight="1.5dip"
+                android:layout_weight="1" />
+
+            <fragment
+                android:id="@+id/order_details_fragment"
+                android:name="com.zld.fragment.OrderDetailsFragment"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1.5dip"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <fragment
+            android:id="@+id/cash_fragment"
+            android:name="com.zld.fragment.CashFragment"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</LinearLayout>

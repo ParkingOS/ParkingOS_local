@@ -1,0 +1,42 @@
+.clear{clear:both;}
+.fieldlayout{float:left;overflow:hidden;border-style:solid; border-color:#889DAD}
+.tqForm{float:left;border:0px solid #889DAD;background:#F3F5F6;overflow:auto;padding-left:5px}
+.tqForm .field100Pct,.tqForm .field50Pct{min-width:200px}
+.tqForm .field100Pct{clear:both}
+.tqForm .fieldCheckbox{overflow:hidden;margin-top:3px;padding-left:8px;*padding-left:6px;-padding-left:9px;line-height:22px;max-width:360px;*float:left}
+.tqForm .fieldCheckbox li{list-style:none;float:left;width:90px;overflow:hidden;line-height:20px}
+.tqForm .fieldCheckbox .fieldItemLabel{float:left;vertical-align:middle}
+.tqForm .fieldCheckbox .labelCheckboxItem{float:left;width:60px}
+.tqForm .fieldCheckbox .fieldItemValue{float:left}
+.tqForm .fieldItemValue{padding-left:10px}
+.tqForm .fieldItemLabel{width:70px;float:left;padding-top:2px;text-align:right}
+.tqForm .fieldItemLabel label{text-align:right;white-space:nowrap}
+.tqForm .field100Pct .fieldItemValue,
+.tqForm .field50Pct .fieldItemValue{display:inline}
+.tqForm .field100Pct .fieldItemValue input,
+.tqForm .field100Pct .fieldItemValue textarea{width:80%;min-width:100px}
+.tqForm .field50Pct .fieldItemValue input,
+.tqForm .field50Pct .fieldItemValue textarea{width:60%;min-width:100px}
+.tqForm .field50Pct{float:left;width:49.9%;*width:48%}
+.tqForm input,.tqForm textarea,.tqForm select{margin-bottom:4px;margin-right:15px}
+.tqForm .fieldCheckbox input{float:left;margin-right:5px}
+.tqForm .fieldCheckbox .fieldItemLabel{padding-top:2px}
+.formtitle{float:left;overflow:hidden;width:100%;height:23px;line-height:23px;marign:0px;padding-left:5px;border-bottom:1px solid #889DAD;font-weight:bold;background:url(../images/form/top_bg.gif)}
+.formbutton{float:left;width:100%;height:30px;line-height:30px;text-align:left;overflow:hidden;border-bottom:1px solid #ccc;background:#CADAEE url(../images/form/toolbg.gif) top repeat-x}
+.tqForm img.ordericon{border:0px;vertical-align:middle;cursor:pointer;margin-left:-15px;margin-top:-3px}
+.tqForm img.ordericon2{border:0px;vertical-align:middle;cursor:pointer;margin-left:2px;margin-top:-3px}
+a.button,a.btdisable{width:auto;float:left;display:block;padding:1px 2px 1px 2px;line-height:20px;margin-top:4px;margin-left:2px;}
+a.btdisable{color:#999}
+a.button:link{text-align:center;text-decoration:none;display:block;color:#000;}
+a.button:visited{padding-right:1px;text-align:center;text-decoration:none;display:block;color:#000;}
+a.button:visited span{display:block;color:#000;margin-right:2px;}
+a.button:active{text-align:center;text-decoration:none;display:block;color:#000;padding-right:1px;}
+a.button:action span{display:block;margin-right:2px;color:#000;}
+a.button:hover{background:#FBDF74;border:1px solid #EAB236;padding:0px 0px 0px 1px;font-style:normal;text-decoration:none;display:block;vertical-align:text-bottom;}
+a.button:hover span{display:block;margin-right:2px;text-decoration:none;}
+input,textarea,select{font-size:12px;padding:2px;font-family:"微软雅黑", sans-serif, Arial, Verdana;}
+input.txt,textarea {border: 1px solid #AFAFAF;background:#fff url(../images/txt.gif) repeat-x;font-family:"微软雅黑", sans-serif, Arial, Verdana;}
+input.button{padding-left:3px;padding-right:3px;*padding-left:0px;*padding-right:0px;*padding-top:3px;margin:2px; height:22px;border:1px solid #889DAD;background: url(../images/button_bg.gif) repeat-x;cursor:pointer;line-height:15px;}
+select.select{border:1px solid #ccc;padding:1px;height:20px;}
+input.h,textarea.h{background:#FF9}
+

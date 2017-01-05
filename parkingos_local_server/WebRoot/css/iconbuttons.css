@@ -1,0 +1,335 @@
+@charset "gb2312";
+/*========================================buttons*/
+.button_disable{
+	color:#A9A3A3;background:#efefef;border:solid 1px #CFCBCB;
+}
+.button_disable:hover{
+	cursor:not-allowed;
+}
+.button16_a{
+	color:#009;
+	height:16px;
+	line-height:16px;
+	padding:0px 3px 0 1px;
+	text-align:left;
+	vertical-alin:middle;
+}
+.button24_a{
+	height:20px;
+	line-height:20px;
+	margin:0px;
+	padding:2px 4px 2px 4px;
+	text-align:left;
+	vertical-align:middle;
+}
+.button32_a{
+	height:24px;
+	line-height:20px;
+	padding:6px 4px 2px 1px;
+	text-align:left;
+	vertical-align:middle;
+}
+/*========================================hovers*/
+.hover:hover{
+	font-weight:300;
+	cursor:pointer;
+}
+.hover1:hover{
+	font-weight:300;
+	cursor:pointer;
+	background-color:#fefefe;
+	opacity:0.8;
+	border:1px solid #ccc;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	-moz-border-radius-topleft: 2px;
+	-moz-border-radius-topright: 2px;
+	-webkit-border-top-left-radius: 2px;
+	-webkit-border-top-right-radius: 2px;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	-moz-border-radius-bottomleft: 2px;
+	-moz-border-radius-bottomright: 2px;
+	-webkit-border-bottom-left-radius: 2px;
+	-webkit-border-bottom-right-radius: 2px;
+	-webkit-background-clip: padding-box;
+}
+.hover2:hover{
+	cursor:pointer;
+}
+/*========================================borders*/
+.border_blank{
+	border-width:1px;
+	border-style:solid;
+	border-color:transparent;
+}
+.border_gray{
+	border-width:1px;
+	border-style:solid;
+	border-color:#ccc;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	-moz-border-radius-topleft: 2px;
+	-moz-border-radius-topright: 2px;
+	-webkit-border-top-left-radius: 2px;
+	-webkit-border-top-right-radius: 2px;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	-moz-border-radius-bottomleft: 2px;
+	-moz-border-radius-bottomright: 2px;
+	-webkit-border-bottom-left-radius: 2px;
+	-webkit-border-bottom-right-radius: 2px;
+	-webkit-background-clip: padding-box;
+}
+.border_gray:hover{
+	border-color:#999;
+}
+.border_green{
+	border-width:1px;
+	border-style:solid;
+	border-color:#090;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	-moz-border-radius-topleft: 2px;
+	-moz-border-radius-topright: 2px;
+	-webkit-border-top-left-radius: 2px;
+	-webkit-border-top-right-radius: 2px;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	-moz-border-radius-bottomleft: 2px;
+	-moz-border-radius-bottomright: 2px;
+	-webkit-border-bottom-left-radius: 2px;
+	-webkit-border-bottom-right-radius: 2px;
+	-webkit-background-clip: padding-box;
+}
+.border_green:hover{
+	border-color:#060;
+}
+/*========================================bgs*/
+.bg_blank{
+	background:none;
+}
+.bg_gray,.bg_gray_hover{
+	color:#333;
+	background-image:url(../images/commonbgs.gif);
+	background-repeat:repeat-x;
+	background-position:0 -21px;
+}
+.bg_gray_hover:hover{
+	cursor:pointer;
+	font-weight:700;
+	background-position:0 -56px;
+}
+.bg_light,.bg_light_hover{
+	color:#333;
+	background-image:url(../images/commonbgs.gif);
+	background-repeat:repeat-x;
+	background-position:0 -164px;
+}
+.bg_light_hover:hover{
+	cursor:pointer;
+	font-weight:700;
+	background-position:0 -200px;
+}
+.bg_green,.bg_green_hover{
+	background-image:url(../images/commonbgs.gif);
+	background-repeat:repeat-x;
+	background-position:0 -92px;
+}
+.bg_green_hover:hover{
+	cursor:pointer;
+	font-weight:700;
+	background-position:0 -128px;
+}
+/*========================================icons_16*/
+.icon16{
+	width:16px;
+	height:16px;
+	border-width:1px;
+	border-style:solid;
+	border-color:transparent;
+	margin:0px;
+	padding:0px;
+	vertical-align:middle;
+	background-color:none;
+	background-image:url(../images/commonicons.gif);
+	background-repeat:no-repeat;
+}
+.icon16add{
+	background-position:0 -90px;
+}
+.icon16ok{
+	background-position:-72px -36px;
+}
+.icon16save{
+	background-position:-90px -36px;
+}
+.icon16save1{
+	background-position:-108px -36px;
+}
+.icon16cancel{
+	background-position:-108px -18px;
+}
+.icon16cancel1{
+	background-position:-126px -36px;
+}
+.icon16import{
+	background-position:-18px -90px;
+}
+.icon16excel{
+	background-position:-36px -90px;
+}
+.icon16edit{
+	background-position:0 -18px;
+}
+.icon16edit1{
+	background-position:-18px -18px;
+}
+.icon16edit2{
+	background-position:-54px -18px;
+}
+.icon16detail{
+	background-position:-72px -18px;
+}
+.icon16close{
+	background-position:-18px -36px;
+}
+.icon16delete{
+	background-position:0 0;
+}
+.icon16delete1{
+	background-position:-18px 0;
+}
+.icon16delete2{
+	background-position:-18px -36px;
+}
+.icon16search{
+	background-position:-36px 0;
+}
+.icon16search1{
+	background-position:-90px -18px;
+}
+.icon16play{
+	background-position:-54px 0px;
+}
+.icon16stop{
+	background-position:-72px 0px;
+}
+.icon16fresh{
+	background-position:-90px 0px;
+}
+.icon16tel0{
+	background-position:-108px 0px;
+}
+.icon16tel1{
+	background-position:-126px 0px;
+}
+.icon16tel2{
+	background-position:-144px 0px;
+}
+.icon16tree1{
+	background-position:0px -54px;
+}
+.icon16table1{
+	background-position:0px -72px;
+}
+.icon16help{
+	background-position:0px -108px;
+}
+.icon16logout{
+	background-position:-18px -108px;
+}
+.icon16tip{
+	background-position:-36px -108px;
+}
+.icon16call{
+	background-position:0 -126px;
+}
+.icon16sms{
+	background-position:-18px -126px;
+}
+.icon16email{
+	background-position:-36px -126px;
+}
+.icon16baidu{
+	background-position:-54px -126px;
+}
+.icon16goto{
+	background-position:-72px -126px;
+}
+.icon16calendar{
+	background-position:-90px -126px;
+}
+.icon16arrowdown{
+	background-position:0 -144px;
+}
+.icon16check{
+	background-position:-36px -144px;
+}
+.icon16uncheck{
+	background-position:-18px -144px;
+}
+.icon16user1{
+	background-position:0 -162px;
+}
+.icon16up{
+	background-position:-54px -108px;
+}
+.icon16up1{
+	background-position:-54px -90px;
+}
+.icon16down{
+	background-position:-72px -108px;
+}
+.icon16down1{
+	background-position:-72px -90px;
+}
+.icon16forward{
+	background-position:-108px -108px;
+}
+.icon16forward1{
+	background-position:-108px -90px;
+}
+.icon16back{
+	background-position:-90px -108px;
+}
+.icon16back1{
+	background-position:-90px -90px;
+}
+.icon16clear{
+	background-position:-144px -36px;
+}
+.icon16star{
+	background-position:-126px -18px;
+}
+.icon16checkok{
+	background-position:-144px -18px;
+}
+.icon16flag{
+	background-position:-72px -162px;
+}
+/*========================================icons_20*/
+
+
+/*========================================icons_24*/
+.icon24{
+	width:24px;
+	height:24px;
+	border-width:1px;
+	border-style:solid;
+	border-color:transparent;
+	margin:0px;
+	padding:0px;
+	vertical-align:middle;
+	background-color:none;
+	background-image:url(../images/commonicons.gif);
+	background-repeat:no-repeat;
+}
+.icon24clear{
+	background-position:-90px 0px;
+}
+
+/*========================================icons_32*/
+
+
+/*========================================icons_64*/

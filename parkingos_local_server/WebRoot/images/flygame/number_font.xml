@@ -1,0 +1,19 @@
+<font>
+  <info face="number_font" size="24" bold="0" italic="0" charset="" unicode="" stretchH="100" smooth="1" aa="1" padding="2,2,2,2" spacing="0,0" outline="0"/>
+  <common lineHeight="33" base="28" scaleW="256" scaleH="256" pages="1" packed="0"/>
+  <pages>
+    <page id="0" file="number_font.png"/>
+  </pages>
+  <chars count="10">
+    <char id="48" x="0" y="0" width="62" height="62" xoffset="0" yoffset="0" xadvance="62" page="0" chnl="15"/>
+    <char id="49" x="0" y="62" width="62" height="62" xoffset="0" yoffset="0" xadvance="62" page="0" chnl="15"/>
+    <char id="50" x="0" y="124" width="62" height="62" xoffset="0" yoffset="0" xadvance="62" page="0" chnl="15"/>
+    <char id="51" x="0" y="186" width="62" height="62" xoffset="0" yoffset="0" xadvance="62" page="0" chnl="15"/>
+    <char id="52" x="0" y="248" width="62" height="62" xoffset="0" yoffset="0" xadvance="62" page="0" chnl="15"/>
+    <char id="53" x="0" y="310" width="62" height="62" xoffset="0" yoffset="0" xadvance="62" page="0" chnl="15"/>
+    <char id="54" x="0" y="372" width="62" height="62" xoffset="0" yoffset="0" xadvance="62" page="0" chnl="15"/>
+    <char id="55" x="0" y="434" width="62" height="62" xoffset="0" yoffset="0" xadvance="62" page="0" chnl="15"/>
+    <char id="56" x="0" y="496" width="62" height="62" xoffset="0" yoffset="0" xadvance="62" page="0" chnl="15"/>
+    <char id="57" x="0" y="558" width="62" height="62" xoffset="0" yoffset="0" xadvance="62" page="0" chnl="15"/>
+  </chars>
+</font>

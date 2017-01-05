@@ -1,0 +1,64 @@
+CREATE SEQUENCE seq_reward_account_tb
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE seq_reward_account_tb
+  OWNER TO postgres;
+
+
+CREATE OR REPLACE FUNCTION trigger_fct_reward_account_tb_trigger()
+  RETURNS trigger AS
+$BODY$
+BEGIN
+  if new.id is NULL then
+New.id:=nextval('seq_reward_account_tb');
+end if;
+Return NEW;
+  END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION trigger_fct_reward_account_tb_trigger()
+  OWNER TO postgres;
+
+
+CREATE TRIGGER reward_account_tb_trigger
+  BEFORE INSERT
+  ON reward_account_tb
+  FOR EACH ROW
+  EXECUTE PROCEDURE trigger_fct_reward_account_tb_trigger();
+  
+  
+  
+
+
+
+
+
+
+================================update trigger=========================
+
+  
+CREATE OR REPLACE FUNCTION trigger_fct_ticket_update()
+  RETURNS trigger AS
+$BODY$
+BEGIN
+  if new.money>12  then
+	new.money=12;
+end if;
+Return NEW;
+  END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION trigger_fct_ticket_update()
+  OWNER TO postgres;
+
+
+CREATE TRIGGER ticket_tb_update_trigger
+  BEFORE UPDATE
+  ON ticket_tb
+  FOR EACH ROW
+  EXECUTE PROCEDURE trigger_fct_ticket_update();

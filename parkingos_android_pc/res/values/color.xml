@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="style_blue">#00ffff</color>
+    <color name="seek_bar_bgcolor">#696969</color>
+    <color name="bg_green">#25af5b</color>
+    <color name="key_board">#687379</color>
+    <color name="tv_leaveItem_state_red">#d45847</color>
+    <color name="app_bg">#525866</color>
+    <color name="tv_parknumber_blue">#4974C2</color>
+    <color name="nfc_dialog">#ffffff</color>
+    <color name="gray">#c9c9c9</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="font_gray">#566866</color>
+    <color name="key_font_gray">#868686</color>
+    <color name="edit_font_gray">#636363</color>
+    <color name="main_blue">#2e6cd7</color>
+    <color name="main_green">#2dae5b</color>
+    <color name="plate_bg">#2764e6</color>
+    <color name="plate_text">#dadfe3</color>
+    <color name="edit_text">#000000</color>
+    <color name="occupy_red">#d55846</color>
+    <color name="idle_green">#36ae6e</color>
+    <color name="dark_grenn">#20964e</color>
+    <color name="share_blue">#5376ba</color>
+    <color name="tinttextview">#7d7d7d</color>
+	<color name="bg_blue">#2764e6</color>
+	<color name="list_bg_gray">#ebebeb</color>
+    <color name="yellow">#f5cb26</color>
+    <!-- 设置透明度为56%(9/16)左右 -->
+    <color name="transparent">#9000</color>
+    <!-- 设置透明度为100%(16/16)左右 -->
+    <color name="transparent100">#0000</color>
+    <color name="pic_textcolor">#e6e6e6</color>
+    <color name="text_green">#329762</color>
+
+</resources>

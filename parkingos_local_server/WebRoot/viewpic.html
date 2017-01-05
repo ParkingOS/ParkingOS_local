@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+</head>
+<script type="text/javascript">
+
+function getParam(paramName)
+{
+        paramValue = "";
+        isFound = false;
+        if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=")>1)
+        {
+            arrSource = unescape(this.location.search).substring(1,this.location.search.length).split("&");
+            i = 0;
+            while (i < arrSource.length && !isFound)
+            {
+                if (arrSource[i].indexOf("=") > 0)
+                {
+                     if (arrSource[i].split("=")[0].toLowerCase()==paramName.toLowerCase())
+                     {
+                        paramValue = arrSource[i].split("=")[1];
+                        isFound = true;
+                     }
+                }
+                i++;
+            }   
+        }
+   return paramValue;
+};
+function view_pic(){
+	var db =getParam('db');
+	//alert(db);
+	if(db=='')
+		db="carstop_pics" ;
+	var url = 'attendant.do?action=getpic&db='+db+'&id='+getParam("name")+'&r='+Math.random();
+	///alert(url)
+	document.getElementById('pic').src=url;
+}
+
+</script>
+
+<body>
+<div>
+<img src='' border='0' id='pic' width='800px' height='490px'/>
+</div>
+</body>
+<script type="text/javascript">
+
+view_pic();
+</script>
+</html>

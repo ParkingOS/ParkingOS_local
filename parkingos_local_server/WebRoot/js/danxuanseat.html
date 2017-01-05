@@ -1,0 +1,360 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>选择员工</title>
+<style type="text/css">
+html,body{margin:0px;padding:0px;font-size: 12px;font-family: Arial,Verdana,sans-serif,"Lucida Grande","Lucida Sans Unicode","宋体";height: 100%;width: 100%;overflow-x:hidden;background:#E2EBED}
+a{color:#000;text-decoration:none;}
+ul{list-style:none;margin:0px;padding:0px;}
+li{list-style:none}
+em{font-style:normal;}
+a.userli{width:100%;float:left;text-align:left;cursor:pointer;_cursor:hand;margin:0px 3px 0px 0px;padding:2px;}
+a.departli{width:100%;float:left;text-align:left;margin-top:5px;}
+a.noselli{width:100%;float:left;text-align:left;margin-top:5px;font-weight:700;}
+a.userli:hover{background:#C2D8DE;}
+a.departli:hover{background:#C2D8DE;}
+a.noselli:hover{background:#C2D8DE;}
+a.usersel{width:100%;float:left;text-align:left;cursor:pointer;_cursor:hand;margin:0px 3px 0px 0px;padding:2px;background:#C2D8DE;}
+.ctree{overflow:hidden;border:solid 0px #889DAD;margin:0px;width:170px; height:200px;float:left;}
+/*.ctree{overflow:hidden;border:solid 1px #889DAD;margin:2px 2px 2px 2px;background-color:#fff;width:200px; height:200px;float:left;}*/
+span.qdelete{display:block;float:left;margin-top:3px;height:16px;padding-left: 16px;background: url(../tq_images/icons/sdelete.png) no-repeat 0px 5px;}
+span.uquery{padding-left: 16px;background: url(../tq_images/icons/search.png) no-repeat 0px 2px;}
+.titlepanel{background:#DDE7EA;height:20px;border-bottom: #889DAD 1px solid;vertical-align:middle;padding:2px 2px;width:170px;line-height:18px;overflow:hidden;}
+.depart{background:url("../tq_images/icons/depart.png") no-repeat;}   
+span.usercontainer em{padding:0px 0px 0px 20px;margin:1px 3px 1px 16px;background:url("../tq_images/icons/user.png") no-repeat;}
+input.loading{background:url("../tq_images/icons/indicator.gif") no-repeat right center;}
+.loadtip{position:absolute;top:0px;left:0px;border-style:none;height:200px;width:170px;background:#DDE7EA;padding:5px;}
+</style>
+<script src="tq.js?0622" type="text/javascript"></script>
+<script src="tq.hash.js" type="text/javascript"></script>
+</head>
+<body style="background:#dfe8f6;">
+<div id="loadtip" style="display:block" class="loadtip"><img src='../tq_images/loading.gif'>数据加载中。若长时间未打开，请<a href='#' style='color:#c00' onclick='location.reload(true);'>点此刷新</a>。</div>
+<div id="treecontainer" class="ctree">
+    <div id="querypanel" class="titlepanel">
+        <input type="text" id="querytext" class="querytext" value="输入姓名关键字回车" style="height:18px;width:164px;padding:0px;float:left;border:1px solid #889DAD">	
+        <a href="javascript:void(0);" id="btnQuery" class="tbbtn"><span class="uquery" style="display:block;float:left;margin:0px 0px 0px -18px;_cursor:hand;" title="查找">&nbsp;</span></a>
+        <a href="javascript:void(0);" id="btnClearQuery" class="tbbtn" style="display:none;">
+            <span class="qdelete" title="取消查找"  style="float:left;margin:0px 0px 0px -18px;_cursor:hand;">&nbsp;</span>
+        </a>
+    </div>
+    <div id="usertree" style="overflow-x:hidden;overflow-y:auto;float:left;width:100%;height:152px;"></div>
+    <div id="userlist" style="display:none;overflow-x:hidden;overflow-y:auto;float:left;width:100%;height:152px"></div>
+    <div id="uslist" style="width:100%;height:18px;line-height:18px;border-top:1px solid #889DAD;overflow:hidden;white-space:nowrap"><span style="font-style:italic">当前选择：</span><span id="seltips" style="color:#c00">无</span></div>
+</div>
+<script type="text/javascript">
+function getParam(paramName)
+{
+        paramValue = "";
+        isFound = false;
+        if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=")>1)
+        {
+            arrSource = unescape(this.location.search).substring(1,this.location.search.length).split("&");
+            i = 0;
+            while (i < arrSource.length && !isFound)
+            {
+                if (arrSource[i].indexOf("=") > 0)
+                {
+                     if (arrSource[i].split("=")[0].toLowerCase()==paramName.toLowerCase())
+                     {
+                        paramValue = arrSource[i].split("=")[1];
+                        isFound = true;
+                     }
+                }
+                i++;
+            }   
+        }
+   return paramValue;
+};
+
+var isall = getParam("isall");
+var isdepartment = getParam("isdepartment");
+var kefulist;
+
+if(isall=="1"){
+	var allkefulist;
+	if(parent.allkefulist==''){
+		var allkefulist = parent.getKefuList("1");
+		parent.allkefulist = allkefulist;
+		kefulist = eval(allkefulist);
+	}else{
+		kefulist = eval(parent.allkefulist)
+	};
+	
+}else{
+	if(parent.kefulist==''){
+		var kefulists = parent.getKefuList();
+		parent.kefulist = kefulists;
+		kefulist = eval(kefulists);
+	}else{
+		kefulist = eval(parent.kefulist)
+	};
+	
+}
+
+</script>
+<script type="text/javascript">
+/*================================
+初始化，判断是否有已选中对象等
+=================================*/
+var select_name = window.name; //存放名称的input的ID
+var select_id = select_name.substring(0,select_name.length-5); //存放名称对应id的input的ID
+var initialize_users = parent.T(select_name).val();
+var initialize_usersid = parent.T(select_id).val();
+var userHash =new TQHash();//临时选中数组对象
+/*================================
+列出成员
+=================================*/
+var listgul = document.createElement("ul");
+//加上请选择
+var _li = document.createElement("a");
+_li.className = "noselli";
+_li.title = "请选择";
+_li.href = "javascript:void(0)";
+_li.innerHTML = "<em style='float:left;padding-left:3px;height:16px;margin-left:2px;'>=======请选择=======</em>";
+_li.onclick = function(){selNo()}
+listgul.appendChild(_li);
+
+for(var m=0;m<kefulist.length;m++){
+	var userItem = kefulist[m];
+	var li = document.createElement("a");
+	li.className = "departli";
+	li.id = "li"+m;
+	li.setAttribute("did",userItem.id);
+	li.did = userItem.id;
+	li.title = userItem.text;
+	li.href = "javascript:void(0)";
+	li.innerHTML = "<em class=\"depart\" style='float:left;padding-left:20px;height:16px;margin-left:2px;'>"+ userItem.text+"</em>";
+	isdepartment=="yes"?li.onclick = function(){selDepartment(this.did||this.getAttribute("did"),this.title)}:"";
+	(T.ie)?li.onkeydown = initialg:li.onkeypress = initialg;
+	listgul.appendChild(li);
+	if (userItem.hasChildren = true){
+		for (var j=0;j<userItem.ChildNodes.length;j++){
+			var listga = document.createElement("a");
+			listga.id = userItem.ChildNodes[j].id;
+			listga.setAttribute("pid",userItem.id);
+			listga.pid = userItem.id;
+			listga.href = "javascript:void(0)";
+			listga.title = userItem.ChildNodes[j].text;
+			listga.setAttribute("dnisphone_id", userItem.ChildNodes[j].dnisphone_id);
+			listga.className = "userli";
+			listga.innerHTML = "<span class=\"usercontainer\"><em class=\"user\" style='float:left;padding-left:20px;'>"+userItem.ChildNodes[j].text+"("+userItem.ChildNodes[j].id+")</em></span>";
+			listga.onclick = function(){selOK(this.id,this.title,this.getAttribute("dnisphone_id"))};
+			(T.ie)?	listga.onkeydown = initialg:listga.onkeypress = initialg;
+			listgul.appendChild(listga);
+		}
+	}
+};
+T("usertree").apch(listgul);
+
+/*================================
+所有成员（查询用）
+=================================*/
+var userAllHash =new TQHash();//全部成员数组对象
+for(var i=0;i<kefulist.length;i++){
+	var aobj = kefulist[i];
+	if (aobj.hasChildren = true){
+		for (var j=0;j<aobj.ChildNodes.length;j++){
+			userAllHash.setItem(aobj.ChildNodes[j].id,aobj.ChildNodes[j].text+"||"+aobj.ChildNodes[j].dnisphone_id);
+		}
+	}
+}
+T("querytext").focus(function(e){
+	var v = this.value;
+	if(v=="输入姓名关键字回车")
+	{
+		this.value ="";
+	}
+}).blur(function(e){               
+	var v = this.value;
+	if(v=="")
+	{
+		this.value ="输入姓名关键字回车";
+	}
+});
+(T.ie)?	T("#querytext").onkeydown = (searchorder):T("#querytext").onkeypress = (searchorder);
+(T.iev=="6.0")?T("#querytext").onkeypress = (searchorder):"";
+T("btnQuery").click(query);
+T("btnClearQuery").click(function(e){
+	T("#querytext").value = "";
+	T("#userlist").innerHTML = "";
+	T("#userlist").style.display = "none";
+	T("#usertree").style.display = "block";
+	T("#btnQuery").style.display = "block";
+	T("#"+this.id).style.display = "none";
+});
+function query()
+{
+	var q =T("querytext");
+	var qtext =q.val();
+	if(qtext && qtext !="输入姓名关键字回车" ) //如果有内容
+	{
+	q.stcs("loading");
+	var listul = document.createElement("ul");
+	listul.style.paddingTop = "5px";
+	var data=userAllHash.items;
+		if (data) {   
+			for(var user_id in data)
+			{
+				user_name = userAllHash.getItem(user_id);
+				if (user_name.indexOf(qtext) != -1){
+					var lista = document.createElement("a");
+					lista.id = user_id;
+					lista.href = "javascript:void(0)";
+					lista.title = user_name.split("||")[0];
+					lista.setAttribute("dnisphone_id", user_name.split("||")[1]);
+					lista.className = "userli";
+					lista.innerHTML = "<span class=\"usercontainer\"><em class=\"user\" style='float:left;padding-left:20px;margin-left:5px'>"+user_name.split("||")[0]+"("+user_id+")</em></span>";
+					lista.onclick = function(){selOK(this.id,this.title,this.getAttribute("dnisphone_id"))};
+					(T.ie)?	lista.onkeydown = searchlist:lista.onkeypress = searchlist;
+					listul.appendChild(lista);
+					var hasuser = 1;
+				}
+			}
+			if(hasuser != 1){
+				listul.innerHTML = "<center style='margin-top:10px;'>无此用户，请重新搜索。</center>";
+			}
+		} 
+		T("#userlist").innerHTML = "";
+		T("userlist").apch(listul);
+		T("#userlist").style.display = "block";
+		T("#usertree").style.display = "none";
+		T("#btnQuery").style.display = "none";
+		T("#btnClearQuery").style.display = "block";
+		T("querytext").rcls("loading");
+	}else{
+		T("#userlist").innerHTML = "";
+		T("#userlist").style.display = "none";
+		T("#usertree").style.display = "block";
+		T("#btnQuery").style.display = "block";
+		T("#btnClearQuery").style.display = "none";
+		//查询end
+	}
+};
+function initialg(e){
+var e = e || event;
+var key = e.keyCode||e.which;
+var utag = T("usertree").gtag("a");
+if (key.toString() == "40") {
+	for(var i=0;i<utag.length-1;i++){
+		if(utag[i].id == this.id){
+			utag[i].className = "userli";
+			getNext(utag[i]).focus();
+			getNext(utag[i]).className="usersel";
+			getNext(utag[i]).id.substring(0,2)!="li" ? T("seltips").html(getNext(utag[i]).title+"("+getNext(utag[i]).id+")"):T("seltips").html("无");
+		}
+	}
+};
+if (key.toString() == "38") {
+	if(utag[0].id == this.id){T(utag[0]).acls("userli");T("#querytext").value="";T("seltips").html("无");T("#querytext").focus()};
+	for(var i=1;i<utag.length;i++){
+		if(utag[i].id == this.id ){
+			utag[i].className = "userli";
+			getPre(utag[i]).focus();
+			getPre(utag[i]).className="usersel";
+			getPre(utag[i]).id.substring(0,2)!="li" ? T("seltips").html(getPre(utag[i]).title+"("+getPre(utag[i]).id+")"):T("seltips").html("无");
+		}
+	};
+}
+};
+function searchlist(e){
+var e = e || event;
+var key = e.keyCode||e.which;
+var utag = T("userlist").gtag("a");
+if (key.toString() == "40") {
+	for(var i=0;i<utag.length-1;i++){
+		if(utag[i].id == this.id){
+			utag[i].className = "userli";
+			getNext(utag[i]).focus();
+			getNext(utag[i]).className="usersel";
+			T("seltips").html(getNext(utag[i]).title+"("+getNext(utag[i]).id+")")
+		}
+	}
+};
+if (key.toString() == "38") {
+	if(utag[0].id == this.id){T(utag[0]).acls("userli");T("#querytext").value="";T("seltips").html("无");T("#querytext").focus()};
+	for(var i=1;i<utag.length;i++){
+		if(utag[i].id == this.id ){
+			utag[i].className = "userli";
+			getPre(utag[i]).focus();
+			getPre(utag[i]).className="usersel";
+			T("seltips").html(getPre(utag[i]).title+"("+getPre(utag[i]).id+")")
+		}
+	};
+};
+if (key.toString() == "13") {
+	for(var i=0;i<utag.length;i++){
+		T(utag[i]).acls("userli");
+		selOK(this.id,this.title, this.getAttribute("dnisphone_id"))
+	};
+}
+};
+function searchorder(e){
+var e = e || event;
+var key = e.keyCode||e.which;
+if (key.toString() == "13") {
+	query();
+};
+if (key.toString() == "40") {
+	if(T("#userlist").style.display == "block" && T("#userlist").firstChild.firstChild.nodeName.toLowerCase()=="a"){
+		var ulistf = T("userlist").gtag("a")[0];
+		ulistf.focus();
+		ulistf.className = "usersel";
+		T("seltips").html(ulistf.title+"("+ulistf.id+")")
+	};
+	if(T("#usertree").style.display == "block"){
+		var utreef = T("usertree").gtag("a")[0];
+		utreef.focus();
+		utreef.className = "usersel";
+		utreef.id.substring(0,2)!="li" ? T("seltips").html(utreef.title+"("+utreef.id+")"):T("seltips").html("无");
+	}
+}
+};
+function selOK(selid, seltext, dnisphone_id){
+	try{T(selid).acls("userli")}catch(e){};
+	var selObj = T("#"+selid);
+	var pid = selObj.getAttribute("pid")||selObj.pid;
+	parent.T(select_name).val(seltext+"("+selid+")");
+	parent.T(select_name).acls("txt");
+	parent.T(select_id).val(selid);
+	parent.T("dnisphone_id").val(dnisphone_id);
+	isdepartment=="yes"?parent.T(select_id+"_department").val(pid):"";
+	parent.T(select_name+"_w").stcs("display","none");
+};
+function getNext(obj){
+	var node = obj.nextSibling;
+	while(node.nodeType!=1){
+		node=node.nextSibling;
+		if(!node) return null;
+	};
+	return node;
+};
+function getPre(obj){
+     var node=obj.previousSibling;
+     while(node.nodeType!=1){
+          node=node.previousSibling;
+          if(!node) return null;
+     };
+      return node;
+};
+function selDepartment(selid,seltext){
+	//parent.T(select_name).val(seltext+"("+selid+")");
+	parent.T(select_name).val(seltext);
+	parent.T(select_name).acls("txt");
+	parent.T(select_id+"_department").val(selid);
+	parent.T("#"+select_id).value = "";
+	parent.T(select_name+"_w").stcs("display","none");
+};
+function selNo(){
+	parent.T("#"+select_name).value = "";
+	parent.T(select_name).acls("txt");
+	isdepartment=="yes"?parent.T("#"+select_id+"_department").value = "":"";
+	parent.T("#"+select_id).value = "";
+	parent.T(select_name+"_w").stcs("display","none");
+}
+document.getElementById("loadtip").style.display = "none";
+try{T("#querytext").focus();}catch(e){}
+</script>
+</body>
+</html>

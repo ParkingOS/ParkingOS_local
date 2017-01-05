@@ -1,0 +1,9 @@
+{
+  "framerate":10,
+  "images":["images/flygame/birdsheet.png"],
+  "frames":{"width":138,"height":138,"count":6},
+  "animations":{
+    "left":[0,2],
+    "right":[3,5]
+  }
+}

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd  
+	http://www.springframework.org/schema/context    
+	http://www.springframework.org/schema/context/spring-context-2.5.xsd  
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	 <!-- 配置数据源 -->
+	 <bean id="dataOnlyRead" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>org.logicalcobwebs.proxool.ProxoolDriver</value>
+		</property>
+		<property name="url">
+			<value>proxool.onlyread</value>
+		</property>
+	</bean>
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>org.logicalcobwebs.proxool.ProxoolDriver</value>
+		</property>
+		<property name="url">
+			<value>proxool.dbconfig</value>
+		</property>
+	</bean>
+	<!-- 声明事务 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+ 	<bean id="transactionInterceptor"   class="org.springframework.transaction.interceptor.TransactionInterceptor">
+	  <property name="transactionManager" ref="transactionManager" /> 
+	   	<property name="transactionAttributes">  
+	   	 <props>    
+	    	<prop key="update*">PROPAGATION_REQUIRED</prop>  
+	     	<prop key="bath*">PROPAGATION_REQUIRED</prop>
+	     </props> 
+	    </property> 
+	  </bean>
+     <bean id="beanAutoProxy"   class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">  
+     	<property name="beanNames">   
+     		<value>*Service</value> 
+    	  </property> 
+       <property name="interceptorNames"> 
+         <list>  
+           <value>transactionInterceptor</value>   
+         </list>  
+        </property> 
+     </bean>
+     
+          <!-- memcached config -->
+     <bean name="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder">
+		<constructor-arg>
+			 <list>
+				<bean class="java.net.InetSocketAddress">
+					 <constructor-arg>
+						<value>memcached.tq.cn</value>
+					</constructor-arg>
+					<constructor-arg>
+						<value>11211</value>
+					</constructor-arg>
+				</bean> 
+				<!--  <bean class="java.net.InetSocketAddress">  
+                    <constructor-arg>  
+                        <value>zlddb.tq.cn</value>  
+                    </constructor-arg>  
+                   <constructor-arg>  
+                        <value>11212</value>  
+                    </constructor-arg>  
+                </bean>  -->
+			</list> 
+		</constructor-arg>
+		<!-- <constructor-arg>  
+            <list>  
+                <value>1</value>  
+                <value>1</value>  
+            </list>  
+        </constructor-arg>  -->
+		<property name="connectionPoolSize" value="3"></property>
+		<property name="commandFactory">
+			<bean class="net.rubyeye.xmemcached.command.BinaryCommandFactory"></bean>
+		</property>
+		<property name="sessionLocator">
+			<bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"></bean>
+		</property>
+		<property name="transcoder">
+			<bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder" />
+		</property>
+	</bean>
+	    <bean name="memcachedClient" factory-bean="memcachedClientBuilder"
+		factory-method="build" destroy-method="shutdown" />
+    
+    <bean id="cacheXMemcache" class="com.mserver.utils.CacheXMemcache">
+		<property name="memcachedClient" ref="memcachedClient"></property>
+	</bean> 
+    <!-- 用户后台登录 -->
+	<bean name="/getmesg" class="com.mserver.struts.MessageServerAction"></bean>
+	<bean name="/getshare" class="com.mserver.struts.GetShareNumberAction"></bean>
+	<bean name="/carmessage" class="com.mserver.struts.CarownerMessageAction"></bean>
+	<bean name="/parkermesg" class="com.mserver.struts.ParkerMessageAction"></bean>
+	<context:component-scan base-package="com.mserver" />
+	
+	</beans>

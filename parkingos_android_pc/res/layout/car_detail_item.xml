@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_current_order_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/list_bg_gray" >
+
+    <TextView
+        android:id="@+id/tv_car_number"
+        style="@style/item_style"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/tv_enter_time"
+        style="@style/item_style"
+        android:layout_below="@id/tv_car_number"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        style="@style/item_style"
+        android:layout_marginRight="16dp"
+        android:layout_toLeftOf="@id/tv_enter_time"
+        android:text="@string/vertical_line"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/iv_monthuser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/monthuser"
+        android:contentDescription="@null"
+        android:visibility="gone" />
+    <ImageView
+        android:id="@+id/iv_monthusersec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/monthusersec"
+        android:contentDescription="@null"
+        android:visibility="gone" />
+    <ImageView
+        android:id="@+id/iv_monthusercycle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/monthusercycle"
+        android:contentDescription="@null"
+        android:visibility="gone" />
+
+</RelativeLayout>

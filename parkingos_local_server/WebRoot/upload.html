@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+</head>
+<script type="text/javascript">
+
+function getParam(paramName)
+{
+        paramValue = "";
+        isFound = false;
+        if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=")>1)
+        {
+            arrSource = unescape(this.location.search).substring(1,this.location.search.length).split("&");
+            i = 0;
+            while (i < arrSource.length && !isFound)
+            {
+                if (arrSource[i].indexOf("=") > 0)
+                {
+                     if (arrSource[i].split("=")[0].toLowerCase()==paramName.toLowerCase())
+                     {
+                        paramValue = arrSource[i].split("=")[1];
+                        isFound = true;
+                     }
+                }
+                i++;
+            }   
+        }
+   return paramValue;
+};
+function upload(){
+	var f = document.getElementById('pic').value;
+	if(f==''){
+		alert("请先选择一个图片");
+		return ;
+	}else{
+		var fix = f.substring(f.lastIndexOf('.')+1,f.length);
+		if(fix!='png'&&fix!='jpg'&&fix!='jpeg'&&fix!='gif'){
+			alert("文件格式错误:*."+fix+"，请选择png,jpg,jpeg,gif等格式!");
+			return ;
+		}
+	}
+	var action=getParam('action');
+	var url = getParam('url');
+	var id = getParam('id');
+	var table=getParam('table');
+	var type=getParam('type');
+	var tourl = url+'.do?action='+action+'&id='+id+'&table='+table+'&type='+type;
+	alert(tourl);
+	document.getElementById('upform').action=tourl;	
+	document.getElementById('upform').submit();	
+}
+</script>
+
+<body>
+<div style='width:250px;margin:10px auto;font-size:12px'>
+		请选择图片 ，支持png,jpg,jpeg,gif等格式:
+  <form action="carstops.do" method="post" id='upform'  enctype="multipart/form-data">
+  <input type='file' name='pic' id='pic' /></br></br>
+ <div style='width:110px;float:right;'><input type='button' onclick='upload()' value='确认上传'/></div>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,244 @@
+.buttonpanel
+{
+    position:absolute;
+    left:0px;
+    bottom:0px;
+  	background: #ccc url(../images/flexigrid/tbg.gif) repeat-x 50% top;
+  	width:100%;
+  	height:35px;
+  	border-top: #99bbe8 1px solid;
+  	text-align:right;
+}
+a.button
+{
+    display:block;
+    border:none;
+   	background: url(../images/bgs/button1.gif) no-repeat left top;
+   	height:23px;
+   	width:60px;
+   	margin:4px;
+   	vertical-align:middle;
+   	text-align:center;
+   	float:left;
+}
+
+a.button span
+{
+    display:block;  
+    padding-top:2px;
+}
+a.imgbtn span
+{
+	padding: 4px 4px 3px 21px;
+	cursor: pointer;
+}
+
+input
+{
+	border: solid 1px #3C7FB1;
+	padding: 1px 0px 0px 1px;
+	vertical-align: middle;
+}
+.ie6 input
+{
+	padding: 1px 0px 0px 1px;
+}
+.ie6.hiddenselect select
+{
+	visibility: hidden;
+}
+
+/*********select********/
+
+.select *
+{
+	margin: 0;
+	padding: 0;
+}
+.select
+{
+	border: 1px solid #3C7FB1;
+	float: left;
+	display: inline;
+}
+.select div
+{
+	border: 1px solid #f9f9f9;
+	float: left;
+}
+/* 子选择器，在FF等非IE浏览器中识别 */
+.select > div
+{
+	width: 119px;
+	height: 17px;
+	overflow: hidden;
+}
+
+/* 通配选择符，只在IE浏览器中识别 */
+* html .select div select
+{
+	display: block;
+	float: left;
+	margin: -2px;
+}
+.select div > select
+{
+	display: block;
+	width: 124px;
+	float: none;
+	margin: -2px;
+	padding: 0px;
+}
+.select:hover
+{
+	/*border:1px solid #666666; */
+}
+.select select > option
+{
+	text-indent: 2px;
+}
+/********************/
+form
+{
+	margin: 0px;
+}
+input[type='text'],input[type='password']
+{
+	border: solid 1px #999;
+	height: 18px;
+	padding:2px 3px;
+	background:#fff url("../images/bgs/text-bg.gif") repeat-x left top;
+}
+input.readonly
+{
+    border: solid 1px #ccc;
+    /*background:#f4f4f4;*/
+    color:#999;
+}
+input[type='checkbox']
+{
+	border: none;
+}
+input[type='radio']
+{
+	border: none !important;
+}
+textarea
+{
+	/*  border: solid 1px #907714;	  */
+	border: solid 1px #999;
+	background:#fff url("../images/bgs/text-bg.gif") repeat-x left top;
+	overflow: auto;
+	height:80px;
+	resize:none;
+}
+fieldset
+{
+	border: none;
+	border-top: solid 1px #ccc;
+}
+.ellipsis
+{
+	white-space: nowrap;
+	text-overflow: ellipsis; /* for internet explorer */
+	overflow: hidden;
+	display: block;
+}
+html > body .ellipsis
+{
+	clear: both;
+}
+.mainpanel
+{
+    padding:5px;
+ 
+}
+.mainpanel label
+{
+    font-weight:bolder;
+}
+table.xeasy-form
+{
+	background: #fff;
+	border-collapse: collapse;
+	empty-cells: show;
+}
+table.xeasy-form td
+{
+	word-break: break-all;
+	padding:2px 0px;
+	vertical-align:top;
+}
+
+.xeasy-formItemMust
+{
+	color: red;
+}
+
+
+/* JQuery Validation */
+label.error
+{
+	padding: 2px 0 2px 20px;
+	display: block;
+	background: url(../images/validation/exclamation.png) no-repeat 2px center;
+}
+input.error, select.error, textarea.error, input.cusErrorPanel, cusErrorPanel.cusErrorPanel, textarea.cusErrorPanel
+{
+	border: solid 1px #c30;
+	background:url("../images/bgs/invalid_line.gif") repeat-x left bottom;
+}
+label.checked
+{
+	float: none;
+	position: relative;
+	padding: 0px 0 0px 18px;
+	background: url(../images/validation/accept.png) no-repeat 2px center;
+}
+
+
+div.cusErrorPanel
+{
+	z-index: auto;
+	position: absolute;
+	width: 150px;
+	height: 35px;
+	overflow: hidden;
+	text-indent: 5px;
+	line-height: 40px;
+	font-size: 12px;
+	padding-left: 5px;
+	padding-right: 5px;
+	background: url(../images/validation/tooltop2.gif) no-repeat left top;
+}
+div.cusError
+{
+	z-index: auto;
+	position: absolute;
+	width: 280px;
+	height: 35px;
+	overflow: hidden;
+	text-indent: 5px;
+	line-height: 40px;
+	font-size: 12px;
+	font-family: Arial;
+	background: url(../images/validation/tooltop.gif) no-repeat left top;
+}
+a.valiclose
+{
+    position:absolute;
+    right:14px;
+    top:10px;
+    line-height:10px;
+    display:block;
+    height:8px;
+    width:8px;
+    background: url(../images/icons/del.gif) no-repeat center center;   
+}
+
+a.valiclose:hover
+{
+    opacity:.5;
+    -moz-opacity:.5;
+    filter:alpha(opacity=50);
+}

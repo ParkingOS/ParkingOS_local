@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_green"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="10dip"
+        android:layout_weight="1"
+        android:gravity="center" >
+
+        <TextView
+            style="@style/font_style"
+            android:text="@string/car_image" />
+
+        <ImageView
+            android:id="@+id/iv_car_image"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="10dip"
+            android:layout_weight="3"
+            android:background="@drawable/plate_sample"
+            android:contentDescription="@null"
+            android:scaleType="fitXY" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="10dip"
+        android:layout_weight="1"
+        android:gravity="center" >
+
+        <TextView
+            style="@style/font_style"
+            android:text="@string/car_num" />
+
+        <EditText
+            android:id="@+id/et_car_num"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="10dip"
+            android:layout_weight="10"
+            android:background="@color/plate_bg"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/plate_text"
+            android:textSize="20sp" />
+            
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:layout_marginTop="10dip"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/tv_toll_collector"
+                style="@style/font_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:text="@string/toll_cartype" />
+
+            <Button
+                android:id="@+id/btn_car_type"
+                android:layout_width="0dip"
+                android:layout_height="44dp"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="10dip"
+                android:layout_weight="2.96"
+                android:background="@drawable/switch_account"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="1dp"   
+                android:textColor="@color/bg_green"
+                android:textSize="25dip" />
+
+        </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="5dip"
+        android:layout_weight="1"
+        android:visibility="gone"
+        android:gravity="center" >
+
+        <TextView
+            style="@style/font_style"
+            android:text="@string/car_type" />
+
+        <TextView
+            android:id="@+id/tv_account_type"
+            style="@style/font_style"
+            android:layout_marginLeft="5dip"
+            android:text="@string/account_type_content"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="5dip"
+        android:layout_weight="1"
+        android:gravity="center" >
+
+        <TextView
+            style="@style/font_style"
+            android:text="@string/entrance_time" />
+
+        <TextView
+            android:id="@+id/tv_entrance_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:text="@string/entrance_time_content"
+            android:textColor="@color/yellow"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="5dip"
+        android:layout_weight="1.3"
+        android:gravity="center" >
+
+        <TextView
+            style="@style/font_style"
+            android:text="@string/park_duration" />
+
+        <TextView
+            android:id="@+id/tv_park_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:text="@string/park_duration_content"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_clear_order"
+        android:layout_width="150dip"
+        android:layout_height="0dip"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dip"
+        android:layout_weight="0.8"
+        android:background="@drawable/btn_big_selector"
+        android:text="@string/clear_order"
+        android:textColor="@color/bg_green"
+        android:textSize="30sp" />
+
+</LinearLayout>

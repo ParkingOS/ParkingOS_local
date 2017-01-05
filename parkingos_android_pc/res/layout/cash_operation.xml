@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_green"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="4" >
+
+        <RelativeLayout
+            android:id="@+id/rl_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/tv_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginTop="5dip"
+                android:text="@string/park_cost"
+                android:textColor="@color/white"
+                android:textSize="35sp" />
+
+            <TextView
+                android:id="@+id/tv_park_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_cost"
+                android:layout_marginLeft="20dip"
+                android:text="@string/park_cost_content"
+                android:textColor="@color/yellow"
+                android:textSize="60sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_rmb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tv_park_cost"
+                android:layout_alignBottom="@+id/tv_park_cost"
+                android:layout_toRightOf="@+id/tv_park_cost"
+                android:text="@string/rmb"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+        </RelativeLayout>
+ 
+        <RelativeLayout
+            android:id="@+id/rl_pay_before"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_cost"
+            android:visibility="gone" >
+
+            <include layout="@layout/pay_before_layout" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_mobile_payment"
+            android:layout_width="120dip"
+            android:layout_height="120dip"
+            android:layout_below="@+id/rl_cost"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/pay_finish"
+            android:visibility="invisible" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="150dip"
+    	android:background="@color/bg_green"
+    	android:layout_height="60dp"
+    	android:layout_gravity="center"
+        android:orientation="horizontal" >
+        <Button
+            android:id="@+id/btn_free"
+            android:layout_width="70dip"
+            android:layout_height="50dip"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/btn_big_selector"
+            android:text="@string/free"
+            android:textColor="@color/bg_green"
+            android:textSize="30sp"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btn_discount"
+            android:layout_width="70dip"
+            android:layout_height="50dip"
+            
+			android:layout_marginLeft="13dp"
+
+            android:background="@drawable/btn_big_selector"
+            android:text="@string/discount"
+            android:textColor="@color/bg_green"
+            android:textSize="30sp"
+            android:visibility="visible" />
+    </LinearLayout>
+        
+    <RelativeLayout
+        android:layout_width="150dip"
+        android:layout_height="0dip"
+        android:layout_gravity="center"
+        android:layout_weight="1" >
+
+        <Button
+            android:id="@+id/btn_charge_finish"
+            android:layout_width="150dip"
+            android:layout_height="50dip"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dip"
+            android:background="@drawable/btn_big_selector"
+            android:text="@string/charge_finish"
+            android:textColor="@color/bg_green"
+            android:textSize="30sp"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+</LinearLayout>

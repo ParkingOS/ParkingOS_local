@@ -1,0 +1,751 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Language" content="zh-cn" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<title></title>
+</head>
+
+<style>
+body {
+  font-family: "Microsoft Yahei", Arial, sans-serif;
+  font-size: 14px;
+  background: #fff;
+  overflow-x:hidden;
+}
+.title{
+	font-size: 15px;
+	margin-bottom:5px;
+}
+.content{e
+	margin-bottom:10px;
+}
+.textarea{
+	background-color: #FFFCEC;
+}
+.module{
+	border: 1px solid #DDDDDD; padding:5px; margin-bottom:10px;
+}
+.button {
+	display: inline-block;
+	position: relative;
+	margin: 0px;
+	padding: 0 20px;
+	text-align: center;
+	text-decoration: none;
+	font: bold 12px/25px Arial, sans-serif;
+
+	text-shadow: 1px 1px 1px rgba(255,255,255, .22);
+
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+
+	-webkit-box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+	-moz-box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+	box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+
+	-webkit-transition: all 0.15s ease;
+	-moz-transition: all 0.15s ease;
+	-o-transition: all 0.15s ease;
+	-ms-transition: all 0.15s ease;
+	transition: all 0.15s ease;
+}
+.green {
+	color: #3e5706;
+	background: #a5cd4e;
+}
+</style>
+<body  style="">
+<div>
+	<div class="module">
+		<div class="title">
+			<span>用户信息</span>
+		</div>
+		<div>
+			<span style="">客服账号：</span><span type="text" id="workeraccount"></span>
+		</div>
+		<div>
+			<span style="">当前访客：</span><span type="text" id="toUin"></span>
+		</div>
+	</div>
+	<div class="module">
+		<div class="title">
+			<span>停车宝信息</span>
+		</div>
+		<div>
+			<span>绑定手机号：</span><input type="text" value="" maxlength="11" id="mobile" />
+			<span style="margin-left:10px;"><input type="button" onclick="getuserinfo()" value="查询信息" /></span>
+		</div>
+		<div style="margin-top:10px;">
+			<span>输入车牌号：</span><input type="text" value="" maxlength="7" id="carnumber" />
+			<span style="margin-left:10px;"><input type="button" onclick="getcarinfo()" value="查询信息" /></span>
+		</div>
+		<div style="margin-top:10px;text-align:center;">
+			<input type="button" onclick="getcode()" value="获取验证码" /><input type="button" style="margin-left:10px;" onclick="kefuauthuser()" value="添加车牌" />
+		</div>
+		<div style="text-align:left;color:red;">
+			<span>注意  : 添加车牌功能相当于车牌认证功能，车主必须提供符合规范的认证照片，该操作会记录客服帐号，请慎重操作!!!</span>
+		</div>
+	</div>
+	<div class="module">
+		<div class="title">
+			<span>查询消费记录</span>
+		</div>
+		<div>
+			<span>交易单号：</span><input type="text" value="" id="wxorderid" />
+		</div>
+		<div style="margin-top:10px;">
+			<span>开始时间：</span><input type="text" value="" id="begintime" />
+		</div>
+		<div style="margin-top:10px;">
+			<span>结束时间：</span><input type="text" value="" id="endtime" />
+		</div>
+		<div style="margin-top:10px;text-align:center;">
+			<input type="button" onclick="getorderinfo()" value="查询订单" />
+			<input style="margin-left:10px;" type="button" onclick="getaccountinfo()" value="查询账户明细" />
+		</div>
+	</div>
+	
+	<div class="module">
+		<div class="title">
+			<span>查询信息显示框</span>
+		</div>
+		<div class="content">
+			<textarea id="area" disabled="disabled" class="textarea" style="height:260;width:100%;overflow-y:auto"></textarea>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="http://o2o.gtimg.com/module/jquery.js" ></script>
+<script>
+var ticket = getUrlParam('ticket');
+var workerAccouont = '';
+
+$.getScript('http://crm1.dkf.qq.com/php/index.php/thirdapp/appdemo/get_workeraccount_by_sessionkey?callback=wokeraccountCallback&ticket='+ticket);
+
+function wokeraccountCallback(data){
+	document.getElementById('area').value += '您现在登录的帐号是：' +  $xss(data.workeraccount,"html") + '\n';
+	document.getElementById('workeraccount').innerHTML =  $xss(data.workeraccount,"html");
+}
+
+function MCS_ClientNotify(EventData) {
+	EventData = strToJson(EventData);
+	switch(EventData['event']){
+		case 'OnUserChange':{
+			OnUserChange(EventData);
+			break;
+		}
+	}
+}
+
+function OnUserChange(data)
+{
+	var openid = data['userid'];
+	document.getElementById('toUin').innerHTML = openid;
+	getmobile(openid);
+}
+
+function getmobile(openid){
+	jQuery.ajax({
+		type : "post",
+		url : "wxpublic.do",
+		data : {
+			'openid' : openid,
+			'action' : 'getmobile'
+		},
+		async : false,
+		success : function(result) {
+			if(result != "-1"){
+				document.getElementById('mobile').value = result;
+				document.getElementById('carnumber').value = "";
+				getuserinfo();
+			}
+		}
+});
+}
+
+function putmsg(){
+	var strReturn = window.external.PutMsg('{"msg":'+document.getElementById('messageData').value+'}');
+	document.getElementById('area').value += 'put msg return:' + strReturn +'\n';
+}
+
+function strToJson(str){ 
+	var json = (new Function("return " + str))(); 
+	return json; 
+} 
+
+function getUrlParam(name)
+{
+	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+	var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+	if (r!=null) return unescape(r[2]); return null; //返回参数值
+}
+function $xss(str,type){
+	//空过滤
+	if(!str){
+		return str===0 ? "0" : "";
+	}
+	
+	switch(type){
+		case "none": //过度方案
+			return str+"";
+		break;
+		case "html": //过滤html字符串中的XSS
+			return str.replace(/[&'"<>\/\\\-\x00-\x09\x0b-\x0c\x1f\x80-\xff]/g, function(r){
+				return "&#" + r.charCodeAt(0) + ";"
+			}).replace(/ /g, " ").replace(/\r\n/g, "<br />").replace(/\n/g,"<br />").replace(/\r/g,"<br />");
+		break;
+		case "htmlEp": //过滤DOM节点属性中的XSS
+			return str.replace(/[&'"<>\/\\\-\x00-\x1f\x80-\xff]/g, function(r){
+				return "&#" + r.charCodeAt(0) + ";"
+			});
+		break;
+		case "url": //过滤url
+			return escape(str).replace(/\+/g, "%2B");
+		break;
+		case "miniUrl":
+			return str.replace(/%/g, "%25");
+		break;
+		case "script":
+			return str.replace(/[\\"']/g, function(r){
+				return "\\" + r;
+			}).replace(/%/g, "\\x25").replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\x01/g, "\\x01");
+		break;
+		case "reg":
+			return str.replace(/[\\\^\$\*\+\?\{\}\.\(\)\[\]]/g, function(a){
+				return "\\" + a;
+			});
+		break;
+		default:
+			return escape(str).replace(/[&'"<>\/\\\-\x00-\x09\x0b-\x0c\x1f\x80-\xff]/g, function(r){
+				return "&#" + r.charCodeAt(0) + ";"
+			}).replace(/ /g, " ").replace(/\r\n/g, "<br />").replace(/\n/g,"<br />").replace(/\r/g,"<br />");
+		break;
+	}
+}
+
+function getuserinfo(){
+	var mobile = document.getElementById("mobile").value;
+	var m = /^[1][3,4,5,7,8][0-9]{9}$/; 
+	if(mobile == ""){
+		document.getElementById("area").value = "请输入手机号码";
+		return false;
+	}
+	if(mobile.length!=11||!mobile.match(m)){
+		document.getElementById("area").value = "手机号码不正确";
+		return false;
+	}
+	jQuery.ajax({
+		type : "post",
+		url : "wxpublic.do",
+		data : {
+			'mobile' : mobile,
+			'action' : 'getuserinfo'
+		},
+		async : false,
+		success : function(result) {
+			if(result != "-1"){
+				var string = "用户信息查询结果：\r\n\r\n";
+				var jsonData = eval("(" + result + ")");
+				var is_auth = jsonData.is_auth;
+				var useticket = jsonData.useticket;
+				var isblack = jsonData.isblack;
+				var openid = jsonData.openid;
+				var uin = jsonData.uin;
+				var bindflag = jsonData.bindflag;
+				var carnumber = jsonData.carnumber;
+				
+				string += "停车宝帐号 ："+uin+"\r\n";
+				if(bindflag == "0"){
+					string += "绑定微信公众号 ：未绑定\r\n";
+				}else{
+					string += "绑定微信公众号 ：已绑定\r\n";
+				}
+				string += "该手机号绑定的微信帐号 ："+openid+"\r\n";
+				
+				if(is_auth == "0"){
+					string +="车主认证状态 ：未认证\r\n";
+				}else if(is_auth == "1"){
+					string +="车主认证状态 ：已认证\r\n";
+				}
+				
+				if(useticket == "true"){
+					string +="今日用券状态 ：未用券\r\n";
+				}else{
+					string +="今日用券状态 ：已用券\r\n";
+				}
+				
+				if(isblack == "true"){
+					string +="车主黑名单状态 ：在黑名单内\r\n\r\n";
+				}else{
+					string +="车主黑名单状态 ：不在黑名单内\r\n\r\n";
+				}
+				
+				string += "绑定的车牌：\r\n\r\n";
+				if(carnumber.length == 0){
+					string +="该车主未绑定车牌\r\n";
+				}else{
+					for(var i=0;i<carnumber.length;i++){
+						var car = carnumber[i];
+						var auth = car.is_auth;
+						var cnum = car.car_number;
+						string += cnum+" : ";
+						if(auth == "-2"){
+							string += "被拉黑\r\n";
+						}else if(auth == "-1"){
+							string += "认证未通过\r\n";
+						}else if(auth == "0"){
+							string += "未认证\r\n";
+						}else if(auth == "1"){
+							string += "已认证\r\n";
+						}else if(auth == "2"){
+							string += "认证中\r\n";
+						}
+					}
+				}
+				document.getElementById("area").value = string;
+			}
+		}
+	});
+}
+
+function getcarinfo(){
+	var car_number = document.getElementById("carnumber").value;
+	car_number = car_number.toUpperCase();
+	var city = car_number.charAt(0);
+	var array = new Array( "京", "沪", "浙", "苏", "粤", "鲁",
+				"晋", "冀", "豫", "川", "渝", "辽", "吉", "黑", "皖", "鄂", "湘", "赣",
+				"闽", "陕", "甘", "宁", "蒙", "津", "贵", "云", "桂", "琼", "青", "新",
+				"藏", "港", "澳", "使", "军", "空", "海", "北", "沈", "兰","济", "南", "广", "成", "WJ", "警", "消", "边","水", "电", "林", "通" );  
+	var m = /^[A-Z]{1}[A-Z_0-9]{5}$/;
+	car_number_char = car_number.substr(1);
+	if(array.toString().indexOf(city) > -1){
+		if(city == "使"){
+			m = /^[A-Z_0-9]{6}$/;
+		}
+		if(!car_number_char.match(m)){
+			document.getElementById("area").value = "车牌号不正确";
+			return false;
+		}
+	}else{
+		document.getElementById("area").value = "车牌号不正确";
+		return false;
+	}
+	car_number = encodeURI(car_number);
+	jQuery.ajax({
+		type : "post",
+		url : "wxpublic.do",
+		data : {
+			'carnumber' : car_number,
+			'action' : 'getcarinfo'
+		},
+		async : false,
+		success : function(result) {
+			if(result != "-1"){
+				var string = "车牌信息查询结果：\r\n\r\n";
+				var jsonData = eval("(" + result + ")");
+				var is_auth = jsonData.is_auth;
+				var useticket = jsonData.useticket;
+				var isblack = jsonData.isblack;
+				var openid = jsonData.openid;
+				var uin = jsonData.uin;
+				var mobile = jsonData.mobile;
+				var bindflag = jsonData.bindflag;
+				var carnumber = jsonData.carnumber;
+				string += "停车宝帐号 ："+uin+"\r\n";
+				string += "该车牌绑定的手机号 ："+mobile+"\r\n";
+				if(bindflag == "0"){
+					string += "绑定微信公众号 ：未绑定\r\n";
+				}else{
+					string += "绑定微信公众号 ：已绑定\r\n";
+				}
+				string += "该手机号绑定的微信帐号 ："+openid+"\r\n";
+				if(is_auth == "0"){
+					string +="车主认证状态 ：未认证\r\n";
+				}else if(is_auth == "1"){
+					string +="车主认证状态 ：已认证\r\n";
+				}
+				
+				if(useticket == "true"){
+					string +="今日用券状态 ：未用券\r\n";
+				}else{
+					string +="今日用券状态 ：已用券\r\n";
+				}
+				
+				if(isblack == "true"){
+					string +="车主黑名单状态 ：在黑名单内\r\n\r\n";
+				}else{
+					string +="车主黑名单状态 ：不在黑名单内\r\n\r\n";
+				}
+				
+				string += "绑定的车牌：\r\n\r\n";
+				if(carnumber.length == 0){
+					string +="该车主未绑定车牌\r\n";
+				}else{
+					for(var i=0;i<carnumber.length;i++){
+						var car = carnumber[i];
+						var auth = car.is_auth;
+						var cnum = car.car_number;
+						string += cnum+" : ";
+						if(auth == "-2"){
+							string += "被拉黑\r\n";
+						}else if(auth == "-1"){
+							string += "认证未通过\r\n";
+						}else if(auth == "0"){
+							string += "未认证\r\n";
+						}else if(auth == "1"){
+							string += "已认证\r\n";
+						}else if(auth == "2"){
+							string += "认证中\r\n";
+						}
+					}
+				}
+				document.getElementById("area").value = string;
+			}
+		}
+	});
+}
+
+	function getorderinfo(){
+		var openid = document.getElementById("toUin").innerHTML;
+		var begintime = document.getElementById("begintime").value;
+		var endtime = document.getElementById("endtime").value;
+		var wxorderid = document.getElementById("wxorderid").value;
+		jQuery.ajax({
+		type : "post",
+		url : "wxpublic.do",
+		data : {
+			'openid' : openid,
+			'begintime' : begintime,
+			'endtime' : endtime,
+			'wxorderid' : wxorderid,
+			'action' : 'getconsuminfo',
+			'type' : 0
+		},
+		async : false,
+		success : function(result) {
+			if(result != "-1"){
+				var string = "订单查询结果：\r\n\r\n";
+				var jsonData = eval("(" + result + ")");
+				
+				if(jsonData.length == 0){
+					string +="未查询到信息\r\n";
+				}else{
+					for(var i=0;i<jsonData.length;i++){
+						var order = jsonData[i];
+						var ctime = order.ctime;
+						var etime = order.etime;
+						var state= order.state;
+						var total = order.total;
+						var pay_type = order.pay_type;
+						var c_type = order.c_type;
+						var uid = order.uid;
+						var car_number = order.car_number;
+						var car_type = order.car_type;
+						var type = order.type;
+						var auto_pay = order.auto_pay;
+						var uin = order.uin;
+						
+						string +=i+1+"、生成时间:"+ctime+"\r\n";
+						if(state == "0"){
+							string += "状态：未结算\r\n";
+						}else if(state == "1"){
+							string += "状态：已结算\r\n";
+							string += "结算时间："+etime+"\r\n";
+							
+							if(pay_type == "0"){
+								string += "支付类型：账户支付\r\n";
+							}else if(pay_type == "1"){
+								string += "支付类型：现金支付\r\n";
+							}else if(pay_type == "2"){
+								string += "支付类型：手机支付\r\n";
+							}else if(pay_type == "3"){
+								string += "支付类型：包月\r\n";
+							}else if(pay_type == "4"){
+								string += "支付类型：现金预支付\r\n";
+							}else if(pay_type == "5"){
+								string += "支付类型：银联卡\r\n";
+							}else if(pay_type == "6"){
+								string += "支付类型：商家卡\r\n";
+							}else if(pay_type == "7"){
+								string += "支付类型：免费放行\r\n";
+							}
+						}else if(state == "2"){
+							string += "状态：逃单\r\n";
+						}
+						string+="金额："+total+"\r\n";
+						string+="车主账号："+uin+"\r\n";
+						
+						if(c_type == "0"){
+							string += "订单生成方式：NFC\r\n";
+						}else if(c_type == "1"){
+							string += "订单生成方式：IBeacon\r\n";
+						}else if(c_type == "2"){
+							string += "订单生成方式：手输照牌\r\n";
+						}else if(c_type == "3"){
+							string += "订单生成方式：通道扫牌\r\n";
+						}else if(c_type == "4"){
+							string += "订单生成方式：直付\r\n";
+						}else if(c_type == "5"){
+							string += "订单生成方式：月卡用户\r\n";
+						}
+						
+						string += "收费员帐号："+uid+"\r\n";
+						string += "车主车牌号："+car_number+"\r\n";
+						if(car_type == "0"){
+							string += "车类型：通用\r\n";
+						}else if(car_type == "1"){
+							string += "车类型：小车\r\n";
+						}else if(car_type == "2"){
+							string += "车类型：大车\r\n";
+						}
+						
+						if(type == "0"){
+							string += "订单类型：普通订单\r\n";
+						}else if(type == "1"){
+							string += "订单类型：极速通订单\r\n";
+						}
+						
+						if(auto_pay == "0"){
+							string += "是否异常：正常结算\r\n";
+						}else if(auto_pay == "1"){
+							string += "是否异常：进场异常结算的订单\r\n";
+						}else if(auto_pay == "2"){
+							string += "是否异常：更正过车牌的订单\r\n";
+						}else if(auto_pay == "3"){
+							string += "是否异常：补录来车生成的订单\r\n";
+						}
+						
+						string += "\r\n";
+					}
+				}
+				document.getElementById("area").value = string;
+			}
+		}
+	});
+	}
+
+	function getaccountinfo(){
+		var openid = document.getElementById("toUin").innerHTML;
+		var begintime = document.getElementById("begintime").value;
+		var endtime = document.getElementById("endtime").value;
+		var wxorderid = document.getElementById("wxorderid").value;
+		jQuery.ajax({
+		type : "post",
+		url : "wxpublic.do",
+		data : {
+			'openid' : openid,
+			'begintime' : begintime,
+			'endtime' : endtime,
+			'wxorderid' : wxorderid,
+			'action' : 'getconsuminfo',
+			'type' : 1
+		},
+		async : false,
+		success : function(result) {
+			if(result != "-1"){
+				var string = "账户明细查询结果：\r\n\r\n";
+				var jsonData = eval("(" + result + ")");
+				
+				if(jsonData.length == 0){
+					string +="未查询到信息\r\n";
+				}else{
+					for(var i=0;i<jsonData.length;i++){
+						var account = jsonData[i];
+						var ctime = account.ctime;
+						var type = account.type;
+						var remark = account.remark;
+						var pay_type = account.pay_type;
+						var uid = account.uid;
+						var amount = account.amount;
+						string +=i+1+"、时间:"+ctime+"\r\n";
+						if(type == "0"){
+							string += "类型：充值\r\n";
+						}else{
+							string += "类型：消费\r\n";
+						}
+						string+="金额："+amount+"\r\n";
+						if(pay_type == "0"){
+							string += "支付类型：余额\r\n";
+						}else if(pay_type == "1"){
+							string += "支付类型：支付宝\r\n";
+						}else if(pay_type == "2"){
+							string += "支付类型：微信\r\n";
+						}else if(pay_type == "3"){
+							string += "支付类型：网银\r\n";
+						}else if(pay_type == "4"){
+							string += "支付类型：余额+支付宝\r\n";
+						}else if(pay_type == "5"){
+							string += "支付类型：余额+微信\r\n";
+						}else if(pay_type == "6"){
+							string += "支付类型：余额+网银\r\n";
+						}else if(pay_type == "7"){
+							string += "支付类型：停车券\r\n";
+						}else if(pay_type == "8"){
+							string += "支付类型：活动奖励\r\n";
+						}else if(pay_type == "9"){
+							string += "支付类型：微信公众号\r\n";
+						}else if(pay_type == "10"){
+							string += "支付类型：微信公众号+余额\r\n";
+						}else if(pay_type == "11"){
+							string += "支付类型：微信打折券\r\n";
+						}else if(pay_type == "12"){
+							string += "支付类型：预支付返款\r\n";
+						}
+						
+						string += "描述："+remark+"\r\n";
+						string += "收费员帐号："+uid+"\r\n\r\n";
+					}
+				}
+				document.getElementById("area").value = string;
+			}
+		}
+	});
+	}
+
+	function kefuauthuser(){
+		var mobile = document.getElementById("mobile").value;
+		var m = /^[1][3,4,5,7,8][0-9]{9}$/; 
+		if(mobile == ""){
+			document.getElementById("area").value = "请输入手机号码";
+			return false;
+		}
+		if(mobile.length!=11||!mobile.match(m)){
+			document.getElementById("area").value = "手机号码不正确";
+			return false;
+		}
+		
+		var car_number = document.getElementById("carnumber").value;
+		car_number = car_number.toUpperCase();
+		var city = car_number.charAt(0);
+		var array = new Array( "京", "沪", "浙", "苏", "粤", "鲁",
+					"晋", "冀", "豫", "川", "渝", "辽", "吉", "黑", "皖", "鄂", "湘", "赣",
+					"闽", "陕", "甘", "宁", "蒙", "津", "贵", "云", "桂", "琼", "青", "新",
+					"藏", "港", "澳", "使", "军", "空", "海", "北", "沈", "兰","济", "南", "广", "成", "WJ", "警", "消", "边","水", "电", "林", "通" );  
+		var m = /^[A-Z]{1}[A-Z_0-9]{5}$/;
+		car_number_char = car_number.substr(1);
+		if(array.toString().indexOf(city) > -1){
+			if(city == "使"){
+				m = /^[A-Z_0-9]{6}$/;
+			}
+			if(!car_number_char.match(m)){
+				document.getElementById("area").value = "车牌号不正确";
+				return false;
+			}
+		}else{
+			document.getElementById("area").value = "车牌号不正确";
+			return false;
+		}
+		car_number = encodeURI(car_number);
+		
+		var kefu = document.getElementById("workeraccount").innerHTML;
+		if(kefu.indexOf("tingchebao2014") <= 0){
+			document.getElementById("area").value = "无客服帐号信息";
+			return false;
+		}
+		
+		jQuery.ajax({
+			type : "post",
+			url : "carower.do",
+			data : {
+				'mobile' : mobile,
+				'action' : 'kefuauthuser',
+				'carnumber' : car_number,
+				'kefu' : kefu
+			},
+			async : false,
+			success : function(result) {
+				var string = "添加车牌结果信息：\r\n\r\n";
+				if(result == "-1"){
+					string += "处理失败：手机号、车牌号、客服信息不全\r\n";
+				}else if(result == "-2"){
+					string += "处理失败：该手机号尚未注册，请先让车主注册，再执行本操作\r\n";
+				}else if(result == "-3"){
+					string += "处理失败：该车牌号本来就属于该手机号的车主，请让车主走正规认证流程，这里不做处理\r\n";
+				}else if(result == "-4"){
+					string += "处理失败：车牌号尚未注册，请车主走正规流程注册车牌，这里不做处理\r\n";
+				}else if(result == "-5"){
+					string += "处理失败：该手机号的车主已经有3个或者以上个数的车牌，不能再添加，这里不做处理\r\n";
+				}else if(result == "1"){
+					string += "处理成功：该车牌已经绑定到该手机号的车主名下并且认证成功，如果该车主之前未认证，那么现在也已经得到认证\r\n";
+				}
+				
+				document.getElementById("area").value = string;
+			}
+	});
+	}
+	
+	function getcode(){
+		var mobile = document.getElementById("mobile").value;
+		var m = /^[1][3,4,5,7,8][0-9]{9}$/; 
+		if(mobile == ""){
+			document.getElementById("area").value = "请输入手机号码";
+			return false;
+		}
+		if(mobile.length!=11||!mobile.match(m)){
+			document.getElementById("area").value = "手机号码不正确";
+			return false;
+		}
+		jQuery.ajax({
+			type:"post",
+			url:"carlogin.do",
+			data:{'action':'login','mobile':mobile,'media':'11'},
+		    async:false,
+		    success:function(result){
+				if(result == "0"){
+					getvalidcode(mobile);
+				}else{
+					document.getElementById("area").value = "获取验证码失败";
+				}
+		      }
+		});
+	}
+	
+	function getvalidcode(mobile){
+		jQuery.ajax({
+			type:"post",
+			url:"wxpublic.do",
+			data:{'action':'getcode','mobile':mobile,'media':'11'},
+		    async:false,
+		    success:function(result){
+				if(result != "-1"){
+					document.getElementById("area").value = "此次验证码："+result;
+				}else{
+					document.getElementById("area").value = "获取验证码失败";
+				}
+		      }
+		});
+	}
+	
+ $(function () {
+        $("#begintime").datetimepicker({
+            //showOn: "button",
+            //buttonImage: "./css/images/icon_calendar.gif",
+            //buttonImageOnly: true,
+            showSecond: true,
+            timeFormat: 'hh:mm:ss',
+            stepHour: 1,
+            stepMinute: 1,
+            stepSecond: 1
+        })
+        
+        $("#endtime").datetimepicker({
+            //showOn: "button",
+            //buttonImage: "./css/images/icon_calendar.gif",
+            //buttonImageOnly: true,
+            showSecond: true,
+            timeFormat: 'hh:mm:ss',
+            stepHour: 1,
+            stepMinute: 1,
+            stepSecond: 1
+        })
+    })
+</script>
+<link type="text/css" href="css/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+<link type="text/css" href="css/jquery-ui-timepicker-addon.css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="js/jquery-ui-timepicker-zh-CN.js"></script>

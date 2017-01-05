@@ -1,0 +1,24 @@
+﻿[
+{ id:1, pid:0, value_name:"展开、折叠 自定义图标不同", open:true, iconOpen:"tqccresource/tq_images/tree/diy/1_open.png", iconClose:"tqccresource/tq_images/tree/diy/1_close.png"},
+{ id:11, pid:1, value_name:"叶子节点1", icon:"/vip/tqccresource/tq_images/tree/diy/2.png"},
+{ id:12, pid:1, value_name:"叶子节点2", icon:"/vip/tqccresource/tq_images/tree/diy/3.png"},
+{ id:13, pid:1, value_name:"叶子节点3", icon:"/vip/tqccresource/tq_images/tree/diy/5.png"},
+{ id:2, pid:0, value_name:"展开、折叠 自定义图标相同", open:true, icon:"/vip/tqccresource/tq_images/tree/diy/4.png"},
+{ id:21, pid:2, value_name:"叶子节点1", icon:"/vip/tqccresource/tq_images/tree/diy/6.png"},
+{ id:22, pid:2, value_name:"叶子节点2", icon:"/vip/tqccresource/tq_images/tree/diy/7.png"},
+{ id:23, pid:2, value_name:"叶子节点3", icon:"/vip/tqccresource/tq_images/tree/diy/8.png"},
+{ id:3, pid:0, value_name:"不使用自定义图标", open:true },
+{ id:31, pid:3, value_name:"叶子节点1",checked:true},
+{ id:32, pid:3, value_name:"叶子节点2"},
+{ id:33, pid:3, value_name:"叶子节点3"},
+{ id:34, pid:3, value_name:"测试", open:true,fn:function(id){T("#test").value = id} },
+{ id:36, pid:34, value_name:"叶子节点2", open:true,checked:true},
+{ id:37, pid:34, value_name:"叶子节点3", open:true,checked:true},
+{ id:35, pid:34, value_name:"叶子节点11111",checked:true},
+{ id:38, pid:37, value_name:"叶子节点38",checked:true},
+{ id:39, pid:37, value_name:"叶子节点39",checked:true},
+{ id:40, pid:36, value_name:"叶子节点40",checked:true},
+{ id:41, pid:37, value_name:"叶子节点41",checked:true},
+{ id:141, pid:35, value_name:"叶子节点41",checked:true}
+]
+
